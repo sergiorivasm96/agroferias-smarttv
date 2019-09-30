@@ -45,3 +45,8 @@
 .space {
     width: 20%;
 }
+
+.btn.btn-primary a {
+    color: inherit;
+    text-decoration: inherit;
+  }
