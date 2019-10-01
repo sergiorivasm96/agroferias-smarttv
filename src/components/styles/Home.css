@@ -1,0 +1,12 @@
+.video-react-big-play-button, .video-react-control-bar  {
+    display: none;
+}
+
+video{
+    margin-top: 1%;
+    vertical-align: center;
+    text-align: center;
+    width: 60%;
+    height: 60%;
+    margin-left: 20%;
+}
