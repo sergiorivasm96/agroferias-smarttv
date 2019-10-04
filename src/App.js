@@ -20,7 +20,6 @@ class App extends React.Component {
     this.mapeo = new Mapeo(".MainMenu");
   }
 
-
   componentDidMount() {
       this.mapeo.createZone('.MainMenu');
   }
@@ -31,7 +30,7 @@ class App extends React.Component {
       <div>
             <div className='App'>
               <div className='MainMenu' display='block' style={menuStyle}>
-                    <MenuItem name='Identifícate' icon={faUser} link="/identificate"></MenuItem>
+                    <MenuItem name='Identifícate' icon={faUser} link="/identificate" ></MenuItem>
                     <MenuItem name='Mapa' icon={faMap} link="/mapas"></MenuItem>
                     <MenuItem name='Publicidad' icon={faVideo} link="/publicidad"></MenuItem>
                     <MenuItem name='Configuración' icon={faCog} link="/configuracion"></MenuItem>
@@ -55,9 +54,9 @@ class App extends React.Component {
             <Home />
           </Route>
         </Switch>
-      </div>
 
-        
+      </div>
+      
     </BrowserRouter>
     );
   }

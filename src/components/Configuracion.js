@@ -1,9 +1,14 @@
 import React from 'react'
 
-function Configuracion(props) {
-    return (
-        <div>Configuracion</div>
-    );
+class Configuracion extends React.Component{
+    constructor(props) {
+        super(props);
+    }
+    render (){
+        return(
+            <div>Configuracion</div>
+        )
+    }
 }
   
 export default Configuracion;

@@ -11,7 +11,7 @@ video{
     margin-left: 20%;
 }
 
-.focused-item{
+.focused-item {
     color: white!important;
-    border-block-color: white;
+    border-block-color: white !important;
 }

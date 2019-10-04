@@ -1,9 +1,13 @@
 import React from 'react'
 
-function Mapa(props) {
-    return (
-        <div>Mapa</div>
-    );
+class Mapa extends React.Component{
+    constructor(props) {
+        super(props);
+    }
+    render (){
+        return(
+            <div>Mapa</div>
+        )
+    }
 }
-  
 export default Mapa;
