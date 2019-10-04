@@ -13,4 +13,5 @@ video{
 
 .focused-item{
     color: white!important;
+    border-block-color: white;
 }
