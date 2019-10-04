@@ -9,8 +9,6 @@ import Publicidad from './components/Publicidad.js'
 import Configuracion from './components/Configuracion.js'
 import Mapeo from './components/Mapeo.js'
 
-// import * as gtv from "@arxis/gtvzone";
-
 const menuStyle = {
     background: '#ed217c',
     paddingLeft: '5%'
@@ -19,31 +17,26 @@ const menuStyle = {
 class App extends React.Component {
     constructor(props) {
     super(props);
-    this.mapeo = new Mapeo();
+    this.mapeo = new Mapeo(".MainMenu");
   }
 
+
   componentDidMount() {
-    console.log(this.mapeo);
-    const _zone = this.mapeo.createNewKeyBehaviorZone(".MainMenu",this.mapeo.generalKeymapping)
-    this.mapeo.globalKeyMappingController.addBehaviorZone(
-    _zone,
-    true,
-    ['HOME_LAYER']
-    );
+      this.mapeo.createZone('.MainMenu');
   }
 
   render() {
     return (
       <BrowserRouter>
       <div>
-            <div className = 'App'>
-              <div className = 'MainMenu' display='block' style={menuStyle}>
-                    <MenuItem name = 'Identifícate' icon = {faUser} link="/identificate"></MenuItem>
+            <div className='App'>
+              <div className='MainMenu' display='block' style={menuStyle}>
+                    <MenuItem name='Identifícate' icon={faUser} link="/identificate"></MenuItem>
                     <MenuItem name='Mapa' icon={faMap} link="/mapas"></MenuItem>
                     <MenuItem name='Publicidad' icon={faVideo} link="/publicidad"></MenuItem>
-                    <MenuItem name = 'Configuración' icon = {faCog} link="/configuracion"></MenuItem>
+                    <MenuItem name='Configuración' icon={faCog} link="/configuracion"></MenuItem>
               </div> 
-          </div>
+            </div>
 
         <Switch>
           <Route path="/identificate">

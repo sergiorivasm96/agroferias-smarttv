@@ -11,10 +11,13 @@ class Mapeo extends React.Component{
 
 generalKeymapping = {
     13: function(selectedItem, newSelected) {
+        console.log('enter');
       // con esto disparamos una accion que está implementado un poco mas abajo en Click
       const nativeSelectectItem = selectedItem[0];
+   
       nativeSelectectItem.click();
-    //   selectedItem.trigger('click');
+      console.log(nativeSelectectItem);
+      selectedItem.trigger('click');
       return {
         status: 'selected' // este debe estar siempre, solo varia cuando se quiere hacer cosas especiales que no se harán para este proyecto
       };
@@ -68,6 +71,15 @@ generalKeymapping = {
       actions: actionMapping || {},
       useGeometry: true
     });
+  }
+
+  createZone(var1){
+    const _zone = this.createNewKeyBehaviorZone(var1, this.generalKeymapping)
+    this.globalKeyMappingController.addBehaviorZone(
+      _zone,
+      true,
+      ['HOME_LAYER']
+    );
   }
 
 }
