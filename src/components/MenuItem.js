@@ -15,7 +15,7 @@ const divStyle = {
 
 function MenuItem(props) {
     return (
-      <Link to={props.link} style={{ color: 'black' }}>
+      <Link to={props.link} style={{ color: 'black' }} className="item-focusable">
         <div className='MenuItem' style={divStyle}>
           <div style={spanStyle}>{props.name}</div>
           <FontAwesomeIcon icon={props.icon} size='6x'/>
