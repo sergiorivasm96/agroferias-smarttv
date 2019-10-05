@@ -1,6 +1,5 @@
 import * as gtv from '@arxis/gtvzone';
 import React from 'react'
-
 class Mapeo extends React.Component {
     globalKeyMappingController;
     constructor(props) {
@@ -11,18 +10,15 @@ class Mapeo extends React.Component {
 
     generalKeymapping = {
         13: function(selectedItem, newSelected) {
-            console.log(selectedItem,selectedItem.hasClass('url-redirect'))
             if(selectedItem.hasClass('url-redirect')){
-              console.log(selectedItem.find('a').attr('href'),selectedItem.attr('href'),selectedItem.find('a').attr('href')||selectedItem.attr('href'))
               window.location.href=(selectedItem.attr('href')||selectedItem.find('a').attr('href'));
             }
-            selectedItem.click();
-            selectedItem.trigger('click');//con esto disparamos una accion que está implementado un poco mas abajo en Click
+            //   selectedItem.trigger('click');//con esto disparamos una accion que está implementado un poco mas abajo en Click
+              selectedItem.click();
             return {
               status: 'selected'//este debe estar siempre, solo varia cuando se quiere hacer cosas especiales que no se harán para este proyecto
             };
           },  
-
         40:
             function _(selectedItem, newSelected) {
             // down
@@ -57,7 +53,10 @@ class Mapeo extends React.Component {
             selectionClasses: {basic: 'focused-item', hasData: 'focused-item'},
             saveRowPosition: false,
             keyMapping: keyMapping,
-            actions: actionMapping || {},
+            actions: {
+                click: function (el) {
+                }
+            },
             useGeometry: true
         });
     }

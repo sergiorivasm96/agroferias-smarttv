@@ -3,9 +3,9 @@ import React from 'react'
 import '../components/styles/Home.css'
 
 class Home extends React.Component{
-  constructor(props) {
-      super(props);
-  }
+  // constructor(props) {
+  //     super(props);
+  // }
   render (){
       return(
         <Player 
@@ -19,6 +19,5 @@ class Home extends React.Component{
       )
   }
 }
-
   
 export default Home;

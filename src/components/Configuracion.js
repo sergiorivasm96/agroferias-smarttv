@@ -1,12 +1,21 @@
 import React from 'react'
+import ScrollableList from './SrollableList';
+
 
 class Configuracion extends React.Component{
-    constructor(props) {
-        super(props);
-    }
+    // constructor(props) {
+    //     super(props);
+    // }
+
     render (){
         return(
-            <div>Configuracion</div>
+            <div>
+                <h3>
+                    Lista de ferias:
+                </h3>
+                <ScrollableList></ScrollableList>   
+            </div>
+            
         )
     }
 }

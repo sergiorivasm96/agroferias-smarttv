@@ -17,19 +17,19 @@ const menuStyle = {
 class App extends React.Component {
     constructor(props) {
     super(props);
-    this.mapeo = new Mapeo(".MainMenu");
+    this.mapeo = new Mapeo();
   }
 
   componentDidMount() {
-      this.mapeo.createZone('.MainMenu');
+      this.mapeo.createZone('.main-menu');
   }
 
   render() {
     return (
       <BrowserRouter>
-      <div>
+      <div className='main-menu'>
             <div className='App'>
-              <div className='MainMenu' display='block' style={menuStyle}>
+              <div  display='block' style={menuStyle}>
                     <MenuItem name='Identifícate' icon={faUser} link="/identificate" ></MenuItem>
                     <MenuItem name='Mapa' icon={faMap} link="/mapas"></MenuItem>
                     <MenuItem name='Publicidad' icon={faVideo} link="/publicidad"></MenuItem>
