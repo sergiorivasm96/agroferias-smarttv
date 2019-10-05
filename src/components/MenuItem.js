@@ -27,7 +27,8 @@ const spanStyle = {
 const divStyle = {
   display: 'inline-block',
   textAlign: 'center',
-  textDecorationLine : 'none'
+  textDecorationLine : 'none',
+  color: 'white'
 }
   
 export default MenuItem;
