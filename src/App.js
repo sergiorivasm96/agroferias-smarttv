@@ -10,8 +10,7 @@ import Configuracion from './components/Configuracion.js'
 import Mapeo from './components/Mapeo.js'
 
 const menuStyle = {
-    background: '#ed217c',
-    paddingLeft: '5%'
+    background: '#ed217c'
 }
 
 class App extends React.Component {

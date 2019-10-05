@@ -1,5 +1,6 @@
 import React from 'react'
 import ScrollableList from './SrollableList';
+import BotonTexto from './BotonTexto.js'
 
 
 class Configuracion extends React.Component{
@@ -14,6 +15,10 @@ class Configuracion extends React.Component{
                     Lista de ferias:
                 </h3>
                 <ScrollableList></ScrollableList>   
+                <div>
+                <BotonTexto texto='Posiciona tu televisor' className='boton-texto'></BotonTexto>
+                </div>
+                
             </div>
             
         )

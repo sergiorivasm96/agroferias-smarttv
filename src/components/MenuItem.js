@@ -21,7 +21,7 @@ class MenuItem extends React.Component {
 
 const spanStyle = {
   fontSize: '40px',
-  width: '280px'
+  width: '230px'
 }
 
 const divStyle = {
