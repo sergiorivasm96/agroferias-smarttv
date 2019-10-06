@@ -1,13 +1,33 @@
 import React from 'react'
-import ScrollableList from './SrollableList';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTv} from '@fortawesome/free-solid-svg-icons'
-
+import Mapeo from './Mapeo.js'
+import FeriaLista from './FeriaLista'
 
 class Configuracion extends React.Component{
-    // constructor(props) {
-    //     super(props);
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+            feriaActual:''
+        }
+        this.mapeo = new Mapeo();
+        this.cambioFeria = this.cambioFeria.bind(this);
+    }
+
+    componentDidMount(){
+        // this.mapeo.createZone('.configuracion');
+    }
+
+    componentWillUnmount(){
+        // this.mapeo.removeZone('.configuracion');
+        // console.log('zone destroyed');
+    }
+
+    cambioFeria(feria){
+        this.setState({ feriaActual: feria}, () => {
+            console.log(this.state.feriaActual);
+          });   
+    }
 
     render (){
         return(
@@ -15,7 +35,7 @@ class Configuracion extends React.Component{
                 <div style={{fontSize: '50px', paddingTop: '5%'}}>
                     Feria actual
                 </div>
-                <ScrollableList></ScrollableList>   
+                <FeriaLista cambioFeria={this.cambioFeria}></FeriaLista>   
                 <div style={{fontSize: '50px', paddingTop: '5%'}}>
                     Posición del televisor en el mapa
                 </div>
@@ -24,10 +44,7 @@ class Configuracion extends React.Component{
                         <FontAwesomeIcon icon={faTv} size='6x' />
                     </button>
                 </div>
-            
-                
-            </div>
-            
+            </div>  
         )
     }
 }

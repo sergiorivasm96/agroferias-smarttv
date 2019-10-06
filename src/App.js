@@ -10,7 +10,8 @@ import Configuracion from './components/Configuracion.js'
 import Mapeo from './components/Mapeo.js'
 
 const menuStyle = {
-    background: '#ed217c'
+    background: '#ed217c',
+    paddingLeft: '5%'
 }
 
 class App extends React.Component {
@@ -20,10 +21,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log("component dis mount")
     this.mapeo.createZone('.main-menu');
-   
+    console.log("zone created")
   }
+
+  componentWillUnmount(){
+    this.mapeo.removeZone('.main-menu');
+    console.log('zone destroyed');
+}
 
   render() {
     return (

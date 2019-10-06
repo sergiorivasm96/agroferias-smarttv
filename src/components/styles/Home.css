@@ -12,5 +12,5 @@ video{
 }
 
 .focused-item {
-    color: white!important;
+    color: red!important;
 }

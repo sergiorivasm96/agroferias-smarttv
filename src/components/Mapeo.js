@@ -1,5 +1,5 @@
 import * as gtv from '@arxis/gtvzone';
-import React from 'react';
+// import React from 'react';
 
 const layer = [];
 class Mapeo {
@@ -12,10 +12,6 @@ class Mapeo {
 
   generalKeymapping = {
     13: function(selectedItem, newSelected) {
-      // if(selectedItem.hasClass('url-redirect')){
-      //   window.location.href=(selectedItem.attr('href')||selectedItem.find('a').attr('href'));
-      // }
-      // selectedItem.trigger('click');//con esto disparamos una accion que está implementado un poco mas abajo en Click
       selectedItem.click();
       return {
         status: 'selected' //este debe estar siempre, solo varia cuando se quiere hacer cosas especiales que no se harán para este proyecto
@@ -74,6 +70,7 @@ class Mapeo {
       return null;
     }
   }
+
   removeZone(zoneName) {
     const l = this[zoneName];
     // eslint-disable-next-line no-unused-expressions
