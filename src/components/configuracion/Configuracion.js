@@ -1,7 +1,6 @@
 import React from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTv} from '@fortawesome/free-solid-svg-icons'
-import Mapeo from './Mapeo.js'
 import FeriaLista from './FeriaLista'
 
 class Configuracion extends React.Component{
@@ -10,7 +9,6 @@ class Configuracion extends React.Component{
         this.state = {
             feriaActual:''
         }
-        this.mapeo = new Mapeo();
         this.cambioFeria = this.cambioFeria.bind(this);
     }
 
@@ -32,8 +30,8 @@ class Configuracion extends React.Component{
     render (){
         return(
             <div>
-                <div style={{fontSize: '50px', paddingTop: '5%'}}>
-                    Feria actual
+                <div style={{fontSize: '50px', paddingTop: '2%'}}>
+                    Seleccione la feria
                 </div>
                 <FeriaLista cambioFeria={this.cambioFeria}></FeriaLista>   
                 <div style={{fontSize: '50px', paddingTop: '5%'}}>

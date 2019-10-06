@@ -1,13 +1,13 @@
 import React from 'react'
-import Home from './components/Home.js'
 import {faCog, faMap, faUser, faVideo} from '@fortawesome/free-solid-svg-icons'
-import MenuItem from './components/MenuItem.js'
+import MenuItem from './components/home/MenuItem.js'
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import Mapa from './components/Mapa.js'
-import Identificate from './components/Identificate.js'
-import Publicidad from './components/Publicidad.js'
-import Configuracion from './components/Configuracion.js'
-import Mapeo from './components/Mapeo.js'
+import Home from './components/home/Home.js'
+import Mapa from './components/mapa/Mapa.js'
+import Identificate from './components/identificate/Identificate.js'
+import Publicidad from './components/publicidad/Publicidad.js'
+import Configuracion from './components/configuracion/Configuracion.js'
+import Mapeo from './components/mapeo/Mapeo.js'
 
 const menuStyle = {
     background: '#ed217c',

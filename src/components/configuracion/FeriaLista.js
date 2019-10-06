@@ -6,11 +6,8 @@ class FeriaLista extends React.Component{
     constructor(props) {
         super(props);
         this.state={
-            ferias: 
-            [
-            ]
+            ferias: []
         }
-        console.log(this.props)
     }
   
     componentDidMount() { 
