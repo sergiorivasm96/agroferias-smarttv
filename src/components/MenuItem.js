@@ -4,17 +4,20 @@ import {Link} from 'react-router-dom'
 
 class MenuItem extends React.Component {
   // constructor(props) {
-  //   super(props);
+  //   super(props); 
   // }
 
+  handleClick() {
+    console.log('The link was clicked.');
+  }
 
   render (){
     return(
-      <div className='MenuItem item-focusable url-redirect' style={divStyle}>
-        <Link to={this.props.link}> </Link>
+      <Link to={this.props.link} onClick={this.handleClick} className='MenuItem item-focusable' style={divStyle}>
+       
         <div style={spanStyle}>{this.props.name}</div>
         <FontAwesomeIcon icon={this.props.icon} size='6x'/>
-      </div>
+      </Link>
     )
   }
 }

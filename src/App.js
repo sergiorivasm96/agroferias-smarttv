@@ -20,7 +20,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-      this.mapeo.createZone('.main-menu');
+    console.log("component dis mount")
+    this.mapeo.createZone('.main-menu');
+   
   }
 
   render() {
@@ -28,11 +30,11 @@ class App extends React.Component {
       <BrowserRouter>
       <div className='main-menu'>
             <div className='App'>
-              <div  display='block' style={menuStyle}>
-                    <MenuItem name='Identifícate' icon={faUser} link="/identificate" ></MenuItem>
-                    <MenuItem name='Mapa' icon={faMap} link="/mapas"></MenuItem>
-                    <MenuItem name='Publicidad' icon={faVideo} link="/publicidad"></MenuItem>
-                    <MenuItem name='Configuración' icon={faCog} link="/configuracion"></MenuItem>
+              <div  display='block' style={menuStyle} className="keyboard-row">
+                    <MenuItem name='Identifícate' icon={faUser} link="/identificate"></MenuItem>
+                    <MenuItem name='Mapa' icon={faMap} link="/mapas" ></MenuItem>
+                    <MenuItem name='Publicidad' icon={faVideo} link="/publicidad" ></MenuItem>
+                    <MenuItem name='Configuración' icon={faCog} link="/configuracion" ></MenuItem>
               </div> 
             </div>
 
