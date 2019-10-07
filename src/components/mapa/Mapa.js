@@ -56,9 +56,7 @@ class Mapa extends React.Component{
                     <MapaLugar></MapaLugar>
                     </div>
             ))}
-               
             </div>
-          
         )
     }
 }

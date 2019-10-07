@@ -1,0 +1,22 @@
+.simple-keyboard {
+    max-width: 400px;
+    margin-left: 5%;
+}
+
+input {
+    width: 400px;
+    height: 50px;
+    padding: 20px;
+    font-size: 20px;
+    margin-left: 5%;
+    margin-top:2%;
+    border: none;
+    box-sizing: border-box;
+    background-color: gray;
+}
+
+.focused-item{
+    background-color: #ed217c !important;
+    color: white !important;
+}
+  

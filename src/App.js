@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Home from './components/home/Home.js'
 import Mapa from './components/mapa/Mapa.js'
 import Identificate from './components/identificate/Identificate.js'
-import Publicidad from './components/publicidad/Publicidad.js'
+import Publicidad from './components/mapa/MapaBuscador'
 import Configuracion from './components/configuracion/Configuracion.js'
 import Mapeo from './components/mapeo/Mapeo.js'
 
