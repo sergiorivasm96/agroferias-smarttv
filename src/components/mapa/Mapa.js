@@ -99,15 +99,22 @@ class Mapa extends React.Component {
             top: 0,
             bottom: 0,
             margin: 'auto',
-            width: '50%',
-            height: '40%',
+            width: "35%",
+            height: "30%",
             zIndex: 10,
-            backgroundColor: 'white'
+            backgroundColor: "#e6428b",
+            padding: "20px",
+            fontSize: "18px",
+            lineHeight: "25px",
+            borderRadius: "20px",
+            boxShadow: "0px 0px 6px #ccc",
+            color: "#fff"
           }}
           data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
           hidden={!this.state.popUpVisible ? 'hidden' : ''}
         >
-          {this.state.tiendaModal.nombre}  {this.state.tiendaModal.descripcion}
+          <p style={{fontWeight: "bold"}}>{this.state.tiendaModal.nombre}</p> 
+          <p>{this.state.tiendaModal.descripcion}</p>
         </div>
       </div>
     );
