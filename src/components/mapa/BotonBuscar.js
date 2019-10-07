@@ -1,8 +1,7 @@
 import React from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSearch} from '@fortawesome/free-solid-svg-icons'
-import {Link, Route} from 'react-router-dom'
-import MapaBuscador from './MapaBuscador.js'
+import {Link} from 'react-router-dom'
 
 class BotonBuscar extends React.Component{
     // constructor(props) {
