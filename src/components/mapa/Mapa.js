@@ -58,7 +58,7 @@ class Mapa extends React.Component {
     this.setState({ tiendaModal: tienda, popUpVisible: true });
     setTimeout(() => {
       this.setState({ popUpVisible: false });
-    }, 10000);
+    }, 3000);
   }
 
   render() {
