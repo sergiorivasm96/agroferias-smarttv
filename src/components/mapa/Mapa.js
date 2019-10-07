@@ -3,6 +3,7 @@ import MapaLugar from './MapaLugar.js'
 import BotonBuscar from './BotonBuscar'
 import MapaImg from './mapa.jpeg'
 
+
 class Mapa extends React.Component{
     constructor(props) {
         super(props);
@@ -11,42 +12,48 @@ class Mapa extends React.Component{
                 {
                     "idTienda": 1,
                     "nombre": "Tienda 1",
-                    "posicionX": 510,
-                    "posicionY": 200
+                    "descripcion": "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl",
+                    "posicionX": 460,
+                    "posicionY": 150
                 },
                 {
                     "idTienda": 2,
                     "nombre": "Tienda 2",
-                    "posicionX": 450,
-                    "posicionY": 330
+                    "descripcion": "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl",
+                    "posicionX": 420,
+                    "posicionY": 250
                 },
                 {
                     "idTienda": 3,
                     "nombre": "Tienda 3",
-                    "posicionX": 775,
-                    "posicionY": 200
+                    "descripcion": "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl",
+                    "posicionX": 760,
+                    "posicionY": 150
                 },
                 {
                     "idTienda": 4,
                     "nombre": "Tienda 4",
-                    "posicionX": 985,
-                    "posicionY": 206
+                    "descripcion": "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl",
+                    "posicionX": 950,
+                    "posicionY": 150
                 },
                 {
                     "idTienda": 5,
                     "nombre": "Tienda 5",
+                    "descripcion": "Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl",
                     "posicionX": 825,
-                    "posicionY": 340
+                    "posicionY": 320
                 },
             
-            ]
+            ],
+            popUpVisible: false
         }
     }
 
     handlerClick(tienda)
     {
-        alert(tienda.nombre);
-        console.log('diste click en ' + tienda.nombre)
+        alert(`${tienda.nombre}: ${tienda.descripcion}`);
+        console.log(`${tienda.nombre}: ${tienda.descripcion}`);
     }
 
     render (){
