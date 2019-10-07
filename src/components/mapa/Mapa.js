@@ -1,6 +1,6 @@
 import React from 'react'
 import MapaLugar from './MapaLugar.js'
-// import '../styles/Mapa.css'
+import BotonBuscar from './BotonBuscar'
 import MapaImg from './mapa.jpeg'
 
 class Mapa extends React.Component{
@@ -50,13 +50,17 @@ class Mapa extends React.Component{
 
     render (){
         return(
-            <div  id='divGrande' style={{backgroundImage: "url(" + MapaImg + ")", position:'relative', width:'1200px', height:'500px'}}>
-                  {this.state.tiendas.map((tienda) => (
-                    <div className='item-focusable' style={{left:tienda.posicionX, position:'absolute', top:tienda.posicionY}} onClick={()=>this.handlerClick(tienda)} key={'tienda-' + tienda.idTienda} >
-                    <MapaLugar></MapaLugar>
+            <div>
+                <BotonBuscar></BotonBuscar>
+                <div  id='divGrande' style={{backgroundImage: "url(" + MapaImg + ")", position:'relative', width:'1000px', height:'450px', marginLeft: '4%'}}>
+                    {this.state.tiendas.map((tienda) => (
+                        <div className='item-focusable' style={{left:tienda.posicionX, position:'absolute', top:tienda.posicionY}} onClick={()=>this.handlerClick(tienda)} key={'tienda-' + tienda.idTienda} >
+                        <MapaLugar></MapaLugar>
                     </div>
-            ))}
+                    ))}
+                </div>
             </div>
+           
         )
     }
 }

@@ -1,6 +1,7 @@
 .simple-keyboard {
     max-width: 400px;
-    margin-left: 5%;
+    margin-left: 2%;
+    margin-top: 10%;
 }
 
 input {
@@ -8,15 +9,20 @@ input {
     height: 50px;
     padding: 20px;
     font-size: 20px;
-    margin-left: 5%;
+    margin-left: 42%;
     margin-top:2%;
     border: none;
     box-sizing: border-box;
-    background-color: gray;
+    background-color: #ed217c;
+    color: white;
 }
 
-.focused-item{
-    background-color: #ed217c !important;
-    color: white !important;
+::placeholder {
+    color: white;
+  }
+
+.simple-keyboard  > .hg-row > .focused-item{
+    background-color: #ed217c ;
+    color: white;
 }
   

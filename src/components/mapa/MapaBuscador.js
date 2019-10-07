@@ -3,7 +3,6 @@ import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 import '../styles/Keyboard.css'
 
-
 class MapaBuscador extends React.Component{
     constructor(props) {
         super(props);
@@ -24,18 +23,14 @@ class MapaBuscador extends React.Component{
     onKeyPress = button => {
         console.log("Button pressed", button);
 
-        /**
-         * If you want to handle the shift and caps lock buttons
-         */
-        if (button === "{shift}" || button === "{lock}") this.handleShift();
+        if (button === "{enter}"){
+            this.buscar();
+        }
     };
 
-    handleShift = () => {
-        let layoutName = this.state.layoutName;
-
-        this.setState({
-            layoutName: layoutName === "default" ? "shift" : "default"
-        });
+    buscar = () => {
+        var text = document.getElementsByTagName('input')[0].value;
+        console.log(`se está buscando ${text}`);
     };
 
     onChangeInput = event => {
@@ -53,7 +48,7 @@ class MapaBuscador extends React.Component{
             <div>
                 <input
                     value={this.state.input}
-                    placeholder={"Tap on the virtual keyboard to start"}
+                    placeholder={"Escribe un producto para buscar"}
                     onChange={e => this.onChangeInput(e)}
                 />
                  <Keyboard
@@ -78,6 +73,11 @@ class MapaBuscador extends React.Component{
                         buttons: "q w e r t y u i o p a s d f g h j k l z x c v b n m {space} {bksp} {enter}"
                         }
                     ]}
+                    display={{
+                        '{bksp}': '⌫',
+                        '{enter}': '🔎'
+                      }}
+                      
                 />
             </div>
         )
