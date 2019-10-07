@@ -9,7 +9,7 @@ class MapaLugar extends React.Component{
     render (){
         return(
             <div id="place">
-                <FontAwesomeIcon icon={faMapMarkerAlt}/>
+                <FontAwesomeIcon icon={faMapMarkerAlt} size='2x'/>
             </div>
         )
     }
