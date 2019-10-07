@@ -101,8 +101,8 @@ class Mapa extends React.Component {
             margin: 'auto',
             width: '50%',
             height: '40%',
-            'z-index': 10,
-            'background-color': 'white'
+            zIndex: 10,
+            backgroundColor: 'white'
           }}
           data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
           hidden={!this.state.popUpVisible ? 'hidden' : ''}
