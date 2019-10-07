@@ -45,6 +45,7 @@ class Mapa extends React.Component{
 
     handlerClick(tienda)
     {
+        alert(tienda.nombre);
         console.log('diste click en ' + tienda.nombre)
     }
 
