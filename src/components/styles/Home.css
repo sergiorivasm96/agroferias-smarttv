@@ -11,6 +11,22 @@ video{
     margin-left: 20%;
 }
 
-.focused-item {
-    color: red!important;
+.menu-rosado > .focused-item {
+    color: black !important ;
+}
+
+.menu-rosado > .focused-item {
+    color: black !important ;
+}
+
+#divGrande > .focused-item{
+    color: red !important ;
+}
+
+.App > div > div >  .focused-item{
+    background-color: white !important ;
+}
+
+.link-mapa-buscador > .focused-item > svg{
+        color: white !important ;
 }

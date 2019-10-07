@@ -1,0 +1,28 @@
+.simple-keyboard {
+    max-width: 400px;
+    margin-left: 2%;
+    margin-top: 10%;
+}
+
+input {
+    width: 400px;
+    height: 50px;
+    padding: 20px;
+    font-size: 20px;
+    margin-left: 42%;
+    margin-top:2%;
+    border: none;
+    box-sizing: border-box;
+    background-color: #ed217c;
+    color: white;
+}
+
+::placeholder {
+    color: white;
+  }
+
+.simple-keyboard  > .hg-row > .focused-item{
+    background-color: #ed217c ;
+    color: white;
+}
+  
