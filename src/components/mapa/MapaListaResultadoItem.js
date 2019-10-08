@@ -12,14 +12,17 @@ class MapaResultado extends React.Component{
                 <div className='resultado-container' style={styleFeriaList}>
                     {this.props.ferias.map((resultado) => (
                         <Link to={{
-                                pathname: `/mapas/buscador/${resultado.idProducto}`
-                        }}>
+                            pathname: `/mapas/buscador/${resultado.idProducto}`
+                            }}  style={{ textDecoration: 'none', color:'inherit' }}>
+                               
                             <div className='item-focusable resultado item' key={'resultado-' + resultado.idProducto} tabIndex="0"  style={styleFeriaCard}>
+                                
                                 <div className={"resultado-body" + resultado.idProducto}>
                                 </div>
                                 <div>{resultado.nombre}</div>
+                                
                             </div>
-                            </Link>  
+                            </Link>
                     ))}
                 </div>
            

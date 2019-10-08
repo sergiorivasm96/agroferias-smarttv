@@ -1,14 +1,6 @@
 import React from 'react'
 
 class MapaResultado extends React.Component{
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount(){
-      
-    }
-   
     render (){
         
         return(

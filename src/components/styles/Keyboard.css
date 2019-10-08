@@ -29,14 +29,10 @@ input {
     color: white;
 }
 
-.resultado-container > .focused-item{
+.resultado-container > a > .focused-item{
     background-color: #ed217c !important ;
     color: white;
 }
-/* 
-.resultado-container::-webkit-scrollbar {
-    display:none !important;
-} */
 
 
   
