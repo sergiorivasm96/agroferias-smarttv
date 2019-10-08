@@ -1,7 +1,9 @@
 .simple-keyboard {
-    max-width: 400px;
-    margin-left: 2%;
-    margin-top: 10%;
+    max-width: 600px;
+    max-height: 500px;
+    margin-left: 4%;
+    margin-top: 5%;
+    height: 100%;
 }
 
 input {
@@ -10,7 +12,8 @@ input {
     padding: 20px;
     font-size: 20px;
     margin-left: 42%;
-    margin-top:2%;
+    margin-top:22%;
+    margin-bottom: 5%;
     border: none;
     box-sizing: border-box;
     background-color: #ed217c;
@@ -22,7 +25,18 @@ input {
   }
 
 .simple-keyboard  > .hg-row > .focused-item{
-    background-color: #ed217c ;
+    background-color: #ed217c !important ;
     color: white;
 }
+
+.resultado-container > .focused-item{
+    background-color: #ed217c !important ;
+    color: white;
+}
+/* 
+.resultado-container::-webkit-scrollbar {
+    display:none !important;
+} */
+
+
   

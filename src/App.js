@@ -9,6 +9,7 @@ import Publicidad from './components/publicidad/Publicidad.js'
 import Configuracion from './components/configuracion/Configuracion.js'
 import MapaBuscador from './components/mapa/MapaBuscador.js'
 import Mapeo from './components/mapeo/Mapeo.js'
+import MapaResultado from './components/mapa/MapaResultado.js'
 
 
 
@@ -63,7 +64,10 @@ class App extends React.Component {
             <Home />
           </Route>
           <Route exact path="/mapas/buscador">
-                    <MapaBuscador />
+              <MapaBuscador />
+          </Route>
+          <Route exact path="/mapas/buscador/:idProducto" render={({ match }) => <MapaResultado idProducto={match.params.idProducto}/>} >
+            
           </Route>
        
         </Switch>
