@@ -30,3 +30,8 @@ video{
 .link-mapa-buscador > .focused-item > svg{
         color: white !important ;
 }
+
+
+#divGrande > div > .focused-item{
+    color: red !important ;
+}

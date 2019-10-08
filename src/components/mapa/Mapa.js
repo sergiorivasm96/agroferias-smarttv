@@ -126,7 +126,7 @@ class Mapa extends React.Component {
               return true;
             else {
               this.televisor = JSON.parse(localTV);
-              return (this.televisor.idTelevisor == televisor.idTelevisor) ? true : false;
+              return (this.televisor.idTelevisor === televisor.idTelevisor) ? true : false;
             }
           }).map(televisor => {
             return <div

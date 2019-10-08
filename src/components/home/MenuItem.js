@@ -15,7 +15,7 @@ class MenuItem extends React.Component {
     return(
       <Link to={this.props.link} onClick={this.handleClick} className='MenuItem item-focusable' style={divStyle}>
         <div style={spanStyle}>{this.props.name}</div>
-        <FontAwesomeIcon icon={this.props.icon} size='6x'/>
+        <FontAwesomeIcon icon={this.props.icon} size='3x'/>
       </Link>
     )
   }

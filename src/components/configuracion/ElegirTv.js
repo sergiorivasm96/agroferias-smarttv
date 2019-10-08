@@ -15,6 +15,11 @@ class ElegirTv extends React.Component {
                     idTelevisor: 2,
                     posicion_x: 750 / 1200,
                     posicion_y: 200 / 382
+                },
+                {
+                    idTelevisor: 3,
+                    posicion_x: 900 / 1200,
+                    posicion_y: 100 / 382
                 }
             ],
             popUpVisible: false,
@@ -28,17 +33,25 @@ class ElegirTv extends React.Component {
     handlerClick(televisor) {
         this.setState({ televisorModal: televisor, popUpVisible: true });
         localStorage.setItem("localTelevisor", JSON.stringify(televisor));
-        setTimeout(() => {
-            this.setState({ popUpVisible: false });
-            window.location = '/mapas';
-        }, 3000);
+        // setTimeout(() => {
+        //     this.setState({ popUpVisible: false });
+        // }, 3000);
     }
 
-    render() {
+    render() {      
+        let textoEncabezado
+        let televisorGuardado =  JSON.parse(localStorage.getItem('localTelevisor')); 
+      
+        if (televisorGuardado.idTelevisor) {
+            textoEncabezado = <h1> Se ha seleccionado el SmarTV con código: {televisorGuardado.idTelevisor} </h1>
+        } else {
+            textoEncabezado = <h1> Seleccione el televisor que está usando: </h1>
+        }
+
         console.log("Usted quiere ubicar los televisores de la feria" + this.props.idFeria + " como id")
         return (
             <div>
-                <h1> Seleccione el televisor que está usando: </h1>
+                {textoEncabezado}
                 <div
                     id="divGrande"
                     style={{
@@ -53,18 +66,34 @@ class ElegirTv extends React.Component {
                     }}
                 >
                     {this.state.televisores.map(televisor => (
-                        <div
-                            className="item-focusable"
-                            style={{
-                                left: televisor.posicion_x * this.anchoImagen,
-                                position: 'absolute',
-                                top: televisor.posicion_y * this.altoImagen
-                            }}
-                            onClick={() => this.handlerClick(televisor)}
-                            key={'televisor-' + televisor.idTelevisor}
-                        >
-                            <MapaLugar></MapaLugar>
+                        <div>
+                            <div style={{
+                                    fontSize: '40px', 
+                                    position: 'absolute',
+                                    left: televisor.posicion_x * this.anchoImagen + 10,
+                                    top: televisor.posicion_y * this.altoImagen - 60,
+                                    borderRadius: '50%',
+                                    width:'50px',
+                                    height: '50px',
+                                    border: '3px solid black',
+                                    textAlign: 'center'
+                                    }}>
+                                    {televisor.idTelevisor}</div> 
+                            <div
+                                className="item-focusable"
+                                style={{
+                                    left: televisor.posicion_x * this.anchoImagen,
+                                    position: 'absolute',
+                                    top: televisor.posicion_y * this.altoImagen
+                                }}
+                                onClick={() => this.handlerClick(televisor)}
+                                key={'televisor-' + televisor.idTelevisor}
+                            >
+                            
+                                <MapaLugar televisor={true}></MapaLugar>
+                            </div>
                         </div>
+                       
                     ))}
                 </div>
                 <div
@@ -81,8 +110,7 @@ class ElegirTv extends React.Component {
                         zIndex: 10,
                         backgroundColor: "#e6428b",
                         padding: "20px",
-                        fontSize: "18px",
-                        lineHeight: "25px",
+                        fontSize: "40px",
                         borderRadius: "20px",
                         boxShadow: "0px 0px 6px #ccc",
                         color: "#fff"

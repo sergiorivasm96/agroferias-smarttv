@@ -10,9 +10,10 @@ class Configuracion extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            feriaActual: '',
+            idFeriaActual: localStorage.getItem('idFeria'),
+            textoFeriaActual: '',
             popUpVisible: false,
-            texto: '',
+            nombreFeriaActual: localStorage.getItem('nombreFeria'),
             feriaSeleccionada: false
         }
         this.cambioFeria = this.cambioFeria.bind(this);
@@ -21,6 +22,7 @@ class Configuracion extends React.Component {
 
     componentDidMount() {
         this._isMounted = true;
+        console.log(`feriaSeleccionada ${this.state.idFeriaActual}`)
     }
 
     componentWillUnmount() {
@@ -29,8 +31,11 @@ class Configuracion extends React.Component {
 
     cambioFeria(feria) {
         const texto = 'Ha seleccionado la feria ' + feria.nombre;
-        this.setState({ feriaActual: feria, texto: texto, popUpVisible: true, feriaSeleccionada: true }, () => {
-            console.log(this.state.feriaActual);
+        console.log(feria.nombre);
+        localStorage.setItem('idFeria', feria.idFeria);
+        localStorage.setItem('nombreFeria', feria.nombre);
+        this.setState({ idFeriaActual: feria.idFeria, texto: texto, popUpVisible: true, feriaSeleccionada: true, nombreFeriaActual: feria.nombre }, () => {
+            console.log(this.state.idFeriaActual);
             setTimeout(() => {
                 this.setState({
                     popUpVisible: false
@@ -55,14 +60,14 @@ class Configuracion extends React.Component {
         let button;
         let textoFeria;
         console.log(this.state.feriaSeleccionada)
-        if (this.state.feriaSeleccionada) {
+        if (localStorage.getItem('idFeria')) {
             console.log('feria seleccionada')
             button = <Link to={{
-                pathname: `/configuracion/${this.state.feriaActual.idFeria}`
+                pathname: `/configuracion/${this.state.idFeriaActual}`
             }} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <button style={buttonStyle} className='item-focusable'>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
             </Link>
-            textoFeria = 'Feria seleccionada: ' + this.state.feriaActual.nombre
+            textoFeria = 'Feria seleccionada: ' + this.state.nombreFeriaActual
         } else {
             console.log('feria sin seleccionar')
             button = <button style={buttonStyle} className='item-focusable' onClick={this.seleccionarTelevisorSinFeria}>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
