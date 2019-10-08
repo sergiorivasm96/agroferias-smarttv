@@ -9,6 +9,8 @@ import Publicidad from './components/publicidad/Publicidad.js'
 import Configuracion from './components/configuracion/Configuracion.js'
 import MapaBuscador from './components/mapa/MapaBuscador.js'
 import Mapeo from './components/mapeo/Mapeo.js'
+import MapaResultado from './components/mapa/MapaResultado.js'
+import ElegirTV from './components/configuracion/ElegirTv.js'
 
 
 
@@ -25,12 +27,10 @@ class App extends React.Component {
 
   componentDidMount() {
     this.mapeo.createZone('.main-menu');
-    console.log("zone created")
   }
 
   componentWillUnmount(){
     this.mapeo.removeZone('.main-menu');
-    console.log('zone destroyed');
 }
 
   render() {
@@ -63,7 +63,12 @@ class App extends React.Component {
             <Home />
           </Route>
           <Route exact path="/mapas/buscador">
-                    <MapaBuscador />
+              <MapaBuscador />
+          </Route>
+          <Route exact path="/mapas/buscador/:idProducto" render={({ match }) => <MapaResultado idProducto={match.params.idProducto}/>} >
+            
+          </Route>
+            <Route exact path="/configuracion/:idFeria" render={({ match }) => <ElegirTV idFeria={match.params.idFeria}/>} >
           </Route>
        
         </Switch>

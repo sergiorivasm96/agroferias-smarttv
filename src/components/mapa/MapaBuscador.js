@@ -1,5 +1,7 @@
 import React from 'react'
 import Keyboard from "react-simple-keyboard";
+import MapaListaResultado from './MapaListaResultado.js'
+
 import "react-simple-keyboard/build/css/index.css";
 import '../styles/Keyboard.css'
 
@@ -8,9 +10,8 @@ class MapaBuscador extends React.Component{
         super(props);
         this.state = {
             layoutName: "default",
-            input: ""
-          };
-        
+            input: "",
+        };
     }
 
     onChange = input => {
@@ -45,13 +46,8 @@ class MapaBuscador extends React.Component{
     };
     render (){
         return(
-            <div>
-                <input
-                    value={this.state.input}
-                    placeholder={"Escribe un producto para buscar"}
-                    onChange={e => this.onChangeInput(e)}
-                />
-                 <Keyboard
+            <div style={{display:'flex'}}>
+                <Keyboard
                     keyboardRef={r => (this.keyboard = r)}
                     onChange={input => this.onChange(input)}
                     onKeyPress={button => this.onKeyPress(button)}
@@ -77,8 +73,16 @@ class MapaBuscador extends React.Component{
                         '{bksp}': '⌫',
                         '{enter}': '🔎'
                       }}
-                      
                 />
+
+            <div>
+                    <input
+                        value={this.state.input}
+                        placeholder={"Escribe un producto para buscar"}
+                        onChange={e => this.onChangeInput(e)}
+                    />
+                     <MapaListaResultado></MapaListaResultado>
+                </div>
             </div>
         )
     }
