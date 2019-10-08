@@ -1,7 +1,6 @@
 import React from 'react';
 import MapaLugar from './MapaLugar.js';
 import BotonBuscar from './BotonBuscar';
-import MapaImg from './mapa.jpeg';
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -13,45 +12,48 @@ class Mapa extends React.Component {
           nombre: 'Tienda 1',
           descripcion:
             'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicionX: 460,
-          posicionY: 150
+          posicionX: 460 / 1200,
+          posicionY: 150 / 382
         },
         {
           idTienda: 2,
           nombre: 'Tienda 2',
           descripcion:
             'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicionX: 420,
-          posicionY: 250
+          posicionX: 420 / 1200,
+          posicionY: 250 / 382
         },
         {
           idTienda: 3,
           nombre: 'Tienda 3',
           descripcion:
             'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicionX: 760,
-          posicionY: 150
+          posicionX: 760 / 1200,
+          posicionY: 150 / 382
         },
         {
           idTienda: 4,
           nombre: 'Tienda 4',
           descripcion:
             'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicionX: 950,
-          posicionY: 150
+          posicionX: 950 / 1200,
+          posicionY: 150 / 382
         },
         {
           idTienda: 5,
           nombre: 'Tienda 5',
           descripcion:
             'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicionX: 825,
-          posicionY: 320
+          posicionX: 825 / 1200,
+          posicionY: 320 / 382
         }
       ],
       popUpVisible: false,
       tiendaModal: {}
     };
+    this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
+    this.anchoImagen = 1200;
+    this.altoImagen = 382;
   }
 
   handlerClick(tienda) {
@@ -68,10 +70,10 @@ class Mapa extends React.Component {
         <div
           id="divGrande"
           style={{
-            backgroundImage: 'url(' + MapaImg + ')',
+            backgroundImage: 'url(' + this.imagen + ')',
             position: 'relative',
-            width: '1000px',
-            height: '450px',
+            width: '1200px',
+            height: '382px',
             marginLeft: '4%'
           }}
         >
@@ -79,9 +81,9 @@ class Mapa extends React.Component {
             <div
               className="item-focusable"
               style={{
-                left: tienda.posicionX,
+                left: tienda.posicionX * this.anchoImagen,
                 position: 'absolute',
-                top: tienda.posicionY
+                top: tienda.posicionY * this.altoImagen
               }}
               onClick={() => this.handlerClick(tienda)}
               key={'tienda-' + tienda.idTienda}
@@ -113,7 +115,7 @@ class Mapa extends React.Component {
           data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
           hidden={!this.state.popUpVisible ? 'hidden' : ''}
         >
-          <p style={{fontWeight: "bold"}}>{this.state.tiendaModal.nombre}</p> 
+          <p style={{ fontWeight: "bold" }}>{this.state.tiendaModal.nombre}</p>
           <p>{this.state.tiendaModal.descripcion}</p>
         </div>
       </div>
