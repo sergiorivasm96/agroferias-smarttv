@@ -28,7 +28,7 @@ class Configuracion extends React.Component {
     }
 
     cambioFeria(feria) {
-        const texto = 'se ha cambiado la feria'
+        const texto = 'Ha seleccionado la feria ' + feria.nombre;
         this.setState({ feriaActual: feria, texto: texto, popUpVisible: true, feriaSeleccionada: true }, () => {
             console.log(this.state.feriaActual);
             setTimeout(() => {
@@ -89,7 +89,7 @@ class Configuracion extends React.Component {
                         bottom: 0,
                         margin: 'auto',
                         width: "35%",
-                        height: "30%",
+                        height: "35%",
                         zIndex: 10,
                         backgroundColor: "#e6428b",
                         padding: "20px",
@@ -102,7 +102,7 @@ class Configuracion extends React.Component {
                     data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
                     hidden={!this.state.popUpVisible ? 'hidden' : ''}
                 >
-                    <p style={{ fontWeight: "bold", fontSize: '50px' }}>{this.state.texto}</p>
+                    <p style={{ fontWeight: "bold", fontSize: '50px', marginTop: '20px' }}>{this.state.texto}</p>
                 </div>
             </div>
         )
