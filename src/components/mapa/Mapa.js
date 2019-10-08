@@ -71,9 +71,11 @@ class Mapa extends React.Component {
           id="divGrande"
           style={{
             backgroundImage: 'url(' + this.imagen + ')',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
             position: 'relative',
-            width: '1200px',
-            height: '382px',
+            width: this.anchoImagen.toString() + 'px',
+            height: this.altoImagen.toString() + 'px',
             marginLeft: '4%'
           }}
         >
