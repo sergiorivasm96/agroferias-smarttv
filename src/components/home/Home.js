@@ -7,7 +7,7 @@ class Home extends React.Component{
   // }
   render (){
       return(
-        <div style={{marginTop: '10%'}}>
+        <div style={{marginTop: '4%'}}>
           <Player 
             src='https://media.w3.org/2010/05/sintel/trailer_hd.mp4' 
             fluid = {false} 

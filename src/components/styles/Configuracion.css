@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 
-.focused-item {
+.focused-item > button > svg {
   color: red!important;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .wrapper{
-  background:#EFEFEF; 
+  /* background:#EFEFEF;  */
   box-shadow: 1px 1px 10px #999; 
   margin: auto; 
   text-align: center; 

@@ -64,9 +64,10 @@ class Configuracion extends React.Component {
             console.log('feria seleccionada')
             button = <Link to={{
                 pathname: `/configuracion/${this.state.idFeriaActual}`
-            }} style={{ textDecoration: 'none', color: 'inherit' }}>
-                <button style={buttonStyle} className='item-focusable'>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
+            }} style={{ boxShadow:'red' }} className='item-focusable'>
+                <button style={buttonStyle} >  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
             </Link>
+            
             textoFeria = 'Feria seleccionada: ' + this.state.nombreFeriaActual
         } else {
             console.log('feria sin seleccionar')
