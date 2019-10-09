@@ -33,9 +33,9 @@ class ElegirTv extends React.Component {
     handlerClick(televisor) {
         this.setState({ televisorModal: televisor, popUpVisible: true });
         localStorage.setItem("localTelevisor", JSON.stringify(televisor));
-        // setTimeout(() => {
-        //     this.setState({ popUpVisible: false });
-        // }, 3000);
+        setTimeout(() => {
+            this.setState({ popUpVisible: false });
+        }, 3000);
     }
 
     render() {      

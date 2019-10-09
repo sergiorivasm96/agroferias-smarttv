@@ -25,7 +25,6 @@ export default ScrollableListItem;
 
 const styleFeriaList ={
     display: 'flex', 
-    marginLeft:'10%',
     marginTop: '5%',
     marginRight: '10%',
     whiteSpace: 'nowrap',

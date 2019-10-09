@@ -70,12 +70,12 @@ class Configuracion extends React.Component {
         }
 
         return (
-            <div>
-                <div style={{ fontSize: '50px', paddingTop: '2%' }}>
+            <div style={{ paddingLeft: '90px' }}>
+                <div style={{ fontSize: '40px', paddingTop: '2%' }}>
                     {textoFeria}
                 </div>
                 <FeriaLista cambioFeria={this.cambioFeria}></FeriaLista>
-                <div style={{ fontSize: '50px', paddingTop: '5%' }}>
+                <div style={{ fontSize: '40px', paddingTop: '5%' }}>
                     Posición del televisor en el mapa
                 </div>
                 {button}
@@ -110,7 +110,6 @@ class Configuracion extends React.Component {
 }
 
 const buttonStyle = {
-    background: '#ed217c',
     textAlign: 'center',
     borderRadius: 10,
     width: 120,

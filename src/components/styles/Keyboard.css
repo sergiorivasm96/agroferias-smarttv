@@ -26,12 +26,12 @@ input {
 
 .simple-keyboard  > .hg-row > .focused-item{
     background-color: #ed217c !important ;
-    color: white;
+    color: white !important;
 }
 
 .resultado-container > a > .focused-item{
-    background-color: #ed217c !important ;
-    color: white;
+    /* background-color: #ed217c !important ; */
+    color: #ed217c !important;
 }
 
 

@@ -12,15 +12,20 @@ video{
 }
 
 .menu-rosado > .focused-item {
-    color: black !important ;
+    color: white !important ;
+    font-weight: bold;
 }
 
-.menu-rosado > .focused-item {
+/* .menu-rosado > .focused-item {
     color: black !important ;
-}
+} */
 
-#divGrande > .focused-item{
+.focused-item{
     color: red !important ;
+}
+
+.item-focusable:focus{
+    outline: none !important;
 }
 
 .App > div > div >  .focused-item{
