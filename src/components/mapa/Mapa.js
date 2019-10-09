@@ -69,10 +69,13 @@ class Mapa extends React.Component {
     //this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
     this.anchoImagen = 1200;
     this.altoImagen = 382;
+    this.factor = { x: 15 / this.anchoImagen, y: 30 / this.altoImagen };
     this.televisor = null;
+    this.idTiendaSeleccionada = null;
   }
 
   componentDidMount() {
+    this.idTiendaSeleccionada = localStorage.getItem("idFeria");
     if (localStorage.getItem("idFeria")) {
       fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/' + localStorage.getItem("idFeria"))
         .then(res => res.json())
@@ -83,7 +86,8 @@ class Mapa extends React.Component {
             .then((data) => {
               console.log("Imagen es ")
               console.log(data.urlImagen);
-              this.setState({imagen : data.urlImagen})
+              this.setState({ imagen: data.urlImagen })
+              //this.setState({ imagen: "https://i.imgur.com/16goI7w.jpg" })
             })
             .catch(console.log)
 
@@ -114,6 +118,8 @@ class Mapa extends React.Component {
     if (this.state.tiendas == null) {
       return null;
     };
+    console.log("Feria = " + this.idTiendaSeleccionada);
+    console.log(this.state.tiendas)
     return (
       <div>
         <BotonBuscar></BotonBuscar>
@@ -123,6 +129,7 @@ class Mapa extends React.Component {
             backgroundImage: 'url(' + this.state.imagen + ')',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
+            /* border: 'solid red 5px', */
             position: 'relative',
             width: this.anchoImagen.toString() + 'px',
             height: this.altoImagen.toString() + 'px',
@@ -131,13 +138,12 @@ class Mapa extends React.Component {
         >
 
           {this.state.tiendas.map((tienda, i) => {
-            if (i > 5) i = 5; //para el mock
             return <div
               className="item-focusable"
               style={{
-                left: this.state.tiendasMock[i].posicion_x * this.anchoImagen,
+                left: (tienda.posicion_x - this.factor.x) * this.anchoImagen,
                 position: 'absolute',
-                top: this.state.tiendasMock[i].posicion_y * this.altoImagen
+                top: (tienda.posicion_y - this.factor.y) * this.altoImagen
               }}
               onClick={() => this.handlerClick(tienda)}
               key={'tienda-' + tienda.idTienda}
@@ -145,9 +151,9 @@ class Mapa extends React.Component {
               <MapaLugar></MapaLugar>
             </div>
           })}
-          <UbicacionActual 
-            anchoImagen = {this.anchoImagen} 
-            altoImagen ={this.altoImagen} 
+          <UbicacionActual
+            anchoImagen={this.anchoImagen}
+            altoImagen={this.altoImagen}
             customClickEvent={this.handlerClickTV.bind(this)}>
           </UbicacionActual>
 
