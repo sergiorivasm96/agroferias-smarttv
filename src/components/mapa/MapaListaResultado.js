@@ -3,16 +3,7 @@ import React from 'react'
 import MapaListaResultadoItem from './MapaListaResultadoItem.js'
 
 class MapaListaResultado extends React.Component{
-
-
-    componentDidMount() { 
-   
-    }
-
     render (){
-        // console.log("Guardando productos");
-        // console.log(this.props)
-        localStorage.setItem("localProductos", JSON.stringify(this.props.resultado));
         return(
             <div>
                 <div >

@@ -42,13 +42,12 @@ class ElegirTv extends React.Component {
         let textoEncabezado
         let televisorGuardado =  JSON.parse(localStorage.getItem('localTelevisor')); 
       
-        if (televisorGuardado.idTelevisor) {
+        if (televisorGuardado) {
             textoEncabezado = <h1> Se ha seleccionado el SmarTV con código: {televisorGuardado.idTelevisor} </h1>
         } else {
             textoEncabezado = <h1> Seleccione el televisor que está usando: </h1>
         }
 
-        console.log("Usted quiere ubicar los televisores de la feria" + this.props.idFeria + " como id")
         return (
             <div>
                 {textoEncabezado}
@@ -66,7 +65,7 @@ class ElegirTv extends React.Component {
                     }}
                 >
                     {this.state.televisores.map(televisor => (
-                        <div>
+                        <div  key= {`tv-${televisor.idTelevisor}`}>
                             <div style={{
                                     fontSize: '40px', 
                                     position: 'absolute',
@@ -77,8 +76,10 @@ class ElegirTv extends React.Component {
                                     height: '50px',
                                     border: '3px solid black',
                                     textAlign: 'center'
+                                   
                                     }}>
-                                    {televisor.idTelevisor}</div> 
+                                {televisor.idTelevisor}
+                            </div> 
                             <div
                                 className="item-focusable"
                                 style={{

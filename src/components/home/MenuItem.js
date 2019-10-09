@@ -8,7 +8,6 @@ class MenuItem extends React.Component {
   // }
 
   handleClick() {
-    console.log('The link was clicked.');
   }
 
   render (){

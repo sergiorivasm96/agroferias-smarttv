@@ -2,31 +2,33 @@ import React from 'react'
 import '../styles/Keyboard.css'
 import {Link} from 'react-router-dom'
 
+
 class MapaResultado extends React.Component{
     // constructor(props) {
     //     super(props);
     // }
+    // componentDidMount(){
+        
+    // }
     render (){
+ 
         let data = Array.from(this.props.resultado)
         return(
-         
                 <div className='resultado-container' style={styleFeriaList}>
                     {data.map((resultado) => (
                         <Link to={{
-                            pathname: `/mapas/buscador/${resultado.idProducto}`
-                            }}  style={{ textDecoration: 'none', color:'inherit' }} key={'key-' + resultado.idProducto}>
+                            pathname: `/mapas/buscador/${resultado.idTienda}`
+                            }}  style={{ textDecoration: 'none', color:'inherit' }} key={'key-' + resultado.idProducto} onClick={localStorage.setItem('resultadoBusqueda', JSON.stringify(resultado))}>
                                
                             <div className='item-focusable resultado item' key={'resultado-' + resultado.idProducto} tabIndex="0"  style={styleFeriaCard}>
                                 
                                 <div className={"resultado-body" + resultado.idProducto}>
                                 </div>
                                 <div>{resultado.nombre}</div>
-                                
                             </div>
                             </Link>
                     ))}
                 </div>
-           
         )
     }
 }

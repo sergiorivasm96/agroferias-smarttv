@@ -65,7 +65,7 @@ class App extends React.Component {
           <Route exact path="/mapas/buscador">
               <MapaBuscador />
           </Route>
-          <Route exact path="/mapas/buscador/:idProducto" render={({ match }) => <MapaResultado idProducto={match.params.idProducto}/>} >
+          <Route exact path="/mapas/buscador/:idTienda" render={({ match }) => <MapaResultado idTienda={match.params.idTienda}/>} >
             
           </Route>
             <Route exact path="/configuracion/:idFeria" render={({ match }) => <ElegirTV idFeria={match.params.idFeria}/>} >

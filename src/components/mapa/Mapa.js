@@ -1,7 +1,7 @@
-import React from 'react';
-import MapaLugar from './MapaLugar.js';
-import TelevisorLugar from './TelevisorLugar.js';
-import BotonBuscar from './BotonBuscar';
+import React from 'react'
+import MapaLugar from './MapaLugar.js'
+import BotonBuscar from './BotonBuscar'
+import UbicacionActual from './UbicacionActual.js'
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -71,13 +71,11 @@ class Mapa extends React.Component {
     this.televisor = null;
   }
 
-  componentWillMount() {
-    console.log("Montar")
+  componentDidMount() {
     if (localStorage.getItem("idFeria")) {
       fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/' + localStorage.getItem("idFeria"))
         .then(res => res.json())
         .then((data) => {
-          console.log(data);
           this.setState({ tiendas: data });
         })
         .catch(console.log)
@@ -85,8 +83,6 @@ class Mapa extends React.Component {
   }
 
   handlerClick(tienda) {
-    console.log("Se setea la tienda");
-    console.log(tienda);
     this.setState({ tiendaModal: tienda, popUpVisible: true });
     setTimeout(() => {
       this.setState({ popUpVisible: false });
@@ -105,10 +101,7 @@ class Mapa extends React.Component {
   }
 
   render() {
-    console.log("Rendering");
-    console.log(this.state.tiendas)
     if (this.state.tiendas == null) {
-      console.log("safo");
       return null;
     };
     return (
@@ -126,6 +119,7 @@ class Mapa extends React.Component {
             marginLeft: '4%'
           }}
         >
+
           {this.state.tiendas.map((tienda, i) => {
             if (i > 5) i = 5; //para el mock
             return <div
@@ -141,31 +135,12 @@ class Mapa extends React.Component {
               <MapaLugar></MapaLugar>
             </div>
           })}
+          <UbicacionActual 
+            anchoImagen = {this.anchoImagen} 
+            altoImagen ={this.altoImagen} 
+            customClickEvent={this.handlerClickTV.bind(this)}>
+          </UbicacionActual>
 
-          {this.state.televisores.filter(televisor => {
-            let localTV = localStorage.getItem("localTelevisor");
-            if (localTV == null)
-              return false;
-            else {
-              this.televisor = JSON.parse(localTV);
-              return (this.televisor.idTelevisor === televisor.idTelevisor) ? true : false;
-            }
-          }).map(televisor => {
-            return <div
-              className="item-focusable"
-              style={{
-                left: televisor.posicion_x * this.anchoImagen,
-                position: 'absolute',
-                top: televisor.posicion_y * this.altoImagen
-              }}
-              onClick={() => this.handlerClickTV()}
-              key={'televisor-' + televisor.idTelevisor}
-            >
-              <TelevisorLugar></TelevisorLugar>
-            </div>
-          }
-
-          )}
         </div>
         {/* Modal para tiendas */}
         <div
