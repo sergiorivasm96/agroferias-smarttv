@@ -11,7 +11,12 @@
   cursor: pointer;
 }
 
-.focused-item > button > svg {
+.focused-item.feria > .feria-text{
+  color: red !important;
+}
+
+
+.focused-item.btn-elegir-tv > .fa-tv {
   color: red!important;
 }
 
