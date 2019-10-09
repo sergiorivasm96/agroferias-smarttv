@@ -7,13 +7,14 @@ class MapaResultado extends React.Component{
     //     super(props);
     // }
     render (){
+        let data = Array.from(this.props.resultado)
         return(
          
                 <div className='resultado-container' style={styleFeriaList}>
-                    {this.props.ferias.map((resultado) => (
+                    {data.map((resultado) => (
                         <Link to={{
                             pathname: `/mapas/buscador/${resultado.idProducto}`
-                            }}  style={{ textDecoration: 'none', color:'inherit' }}>
+                            }}  style={{ textDecoration: 'none', color:'inherit' }} key={'key-' + resultado.idProducto}>
                                
                             <div className='item-focusable resultado item' key={'resultado-' + resultado.idProducto} tabIndex="0"  style={styleFeriaCard}>
                                 

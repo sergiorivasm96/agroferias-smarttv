@@ -11,6 +11,7 @@ class MapaBuscador extends React.Component{
         this.state = {
             layoutName: "default",
             input: "",
+            data: ""
         };
     }
 
@@ -18,12 +19,9 @@ class MapaBuscador extends React.Component{
         this.setState({
             input: input
         });
-        console.log("Input changed", input);
     };
 
     onKeyPress = button => {
-        console.log("Button pressed", button);
-
         if (button === "{enter}"){
             this.buscar();
         }
@@ -31,8 +29,27 @@ class MapaBuscador extends React.Component{
 
     buscar = () => {
         var text = document.getElementsByTagName('input')[0].value;
+        let currentComponent = this
         console.log(`se está buscando ${text}`);
+        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/producto/obtenerProductos/${localStorage.getItem('idFeria')}`, {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: text
+        }).then(function(response) {
+            return response.json();
+          })
+          .then(function(data) {
+            currentComponent.setState({
+                data: data
+            })
+          });
     };
+
+
+
+
 
     onChangeInput = event => {
         let input = event.target.value;
@@ -81,7 +98,7 @@ class MapaBuscador extends React.Component{
                         placeholder={"Escribe un producto para buscar"}
                         onChange={e => this.onChangeInput(e)}
                     />
-                     <MapaListaResultado></MapaListaResultado>
+                     <MapaListaResultado resultado={this.state.data}></MapaListaResultado>
                 </div>
             </div>
         )
