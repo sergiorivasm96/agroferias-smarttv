@@ -7,7 +7,7 @@ class Mapa extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tiendas: [
+      tiendasMock: [
         {
           idTienda: 1,
           nombre: 'Tienda 1',
@@ -71,7 +71,23 @@ class Mapa extends React.Component {
     this.televisor = null;
   }
 
+  componentWillMount() {
+    console.log("Montar")
+    console.log(localStorage.getItem("idFeria"))
+    if (localStorage.getItem("idFeria")) {
+      fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/' + localStorage.getItem("idFeria"))
+        .then(res => res.json())
+        .then((data) => {
+          console.log(data);
+          this.setState({ tiendas: data });
+        })
+        .catch(console.log)
+    }
+  }
+
   handlerClick(tienda) {
+    console.log("Se setea la tienda");
+    console.log(tienda);
     this.setState({ tiendaModal: tienda, popUpVisible: true });
     setTimeout(() => {
       this.setState({ popUpVisible: false });
@@ -79,7 +95,7 @@ class Mapa extends React.Component {
   }
 
   handlerClickTV() {
-    const texto2 = 'Usted se encuentra aquí'
+    const texto2 = 'Usted se encuentra aquí';
     this.setState({ texto: texto2, popUpTVVisible: true }, () => {
       setTimeout(() => {
         this.setState({
@@ -90,6 +106,12 @@ class Mapa extends React.Component {
   }
 
   render() {
+    console.log("Rendering");
+    console.log(this.state.tiendas)
+    if (this.state.tiendas == null) {
+      console.log("safo");
+      return null;
+    };
     return (
       <div>
         <BotonBuscar></BotonBuscar>
@@ -105,25 +127,26 @@ class Mapa extends React.Component {
             marginLeft: '4%'
           }}
         >
-          {this.state.tiendas.map(tienda => (
-            <div
+          {this.state.tiendas.map((tienda, i) => {
+            if (i > 5) i = 5; //para el mock
+            return <div
               className="item-focusable"
               style={{
-                left: tienda.posicion_x * this.anchoImagen,
+                left: this.state.tiendasMock[i].posicion_x * this.anchoImagen,
                 position: 'absolute',
-                top: tienda.posicion_y * this.altoImagen
+                top: this.state.tiendasMock[i].posicion_y * this.altoImagen
               }}
               onClick={() => this.handlerClick(tienda)}
               key={'tienda-' + tienda.idTienda}
             >
               <MapaLugar></MapaLugar>
             </div>
-          ))}
+          })}
 
           {this.state.televisores.filter(televisor => {
             let localTV = localStorage.getItem("localTelevisor");
             if (localTV == null)
-              return true;
+              return false;
             else {
               this.televisor = JSON.parse(localTV);
               return (this.televisor.idTelevisor === televisor.idTelevisor) ? true : false;
@@ -169,7 +192,7 @@ class Mapa extends React.Component {
           data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
           hidden={!this.state.popUpVisible ? 'hidden' : ''}
         >
-          <p style={{ fontWeight: "bold" }}>{this.state.tiendaModal.nombre}</p>
+          <p style={{ fontWeight: "bold" }}>{(this.state.tiendaModal.empresa == null) ? '' : (this.state.tiendaModal.empresa.nombreComercial)}</p>
           <p>{this.state.tiendaModal.descripcion}</p>
         </div>
 
