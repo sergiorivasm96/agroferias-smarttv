@@ -41,15 +41,16 @@ class MapaResultado extends React.Component {
         this.idTiendaProducto = null;
     }
 
-    componentWillMount() {
+    componentDidMount() {
         let localProductos = JSON.parse(localStorage.getItem("localProductos"));
         this.setState({
             productos: localProductos,
         });
-        //this.state.productos = localProductos;
+        console.log(localProductos)
+        // this.state.productos = localProductos;
         //Buscamos el nombre del producto
         localProductos.forEach((producto) => {
-            if (this.props.idProducto == producto.idProducto && localStorage.getItem("idFeria")) {
+            if (this.props.idProducto === producto.idProducto && localStorage.getItem("idFeria")) {
                 console.log("Buscando en feria " + localStorage.getItem("idFeria") + " el producto " + producto.nombre.split(' ')[0])
                 fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/producto/' + '1'
                     + '/' + 'leche')
@@ -99,7 +100,7 @@ class MapaResultado extends React.Component {
                 >
                     {this.state.tiendas.filter(tienda => {
                         //console.log('Comparando ' + this.idTiendaProducto + " y " + tienda.idTienda);
-                        return (this.idTiendaProducto == tienda.idTienda) ? true : false;
+                        return (this.idTiendaProducto === tienda.idTienda) ? true : false;
                     }).map((tienda, i) => (
                         <div
                             className="item-focusable"
