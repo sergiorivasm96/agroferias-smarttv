@@ -63,9 +63,10 @@ class Mapa extends React.Component {
       ],
       popUpVisible: false,
       popUpTVVisible: false,
-      tiendaModal: {}
+      tiendaModal: {},
+      imagen: null
     };
-    this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
+    //this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
     this.anchoImagen = 1200;
     this.altoImagen = 382;
     this.televisor = null;
@@ -79,6 +80,15 @@ class Mapa extends React.Component {
         .then((data) => {
           console.log(data);
           this.setState({ tiendas: data });
+          fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/' + '1' + "/imagen")
+            .then(res => res.json())
+            .then((data) => {
+              console.log("Imagen es ")
+              console.log(data.urlImagen);
+              this.setState({imagen : data.urlImagen})
+            })
+            .catch(console.log)
+
         })
         .catch(console.log)
     }
@@ -117,7 +127,7 @@ class Mapa extends React.Component {
         <div
           id="divGrande"
           style={{
-            backgroundImage: 'url(' + this.imagen + ')',
+            backgroundImage: 'url(' + this.state.imagen + ')',
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             position: 'relative',
