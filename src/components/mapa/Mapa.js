@@ -73,7 +73,6 @@ class Mapa extends React.Component {
 
   componentWillMount() {
     console.log("Montar")
-    console.log(localStorage.getItem("idFeria"))
     if (localStorage.getItem("idFeria")) {
       fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/' + localStorage.getItem("idFeria"))
         .then(res => res.json())

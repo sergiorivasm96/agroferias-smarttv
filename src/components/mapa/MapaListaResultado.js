@@ -67,6 +67,11 @@ class MapaListaResultado extends React.Component{
         }
     }
   
+    componentWillMount(){
+        console.log("Guardando productos");
+        localStorage.setItem("localProductos", JSON.stringify(this.state.resultado));
+    }
+
     componentDidMount() { 
         // fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/ferias')
         // .then(res => res.json())
