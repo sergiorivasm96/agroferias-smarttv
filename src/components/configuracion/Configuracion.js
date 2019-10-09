@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTv } from '@fortawesome/free-solid-svg-icons'
 import FeriaLista from './FeriaLista'
 import { Link } from 'react-router-dom'
+import '../styles/Configuracion.css'
 
 class Configuracion extends React.Component {
     _isMounted = false;
@@ -64,8 +65,8 @@ class Configuracion extends React.Component {
             console.log('feria seleccionada')
             button = <Link to={{
                 pathname: `/configuracion/${this.state.idFeriaActual}`
-            }} style={{ boxShadow:'red' }} className='item-focusable'>
-                <button style={buttonStyle} >  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
+            }} >
+                <button style={buttonStyle} className='item-focusable btn-elegir-tv'>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
             </Link>
             
             textoFeria = 'Feria seleccionada: ' + this.state.nombreFeriaActual
