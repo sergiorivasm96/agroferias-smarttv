@@ -71,17 +71,17 @@ class ElegirTv extends React.Component {
                     {this.state.televisores.map(televisor => (
                         <div key={`tv-${televisor.idTelevisor}`}>
                             <div style={{
-                                fontSize: '40px',
-                                left: (televisor.posicion_X - this.factor.x) * this.anchoImagen,
-                                position: 'absolute',
-                                top: (televisor.posicion_Y - this.factor.y) * this.altoImagen,
-                                borderRadius: '50%',
-                                width: '50px',
-                                height: '50px',
-                                border: '3px solid black',
-                                textAlign: 'center'
-
-                            }}>
+                                    fontSize: '40px', 
+                                    left: (televisor.posicion_X - this.factor.x) * this.anchoImagen + 10,
+                                    position: 'absolute',
+                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen - 60,
+                                    borderRadius: '50%',
+                                    width:'50px',
+                                    height: '50px',
+                                    border: '3px solid black',
+                                    textAlign: 'center'
+                                   
+                                    }}>
                                 {televisor.idTelevisor}
                             </div>
                             <div
