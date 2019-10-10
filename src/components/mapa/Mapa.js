@@ -67,8 +67,10 @@ class Mapa extends React.Component {
       imagen: null
     };
     //this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
-    this.anchoImagen = 1200;
-    this.altoImagen = 382;
+    // this.anchoImagen = 1200;
+    // this.altoImagen = 382;
+    this.anchoImagen = 1000;
+    this.altoImagen = 350;
     this.factor = { x: 15 / this.anchoImagen, y: 30 / this.altoImagen };
     this.televisor = null;
     this.idTiendaSeleccionada = null;
@@ -125,20 +127,18 @@ class Mapa extends React.Component {
           id="divGrande"
           style={{
             backgroundImage: 'url(' + this.state.imagen + ')',
-            // backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            width: '800',
-            height: '400',
-            /* border: 'solid red 5px', */
+
+
+            //   position: 'relative',
+            width: '1000px',
+            height: '350px',
+            backgroundSize: '100% 100%',
             position: 'relative',
-            width: this.anchoImagen.toString() + 'px',
-            height: this.altoImagen.toString() + 'px',
             marginLeft: '4%'
-          }}
-      
-        >
+          }}>
 
           {this.state.tiendas.map((tienda, i) => {
+            if (tienda.tipoTienda === 0 || tienda.posicion_x > 1 || tienda.posicion_y > 1) return null;
             return <div
               className="item-focusable"
               style={{
@@ -147,8 +147,7 @@ class Mapa extends React.Component {
                 top: (tienda.posicion_y - this.factor.y) * this.altoImagen
               }}
               onClick={() => this.handlerClick(tienda)}
-              key={'tienda-' + tienda.idTienda}
-            >
+              key={'tienda-' + tienda.idTienda}>
               <MapaLugar></MapaLugar>
             </div>
           })}
