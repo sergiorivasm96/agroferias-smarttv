@@ -64,9 +64,9 @@ class ElegirTv extends React.Component {
                         <div  key= {`tv-${televisor.idTelevisor}`}>
                             <div style={{
                                     fontSize: '40px', 
-                                    left: (televisor.posicion_x - this.factor.x) * this.anchoImagen ,
+                                    left: (televisor.posicion_X - this.factor.x) * this.anchoImagen ,
                                     position: 'absolute',
-                                    top: (televisor.posicion_y - this.factor.y) * this.altoImagen ,
+                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen ,
                                     borderRadius: '50%',
                                     width:'50px',
                                     height: '50px',
@@ -79,9 +79,9 @@ class ElegirTv extends React.Component {
                             <div
                                 className="item-focusable"
                                 style={{
-                                    left: (televisor.posicion_x - this.factor.x) * this.anchoImagen,
+                                    left: (televisor.posicion_X - this.factor.x) * this.anchoImagen,
                                     position: 'absolute',
-                                    top: (televisor.posicion_y - this.factor.y) * this.altoImagen
+                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen
                                 }}
                                 onClick={() => this.handlerClick(televisor)}
                                 key={'televisor-' + televisor.idTelevisor}
