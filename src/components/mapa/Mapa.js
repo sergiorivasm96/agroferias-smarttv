@@ -74,7 +74,8 @@ class Mapa extends React.Component {
             height: '350px',
             backgroundSize: '100% 100%',
             position: 'relative',
-            marginLeft: '4%'
+            marginLeft: '4%',
+            marginTop: '5%'
           }}>
 
           {this.state.tiendas.map((tienda, i) => {
