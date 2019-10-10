@@ -77,20 +77,18 @@ class Mapa extends React.Component {
   componentDidMount() {
     this.idTiendaSeleccionada = localStorage.getItem("idFeria");
     if (localStorage.getItem("idFeria")) {
-      fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/' + localStorage.getItem("idFeria"))
+      fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/${localStorage.getItem("idFeria")}`)
         .then(res => res.json())
         .then((data) => {
           this.setState({ tiendas: data });
-          fetch('https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/' + '1' + "/imagen")
+          fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
             .then(res => res.json())
             .then((data) => {
               console.log("Imagen es ")
               console.log(data.urlImagen);
               this.setState({ imagen: data.urlImagen })
-              //this.setState({ imagen: "https://i.imgur.com/16goI7w.jpg" })
             })
             .catch(console.log)
-
         })
         .catch(console.log)
     }
@@ -127,14 +125,17 @@ class Mapa extends React.Component {
           id="divGrande"
           style={{
             backgroundImage: 'url(' + this.state.imagen + ')',
-            backgroundSize: 'contain',
+            // backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
+            width: '800',
+            height: '400',
             /* border: 'solid red 5px', */
             position: 'relative',
             width: this.anchoImagen.toString() + 'px',
             height: this.altoImagen.toString() + 'px',
             marginLeft: '4%'
           }}
+      
         >
 
           {this.state.tiendas.map((tienda, i) => {
