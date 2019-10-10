@@ -5,29 +5,25 @@ class ElegirTv extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            televisores: [
-                {
-                    idTelevisor: 1,
-                    posicion_x: 460 / 1200,
-                    posicion_y: 200 / 382
-                },
-                {
-                    idTelevisor: 2,
-                    posicion_x: 750 / 1200,
-                    posicion_y: 200 / 382
-                },
-                {
-                    idTelevisor: 3,
-                    posicion_x: 900 / 1200,
-                    posicion_y: 100 / 382
-                }
-            ],
+            televisores: [],
             popUpVisible: false,
             televisorModal: {}
         };
         this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
-        this.anchoImagen = 1200;
-        this.altoImagen = 382;
+        this.anchoImagen = 1000;
+        this.altoImagen = 350;
+        this.factor = { x: 15 / this.anchoImagen, y: 30 / this.altoImagen };
+    }
+
+    componentDidMount(){
+        let idFeria = localStorage.getItem('idFeria')
+        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${idFeria}/televisor`)
+        .then(res => res.json())
+        .then((data) => {
+          this.setState({ televisores: data })
+          console.log(this.state.televisores)
+        })
+        .catch(console.log)
     }
 
     handlerClick(televisor) {
@@ -43,9 +39,9 @@ class ElegirTv extends React.Component {
         let televisorGuardado =  JSON.parse(localStorage.getItem('localTelevisor')); 
       
         if (televisorGuardado) {
-            textoEncabezado = <h1> Se ha seleccionado el SmarTV con código: {televisorGuardado.idTelevisor} </h1>
+            textoEncabezado = <h1 style={{paddingLeft: '90px'}}> Se ha seleccionado el SmarTV con código: {televisorGuardado.idTelevisor} </h1>
         } else {
-            textoEncabezado = <h1> Seleccione el televisor que está usando: </h1>
+            textoEncabezado = <h1 style={{paddingLeft: '90px'}}> Seleccione el televisor que está usando: </h1>
         }
 
         return (
@@ -68,9 +64,9 @@ class ElegirTv extends React.Component {
                         <div  key= {`tv-${televisor.idTelevisor}`}>
                             <div style={{
                                     fontSize: '40px', 
+                                    left: (televisor.posicion_x - this.factor.x) * this.anchoImagen ,
                                     position: 'absolute',
-                                    left: televisor.posicion_x * this.anchoImagen + 10,
-                                    top: televisor.posicion_y * this.altoImagen - 60,
+                                    top: (televisor.posicion_y - this.factor.y) * this.altoImagen ,
                                     borderRadius: '50%',
                                     width:'50px',
                                     height: '50px',
@@ -83,9 +79,9 @@ class ElegirTv extends React.Component {
                             <div
                                 className="item-focusable"
                                 style={{
-                                    left: televisor.posicion_x * this.anchoImagen,
+                                    left: (televisor.posicion_x - this.factor.x) * this.anchoImagen,
                                     position: 'absolute',
-                                    top: televisor.posicion_y * this.altoImagen
+                                    top: (televisor.posicion_y - this.factor.y) * this.altoImagen
                                 }}
                                 onClick={() => this.handlerClick(televisor)}
                                 key={'televisor-' + televisor.idTelevisor}

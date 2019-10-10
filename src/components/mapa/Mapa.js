@@ -7,68 +7,11 @@ class Mapa extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tiendasMock: [
-        {
-          idTienda: 1,
-          nombre: 'Tienda 1',
-          descripcion:
-            'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicion_x: 460 / 1200,
-          posicion_y: 150 / 382
-        },
-        {
-          idTienda: 2,
-          nombre: 'Tienda 2',
-          descripcion:
-            'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicion_x: 420 / 1200,
-          posicion_y: 250 / 382
-        },
-        {
-          idTienda: 3,
-          nombre: 'Tienda 3',
-          descripcion:
-            'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicion_x: 760 / 1200,
-          posicion_y: 150 / 382
-        },
-        {
-          idTienda: 4,
-          nombre: 'Tienda 4',
-          descripcion:
-            'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicion_x: 950 / 1200,
-          posicion_y: 150 / 382
-        },
-        {
-          idTienda: 5,
-          nombre: 'Tienda 5',
-          descripcion:
-            'Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec efficitur dolor vitae lobortis varius. Curabitur fermentum leo a eros posuere placerat. Aenean tempor ex lorem, non faucibus diam efficitur a. Etiam vitae imperdiet velit. Curabitur nec cursus orci. Nam nec ex nisl',
-          posicion_x: 825 / 1200,
-          posicion_y: 320 / 382
-        }
-      ],
-      televisores: [
-        {
-          idTelevisor: 1,
-          posicion_x: 460 / 1200,
-          posicion_y: 200 / 382
-        },
-        {
-          idTelevisor: 2,
-          posicion_x: 750 / 1200,
-          posicion_y: 200 / 382
-        }
-      ],
       popUpVisible: false,
       popUpTVVisible: false,
       tiendaModal: {},
       imagen: null
     };
-    //this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
-    // this.anchoImagen = 1200;
-    // this.altoImagen = 382;
     this.anchoImagen = 1000;
     this.altoImagen = 350;
     this.factor = { x: 15 / this.anchoImagen, y: 30 / this.altoImagen };
@@ -127,9 +70,6 @@ class Mapa extends React.Component {
           id="divGrande"
           style={{
             backgroundImage: 'url(' + this.state.imagen + ')',
-
-
-            //   position: 'relative',
             width: '1000px',
             height: '350px',
             backgroundSize: '100% 100%',

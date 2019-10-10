@@ -16,9 +16,6 @@ video{
     font-weight: bold;
 }
 
-/* .menu-rosado > .focused-item {
-    color: black !important ;
-} */
 
 .focused-item{
     color: red !important ;
@@ -35,7 +32,6 @@ video{
 .link-mapa-buscador > .focused-item > svg{
         color: white !important ;
 }
-
 
 #divGrande > div > .focused-item{
     color: red !important ;
