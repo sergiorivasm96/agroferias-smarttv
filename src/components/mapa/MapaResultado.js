@@ -64,12 +64,12 @@ class MapaResultado extends React.Component {
                     id="divGrande"
                     style={{
                         backgroundImage: 'url(' + this.state.imagen + ')',
-                        backgroundSize: 'contain',
-                        backgroundRepeat: 'no-repeat',
+                        width: '1000px',
+                        height: '350px',
+                        backgroundSize: '100% 100%',
                         position: 'relative',
-                        width: this.anchoImagen.toString() + 'px',
-                        height: this.altoImagen.toString() + 'px',
-                        marginLeft: '4%'
+                        marginLeft: '4%',
+                        marginTop: '5%'
                     }}>
                     <div
                         className="item-focusable"

@@ -16,7 +16,7 @@ import ElegirTV from './components/configuracion/ElegirTv.js'
 
 const menuStyle = {
     background: '#ed217c',
-    paddingLeft: '5%',
+    paddingLeft: '12%',
     paddingTop: '15px',
     paddingBottom: '15px'
 }

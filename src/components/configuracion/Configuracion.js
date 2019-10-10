@@ -33,6 +33,7 @@ class Configuracion extends React.Component {
         const texto = 'Ha seleccionado la feria ' + feria.nombre;
         localStorage.setItem('idFeria', feria.idFeria);
         localStorage.setItem('nombreFeria', feria.nombre);
+        localStorage.removeItem('localTelevisor');
         this.setState({ idFeriaActual: feria.idFeria, texto: texto, popUpVisible: true, feriaSeleccionada: true, nombreFeriaActual: feria.nombre }, () => {
             setTimeout(() => {
                 this.setState({
