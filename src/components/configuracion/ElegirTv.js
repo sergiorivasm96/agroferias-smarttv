@@ -7,23 +7,31 @@ class ElegirTv extends React.Component {
         this.state = {
             televisores: [],
             popUpVisible: false,
-            televisorModal: {}
+            televisorModal: {},
+            imagen: ''
         };
-        this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
         this.anchoImagen = 1000;
         this.altoImagen = 350;
         this.factor = { x: 15 / this.anchoImagen, y: 30 / this.altoImagen };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         let idFeria = localStorage.getItem('idFeria')
         fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${idFeria}/televisor`)
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ televisores: data })
-          console.log(this.state.televisores)
-        })
-        .catch(console.log)
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({ televisores: data })
+                console.log(this.state.televisores);
+                fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
+                    .then(res => res.json())
+                    .then((data) => {
+                        console.log("Imagen es ")
+                        console.log(data.urlImagen);
+                        this.setState({ imagen: data.urlImagen })
+                    })
+                    .catch(console.log)
+            })
+            .catch(console.log)
     }
 
     handlerClick(televisor) {
@@ -34,14 +42,14 @@ class ElegirTv extends React.Component {
         }, 3000);
     }
 
-    render() {      
+    render() {
         let textoEncabezado
-        let televisorGuardado =  JSON.parse(localStorage.getItem('localTelevisor')); 
-      
+        let televisorGuardado = JSON.parse(localStorage.getItem('localTelevisor'));
+
         if (televisorGuardado) {
-            textoEncabezado = <h1 style={{paddingLeft: '90px'}}> Se ha seleccionado el SmarTV con código: {televisorGuardado.idTelevisor} </h1>
+            textoEncabezado = <h1 style={{ paddingLeft: '90px' }}> Se ha seleccionado el SmarTV con código: {televisorGuardado.idTelevisor} </h1>
         } else {
-            textoEncabezado = <h1 style={{paddingLeft: '90px'}}> Seleccione el televisor que está usando: </h1>
+            textoEncabezado = <h1 style={{ paddingLeft: '90px' }}> Seleccione el televisor que está usando: </h1>
         }
 
         return (
@@ -50,7 +58,7 @@ class ElegirTv extends React.Component {
                 <div
                     id="divGrande"
                     style={{
-                        backgroundImage: 'url(' + this.imagen + ')',
+                        backgroundImage: 'url(' + this.state.imagen + ')',
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         position: 'relative',
@@ -61,7 +69,7 @@ class ElegirTv extends React.Component {
                     }}
                 >
                     {this.state.televisores.map(televisor => (
-                        <div  key= {`tv-${televisor.idTelevisor}`}>
+                        <div key={`tv-${televisor.idTelevisor}`}>
                             <div style={{
                                     fontSize: '40px', 
                                     left: (televisor.posicion_X - this.factor.x) * this.anchoImagen + 10,
@@ -75,7 +83,7 @@ class ElegirTv extends React.Component {
                                    
                                     }}>
                                 {televisor.idTelevisor}
-                            </div> 
+                            </div>
                             <div
                                 className="item-focusable"
                                 style={{
@@ -86,11 +94,11 @@ class ElegirTv extends React.Component {
                                 onClick={() => this.handlerClick(televisor)}
                                 key={'televisor-' + televisor.idTelevisor}
                             >
-                            
+
                                 <MapaLugar televisor={true}></MapaLugar>
                             </div>
                         </div>
-                       
+
                     ))}
                 </div>
                 <div
