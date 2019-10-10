@@ -64,9 +64,9 @@ class ElegirTv extends React.Component {
                         <div  key= {`tv-${televisor.idTelevisor}`}>
                             <div style={{
                                     fontSize: '40px', 
-                                    left: (televisor.posicion_X - this.factor.x) * this.anchoImagen ,
+                                    left: (televisor.posicion_X - this.factor.x) * this.anchoImagen + 10,
                                     position: 'absolute',
-                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen ,
+                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen - 60,
                                     borderRadius: '50%',
                                     width:'50px',
                                     height: '50px',
