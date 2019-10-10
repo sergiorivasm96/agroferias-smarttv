@@ -9,9 +9,9 @@ class MapaResultado extends React.Component {
         this.state = {
             popUpVisible: false,
             popUpTVVisible: false,
-            tienda: ''
+            tienda: '',
+            imagen: ''
         };
-        this.imagen = 'https://i.imgur.com/6emyLTi.jpg';
         this.anchoImagen = 1000;
         this.altoImagen = 350;
         this.factor = { x: 15 / this.anchoImagen, y: 30 / this.altoImagen };
@@ -21,12 +21,20 @@ class MapaResultado extends React.Component {
 
     componentDidMount() {
         fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tienda/perfil/${this.props.idTienda}`)
-        .then(res => res.json())
-        .then((data) => {
-          this.setState({ tienda: data })
-          console.log(data)
-        })
-        .catch(console.log)
+            .then(res => res.json())
+            .then((data) => {
+                this.setState({ tienda: data })
+                console.log(data);
+                fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
+                    .then(res => res.json())
+                    .then((data) => {
+                        console.log("Imagen es ")
+                        console.log(data.urlImagen);
+                        this.setState({ imagen: data.urlImagen })
+                    })
+                    .catch(console.log)
+            })
+            .catch(console.log)
     }
 
     handlerClick(tienda) {
@@ -39,23 +47,23 @@ class MapaResultado extends React.Component {
     handlerClickTV() {
         const texto2 = 'Usted se encuentra aquí';
         this.setState({ texto: texto2, popUpTVVisible: true }, () => {
-          setTimeout(() => {
-            this.setState({
-              popUpTVVisible: false
-            });
-          }, 3000);
+            setTimeout(() => {
+                this.setState({
+                    popUpTVVisible: false
+                });
+            }, 3000);
         });
-      }
+    }
 
     render() {
         let productoBuscado = JSON.parse(localStorage.getItem('resultadoBusqueda'));
         return (
             <div>
-               <h1 style={{paddingLeft:'90px'}}>En las siguientes tiendas puede encontrar el producto: {productoBuscado.nombre}</h1> 
+                <h1 style={{ paddingLeft: '90px' }}>En las siguientes tiendas puede encontrar el producto: {productoBuscado.nombre}</h1>
                 <div
                     id="divGrande"
                     style={{
-                        backgroundImage: 'url(' + this.imagen + ')',
+                        backgroundImage: 'url(' + this.state.imagen + ')',
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         position: 'relative',
@@ -68,17 +76,17 @@ class MapaResultado extends React.Component {
                         style={{
                             left: (this.state.tienda.posicion_x - this.factor.x) * this.anchoImagen,
                             position: 'absolute',
-                            top: (this.state.tienda.posicion_y - this.factor.y) * this.altoImagen 
+                            top: (this.state.tienda.posicion_y - this.factor.y) * this.altoImagen
                         }}
                         onClick={() => this.handlerClick(this.state.tienda)}>
                         <MapaLugar></MapaLugar>
                     </div>
-                    <UbicacionActual 
-                        anchoImagen = {this.anchoImagen} 
-                        altoImagen ={this.altoImagen} 
+                    <UbicacionActual
+                        anchoImagen={this.anchoImagen}
+                        altoImagen={this.altoImagen}
                         customClickEvent={this.handlerClickTV.bind(this)}>
-                     </UbicacionActual>
- 
+                    </UbicacionActual>
+
                 </div>
                 {/* Modal para tiendas */}
                 <div
@@ -107,7 +115,7 @@ class MapaResultado extends React.Component {
                     <p style={{ fontWeight: "bold" }}>{(this.state.tienda.empresa == null) ? '' : (this.state.tienda.empresa.nombreComercial)}</p>
                     <p>{this.state.tienda.descripcion}</p>
                 </div>
-                  {/* Modal para televisores */}
+                {/* Modal para televisores */}
                 <div
                     className="modal-tv"
                     style={{
@@ -128,8 +136,8 @@ class MapaResultado extends React.Component {
                         boxShadow: "0px 0px 6px #ccc",
                         color: "#fff"
                     }}
-                data-attribute={!this.state.popUpTVVisible ? 'hidden' : ''}
-                hidden={!this.state.popUpTVVisible ? 'hidden' : ''}
+                    data-attribute={!this.state.popUpTVVisible ? 'hidden' : ''}
+                    hidden={!this.state.popUpTVVisible ? 'hidden' : ''}
                 >  <p style={{ fontWeight: "bold", fontSize: '50px', marginTop: 'auto' }}>{this.state.texto}</p></div>
             </div>
         )
