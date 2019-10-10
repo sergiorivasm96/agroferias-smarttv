@@ -83,9 +83,6 @@ class MapaBuscador extends React.Component{
     render (){
         
         let divResultado;
-
-        console.log('tam: ' + this.state.data.length )
-        console.log(this.state.pressedButton)
         if( this.state.input === ''){
             divResultado = <div style={{marginLeft:'43%' , width:'100%'}}>Ingrese su producto y luego presione la lupa para buscar</div>
         }
