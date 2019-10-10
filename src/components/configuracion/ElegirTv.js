@@ -28,7 +28,8 @@ class ElegirTv extends React.Component {
         fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${idFeria}/televisor`)
             .then(res => res.json())
             .then((data) => {
-                this.setState({ televisores: data })
+                console.log(data.filter((x) => x.habilitado ===1))
+                this.setState({ televisores: data.filter((x) => x.habilitado ===1) })
                 console.log(this.state.televisores);
                 fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
                     .then(res => res.json())
