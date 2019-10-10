@@ -12,9 +12,9 @@ class UbicacionActual extends React.Component{
             <div
                 className="item-focusable"
                 style={{
-                    left: tvLocal.posicion_x * this.props.anchoImagen,
+                    left: tvLocal.posicion_X * this.props.anchoImagen,
                     position: 'absolute',
-                    top: tvLocal.posicion_y * this.props.altoImagen
+                    top: tvLocal.posicion_Y * this.props.altoImagen
                 }}
                 onClick={this.props.customClickEvent}
                 >
