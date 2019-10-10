@@ -20,6 +20,18 @@ class Mapa extends React.Component {
     this.idTiendaSeleccionada = null;
   }
 
+  componentWillMount() {
+    let idFeria = localStorage.getItem("idFeria");
+    let televisorLocal = localStorage.getItem("localTelevisor");
+    if (idFeria == null) {
+      alert("Por favor, seleccione una feria en configuración.");
+      window.location.pathname = "/configuracion";
+    } else if (televisorLocal == null) {
+      alert("Por favor, seleccione un televisor en configuración.");
+      window.location.pathname = "/configuracion";
+    }
+  }
+
   componentDidMount() {
     this.idTiendaSeleccionada = localStorage.getItem("idFeria");
     if (localStorage.getItem("idFeria")) {
@@ -80,7 +92,8 @@ class Mapa extends React.Component {
           }}>
 
           {this.state.tiendas.map((tienda, i) => {
-            if (tienda.tipoTienda === 0 || tienda.posicion_x > 1 || tienda.posicion_y > 1) return null;
+            if (tienda.tipoTienda === 0 || tienda.posicion_x > 1 || tienda.posicion_y > 1
+              || tienda.posicion_x == null || tienda.posicion_y == null) return null;
             return <div
               className="item-focusable"
               style={{

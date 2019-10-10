@@ -15,6 +15,14 @@ class ElegirTv extends React.Component {
         this.factor = { x: 15 / 1200, y: 30 / 382 };
     }
 
+    componentWillMount() {
+        let idFeria = localStorage.getItem("idFeria");
+        if (idFeria == null) {
+            alert("Por favor, seleccione una feria en configuración.");
+            window.location.pathname = "/configuracion";
+        }
+    }
+
     componentDidMount() {
         let idFeria = localStorage.getItem('idFeria')
         fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${idFeria}/televisor`)
@@ -70,17 +78,17 @@ class ElegirTv extends React.Component {
                     {this.state.televisores.map(televisor => (
                         <div key={`tv-${televisor.idTelevisor}`}>
                             <div style={{
-                                    fontSize: '40px', 
-                                    left: (televisor.posicion_X - this.factor.x) * this.anchoImagen + 10,
-                                    position: 'absolute',
-                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen - 60,
-                                    borderRadius: '50%',
-                                    width:'50px',
-                                    height: '50px',
-                                    border: '3px solid black',
-                                    textAlign: 'center'
-                                   
-                                    }}>
+                                fontSize: '40px',
+                                left: (televisor.posicion_X - this.factor.x) * this.anchoImagen + 10,
+                                position: 'absolute',
+                                top: (televisor.posicion_Y - this.factor.y) * this.altoImagen - 60,
+                                borderRadius: '50%',
+                                width: '50px',
+                                height: '50px',
+                                border: '3px solid black',
+                                textAlign: 'center'
+
+                            }}>
                                 {televisor.idTelevisor}
                             </div>
                             <div
