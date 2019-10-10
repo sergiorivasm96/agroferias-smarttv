@@ -2,6 +2,7 @@ import React from 'react'
 import MapaLugar from './MapaLugar.js'
 import BotonBuscar from './BotonBuscar'
 import UbicacionActual from './UbicacionActual.js'
+import Modal from '../utilitarios/Modal'
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Mapa extends React.Component {
     };
     this.anchoImagen = 1000;
     this.altoImagen = 350;
-    this.factor = { x: 15 / this.anchoImagen, y: 30 / this.altoImagen };
+    this.factor = { x: 15 / 1200, y: 30 / 382 };
     this.televisor = null;
     this.idTiendaSeleccionada = null;
   }
