@@ -41,7 +41,7 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div className='main-menu'>
+        <div className='main-menu' id='menuSuperior'>
           <div className='App'>
             <div display='block' style={menuStyle} className="keyboard-row menu-rosado">
               <MenuItem name='Identifícate' icon={faUser} link="/identificate"></MenuItem>
@@ -76,7 +76,7 @@ class App extends React.Component {
             <Route exact path="/configuracion/:idFeria" render={({ match }) => <ElegirTV idFeria={match.params.idFeria} />} >
             </Route>
 
-            <Route exact path="/playvideo">
+            <Route exact path="/playvideo/:codigo" render={({ match }) => <PlayVideo codigo={match.params.codigo} />} >
               <PlayVideo />
             </Route>
 

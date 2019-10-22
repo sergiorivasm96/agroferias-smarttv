@@ -7,13 +7,38 @@ class PlayVideo extends React.Component {
         super(props);
     }
 
+    componentWillMount() {
+        //document.getElementById('menuSuperior').style.display = "none";
+    }
+
     render() {
+        let idPlaylist = false ? localStorage.getItem("codigoVideo") : "PLC0w3lEHx2SF3NsbnqnLbWBWyF_3g0cjZ";
+        let srcUrl = "https://www.youtube.com/embed/videoseries?list=" + idPlaylist + "&modestbranding=1&autoplay=1&controls=0&fs=0&loop=1&rel=0&showinfo=0&disablekb=1"
         return (
-            <div>
-                <iframe width="100%" height="521" src="https://www.youtube.com/embed/videoseries?list=PLC0w3lEHx2SF3NsbnqnLbWBWyF_3g0cjZ&autoplay=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>
+            <div style={videoContainerStyle}>
+                <iframe style={iframeStyle} src={srcUrl} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>
             </div>
         )
     }
+}
+
+const videoContainerStyle = {
+    "position": "absolute",
+    "width": "100%",
+    "height": "100%",
+    "top": "0",
+    "left": "0",
+    "bottom": "0",
+    "right": "0",
+    "display": "flex",
+    "flexDirection": "column",
+    "justifyContent": "center",
+    "alignItems": "center"
+}
+
+const iframeStyle = {
+    "width": "100%",
+    "height": "100%"
 }
 
 function formarUrl(id) {

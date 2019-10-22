@@ -11,7 +11,8 @@ class Publicidad extends React.Component {
     cambioVideoList(videoList){
         //console.log(videoList);
         //alert(videoList.urlPlaylist);
-        window.location.pathname = "/playvideo";
+        //window.location.pathname = "/playvideo";
+        localStorage.setItem('codigoVideo', videoList.urlPlaylist);
     }
 
     render() {
