@@ -7,8 +7,8 @@ class PlayVideo extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
-        //document.getElementById('menuSuperior').style.display = "none";
+    componentDidMount() {
+        document.getElementsByClassName("item-focusable")[0].focus();
     }
 
     render() {
@@ -16,7 +16,10 @@ class PlayVideo extends React.Component {
         let srcUrl = "https://www.youtube.com/embed/videoseries?list=" + idPlaylist + "&modestbranding=1&autoplay=1&controls=0&fs=0&loop=1&rel=0&showinfo=0&disablekb=1"
         return (
             <div style={videoContainerStyle}>
-                <iframe style={iframeStyle} src={srcUrl} frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>
+                <iframe style={iframeStyle} src={srcUrl} frameborder="0"
+                    allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>
+                <input style={{ display: "none" }} className="item-focusable"
+                    action="action" onclick="window.history.go(-1); return false;" type="button" value="Back" />
             </div>
         )
     }
