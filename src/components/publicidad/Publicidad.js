@@ -9,7 +9,9 @@ class Publicidad extends React.Component {
     }
 
     cambioVideoList(videoList){
-        //acá se llama a la vista donde se muestra el videolist
+        //console.log(videoList);
+        //alert(videoList.urlPlaylist);
+        window.location.pathname = "/playvideo";
     }
 
     render() {
