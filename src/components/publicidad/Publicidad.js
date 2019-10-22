@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Configuracion.css'
-
+import FeriaLista from './VideoLista'
 
 
 class Publicidad extends React.Component {
