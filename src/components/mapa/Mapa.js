@@ -2,7 +2,7 @@ import React from 'react'
 import MapaLugar from './MapaLugar.js'
 import BotonBuscar from './BotonBuscar'
 import UbicacionActual from './UbicacionActual.js'
-import Modal from '../utilitarios/Modal'
+// import Modal from '../utilitarios/Modal'
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -38,7 +38,8 @@ class Mapa extends React.Component {
       fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/${localStorage.getItem("idFeria")}`)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ tiendas: data });
+          this.setState({ tiendas: data.filter((x) => x.tipoTienda ===0) })
+          // this.setState({ tiendas: data });
           fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
             .then(res => res.json())
             .then((data) => {
@@ -92,8 +93,7 @@ class Mapa extends React.Component {
           }}>
 
           {this.state.tiendas.map((tienda, i) => {
-            if (tienda.tipoTienda === 0 || tienda.posicion_x > 1 || tienda.posicion_y > 1
-              || tienda.posicion_x == null || tienda.posicion_y == null) return null;
+            // if ( tienda.posicion_x == null || tienda.posicion_y == null) return null;
             return <div
               className="item-focusable"
               style={{
