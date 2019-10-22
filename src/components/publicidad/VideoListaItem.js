@@ -8,7 +8,7 @@ class ScrollableListItem extends React.Component{
     render (){
         return(
             <div  style={styleVideoList}>
-            {this.props.ferias.map((videoList) => (
+            {this.props.videoList.map((videoList) => (
               <div className='item-focusable feria item' key={'feria-' + videoList.idPlaylist} onClick={()=>this.cambioVideoList(videoList)} tabIndex="0"  style={styleVideoListCard}>
                 <div >
                   <img src={videoList.urlImagen} style={{width: '150px', height: '150px'}} alt = ""></img>

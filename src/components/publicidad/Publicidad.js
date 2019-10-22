@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/Configuracion.css'
-import FeriaLista from './VideoLista'
+import VideoLista from './VideoLista'
 
 
 class Publicidad extends React.Component {
@@ -15,7 +15,7 @@ class Publicidad extends React.Component {
     render() {
         return (
             <div>
-                <FeriaLista cambioVideoList={this.cambioVideoList}></FeriaLista>
+                <VideoLista cambioVideoList={this.cambioVideoList}></VideoLista>
             </div>
         )
     }
