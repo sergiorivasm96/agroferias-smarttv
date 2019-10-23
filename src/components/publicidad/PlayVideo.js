@@ -12,7 +12,7 @@ class PlayVideo extends React.Component {
     }
 
     render() {
-        let idPlaylist = false ? localStorage.getItem("codigoVideo") : "PLC0w3lEHx2SF3NsbnqnLbWBWyF_3g0cjZ";
+        let idPlaylist = true ? localStorage.getItem("codigoVideo") : "PLC0w3lEHx2SF3NsbnqnLbWBWyF_3g0cjZ";
         let srcUrl = "https://www.youtube.com/embed/videoseries?list=" + idPlaylist + "&modestbranding=1&autoplay=1&controls=0&fs=0&loop=1&rel=0&showinfo=0&disablekb=1"
         return (
             <div style={videoContainerStyle}>

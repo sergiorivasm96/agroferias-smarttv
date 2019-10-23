@@ -24,12 +24,15 @@ class ElegirTv extends React.Component {
     }
 
     componentDidMount() {
-        let idFeria = localStorage.getItem('idFeria')
+        let idFeria = localStorage.getItem('idFeria');
+        console.log("did")
         fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${idFeria}/televisor`)
             .then(res => res.json())
             .then((data) => {
-                console.log(data.filter((x) => x.habilitado ===1))
-                this.setState({ televisores: data.filter((x) => x.habilitado ===1) })
+                let habilitados = data.filter((x) => x.habilitado === 1);
+                console.log(habilitados)
+                this.setState({ televisores: habilitados })
+                if(habilitados == null || habilitados.length == 0) alert("No existen televisores en la agreferia.");
                 console.log(this.state.televisores);
                 fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
                     .then(res => res.json())
@@ -52,6 +55,7 @@ class ElegirTv extends React.Component {
     }
 
     render() {
+        console.log("redner")
         let textoEncabezado
         let televisorGuardado = JSON.parse(localStorage.getItem('localTelevisor'));
 
