@@ -4,9 +4,6 @@ import VideoLista from './VideoLista'
 
 
 class Publicidad extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     cambioVideoList(videoList){
         //console.log(videoList);

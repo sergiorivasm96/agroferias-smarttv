@@ -15,7 +15,7 @@ class ScrollableListItem extends React.Component{
                 <div >
                   <img src={videoList.urlImagen} style={{width: '150px', height: '150px'}} alt = ""></img>
                 </div>
-                <div className={"videolist-text"} style={{fontWeight: 'bold'}}>{videoList.nombre}</div>
+                <div className={"videolist-text"} style={{fontWeight: 'bold', textDecoration: 'inherit', color: 'inherit'  }}>{videoList.nombre}</div>
               </Link>
             ))}
           </div>
