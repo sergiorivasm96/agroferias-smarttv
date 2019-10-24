@@ -11,7 +11,10 @@ class ScrollableListItem extends React.Component{
             <div  style={styleVideoList}>
             {this.props.videoList.map((videoList) => (
               <Link to={{ pathname: `/playvideo/${videoList.urlPlaylist}` }}
-              className='item-focusable feria item' key={'feria-' + videoList.idPlaylist} onClick={()=>this.cambioVideoList(videoList)} tabIndex="0"  style={styleVideoListCard}>
+                className='item-focusable feria item'
+                key={'feria-' + videoList.idPlaylist}
+                onClick={()=>this.cambioVideoList(videoList)} tabIndex="0"
+                style={styleVideoListCard}>
                 <div >
                   <img src={videoList.urlImagen} style={{width: '150px', height: '150px'}} alt = ""></img>
                 </div>
@@ -39,5 +42,7 @@ const styleVideoListCard = {
     textAlign: 'center',
     width: '100% !important',
     height: '100% !important',
-    marginRight: '10%'
+    marginRight: '10%',
+    textDecoration: 'none',
+    color: 'black'
 }
