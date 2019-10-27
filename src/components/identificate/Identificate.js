@@ -20,7 +20,7 @@ class Identificate extends React.Component {
 
 
         return (
-            <div style={divGrande}>
+            <div style={divGrandeStyle}>
                 <div style={divCentradoStyle}>
                     <h1>Por favor, escanea el código QR desde nuestra app:</h1>
                     <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.state.codigoQR}`} style={QRStyle}></img>
@@ -31,7 +31,7 @@ class Identificate extends React.Component {
     }
 }
 
-const divGrande = {
+const divGrandeStyle = {
     width: '100%',
     height: '83vh',
     display: 'flex',
@@ -39,13 +39,13 @@ const divGrande = {
     alignItems: 'center'
 }
 
-const QRStyle = {
-    margin: 'auto'
-}
-
 const divCentradoStyle = {
     textAlign: 'center',
     width: '50%'
+}
+
+const QRStyle = {
+    margin: 'auto'
 }
 
 export default Identificate;
