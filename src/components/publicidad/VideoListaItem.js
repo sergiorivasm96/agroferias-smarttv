@@ -38,8 +38,10 @@ const styleVideoList = {
 }
 
 const styleVideoListCard = {
-  textAlign: 'center',
-  width: '100% !important',
-  height: '100% !important',
-  marginRight: '10%'
+    textAlign: 'center',
+    width: '100% !important',
+    height: '100% !important',
+    marginRight: '10%',
+    textDecoration: 'none',
+    color: 'black'
 }
