@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Home from './components/home/Home.js'
 import Mapa from './components/mapa/Mapa.js'
 import Identificate from './components/identificate/Identificate.js'
+import Perfil from './components/identificate/perfil.js'
 import Publicidad from './components/publicidad/Publicidad.js'
 import Configuracion from './components/configuracion/Configuracion.js'
 import MapaBuscador from './components/mapa/MapaBuscador.js'
@@ -78,6 +79,10 @@ class App extends React.Component {
 
             <Route exact path="/playvideo/:codigo" render={({ match }) => <PlayVideo codigo={match.params.codigo} />} >
               <PlayVideo />
+            </Route>
+
+            <Route exact path="/perfil">
+              <Perfil />
             </Route>
 
           </Switch>
