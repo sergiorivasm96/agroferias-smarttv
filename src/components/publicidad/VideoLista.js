@@ -7,13 +7,13 @@ class VideoLista extends React.Component {
         super(props);
         this.state = {
             videoList: [],
-            idTiendaSeleccionada: 1
+            idTiendaSeleccionada: null
         }
     }
 
     componentWillMount() {
         this.idTiendaSeleccionada = localStorage.getItem("idFeria");
-        if (this.idTiendaSeleccionada == null) {
+        if (this.state.idTiendaSeleccionada == null) {
             alert("Por favor, seleccione una feria en configuración.");
             window.location.pathname = "/configuracion";
             return;
