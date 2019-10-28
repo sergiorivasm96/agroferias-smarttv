@@ -12,7 +12,7 @@ class Identificate extends React.Component {
 
     componentDidMount() {
         setTimeout(() => {
-            window.location.pathname = "/perfil";
+            window.location.pathname = "/Perfil";
         }, 5000);
     }
 
@@ -23,7 +23,7 @@ class Identificate extends React.Component {
             <div style={divGrandeStyle}>
                 <div style={divCentradoStyle}>
                     <h1>Por favor, escanea el código QR desde nuestra app:</h1>
-                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.state.codigoQR}`} style={QRStyle}></img>
+                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.state.codigoQR}`} style={QRStyle} alt=''></img>
 
                 </div>
             </div>

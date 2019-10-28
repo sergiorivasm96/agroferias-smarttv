@@ -9,9 +9,7 @@ class ScrollableListItem extends React.Component {
   render() {
     return (
       <div style={styleVideoList}>
-        {this.props.videoList.filter(x => {
-          if (x.habilitado) return x;
-        }).map((videoList) => (
+        {this.props.videoList.map((videoList) => (
           <Link to={{ pathname: `/playvideo/${videoList.urlPlaylist}` }}
             className='item-focusable feria item' key={'feria-' + videoList.idPlaylist} onClick={() => this.cambioVideoList(videoList)} tabIndex="0" style={styleVideoListCard}>
             <div >

@@ -7,31 +7,26 @@ class VideoLista extends React.Component {
         super(props);
         this.state = {
             videoList: [],
-            idTiendaSeleccionada: null
-        }
-    }
-
-    componentWillMount() {
-        this.idTiendaSeleccionada = localStorage.getItem("idFeria");
-        if (this.state.idTiendaSeleccionada == null) {
-            alert("Por favor, seleccione una feria en configuración.");
-            window.location.pathname = "/configuracion";
-            return;
+            idFeriaSeleccionada: localStorage.getItem("idFeria")
         }
     }
 
     componentDidMount() {
-        if (localStorage.getItem("idFeria")) {
-            fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/publicidad/${this.state.idTiendaSeleccionada}/playlist`)
+        if (this.state.idFeriaSeleccionada) {
+            fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/publicidad/${this.state.idFeriaSeleccionada}/playlist`)
                 .then(res => res.json())
                 .then((data) => {
                     console.log(data)
-                    this.setState({ videoList: data })
-                    //   console.log(this.state.videoList)
+                    this.setState({ videoList: data.filter((x) => x.habilitado === 1) })
+                        console.log('filtrado:')
+                        console.log(this.state.videoList)
                 })
                 .catch(console.log)
+        }else{
+            alert("Por favor, seleccione una feria en configuración.");
+            window.location.pathname = "/configuracion";
+            return;
         }
-
     }
 
     render() {
