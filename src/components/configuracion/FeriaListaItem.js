@@ -9,7 +9,13 @@ class ScrollableListItem extends React.Component{
         return(
             <div  style={styleFeriaList}>
             {this.props.ferias.map((feria) => (
-              <div className='item-focusable feria item' key={'feria-' + feria.idFeria} onClick={()=>this.cambioFeria(feria)} tabIndex="0"  style={styleFeriaCard}>
+              <div
+                  className='item-focusable feria item'
+                  key={'feria-' + feria.idFeria}
+                  name={'feria-' + feria.idFeria}
+                  onClick={()=>this.cambioFeria(feria)}
+                  tabIndex="0"
+                  style={styleFeriaCard}>
                 <div >
                   <img src={feria.logo} style={{width: '150px', height: '150px'}} alt = ""></img>
                 </div>

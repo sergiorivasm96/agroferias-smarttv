@@ -11,30 +11,18 @@ class Mapa extends React.Component {
       popUpVisible: false,
       popUpTVVisible: false,
       tiendaModal: {},
-      imagen: null
+      imagen: null,
+      televisor: JSON.parse(localStorage.getItem("localTelevisor")),
+      idFeriaSeleccionada: localStorage.getItem("idFeria")
     };
     this.anchoImagen = 1000;
     this.altoImagen = 350;
     this.factor = { x: 15 / 1200, y: 30 / 382 };
-    this.televisor = null;
-    this.idTiendaSeleccionada = null;
-  }
 
-  componentWillMount() {
-    let idFeria = localStorage.getItem("idFeria");
-    let televisorLocal = localStorage.getItem("localTelevisor");
-    if (idFeria == null) {
-      alert("Por favor, seleccione una feria en configuración.");
-      window.location.pathname = "/configuracion";
-    } else if (televisorLocal == null) {
-      alert("Por favor, seleccione un televisor en configuración.");
-      window.location.pathname = "/configuracion";
-    }
   }
 
   componentDidMount() {
-    this.idTiendaSeleccionada = localStorage.getItem("idFeria");
-    if (localStorage.getItem("idFeria")) {
+    if (this.state.idFeriaSeleccionada && this.state.televisor) {
       fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/${localStorage.getItem("idFeria")}`)
         .then(res => res.json())
         .then((data) => {
@@ -50,6 +38,10 @@ class Mapa extends React.Component {
             .catch(console.log)
         })
         .catch(console.log)
+    }
+    else{
+        alert("Por favor, seleccione una feria y un televisor en la pestaña de configuración");
+        window.location.pathname = "/configuracion";
     }
   }
 

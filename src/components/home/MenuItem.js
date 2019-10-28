@@ -12,10 +12,14 @@ class MenuItem extends React.Component {
 
   render (){
     return(
-      <Link to={this.props.link} onClick={this.handleClick} className='MenuItem item-focusable' style={divStyle}>
-        <FontAwesomeIcon icon={this.props.icon} size='2x'/>
-        <div style={spanStyle}>{this.props.name}</div>
-        
+      <Link
+        to={this.props.link}
+        name={this.props.name.toString()+"Open"}
+        onClick={this.handleClick}
+        className='MenuItem item-focusable'
+        style={divStyle}>
+          <FontAwesomeIcon icon={this.props.icon} size='2x'/>
+          <div style={spanStyle}>{this.props.name}</div>
       </Link>
     )
   }

@@ -8,15 +8,20 @@ class PlayVideo extends React.Component {
         document.getElementsByClassName("item-focusable")[0].focus();
     }
 
+    handlerClickBack(){
+        console.log('back')
+        window.location.pathname = "/publicidad";
+    }
+
     render() {
         let idPlaylist = true ? localStorage.getItem("codigoVideo") : "PLC0w3lEHx2SF3NsbnqnLbWBWyF_3g0cjZ";
         let srcUrl = "https://www.youtube.com/embed/videoseries?list=" + idPlaylist + "&modestbranding=1&autoplay=1&controls=0&fs=0&loop=1&rel=0&showinfo=0&disablekb=1"
         return (
             <div style={videoContainerStyle}>
-                <iframe style={iframeStyle} src={srcUrl} frameborder="0" title='iframeTitle'
-                    allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>
+                <iframe style={iframeStyle} src={srcUrl} frameBorder="0" title='iframeTitle'
+                    allow="autoplay; encrypted-media" allowFullScreen="allowfullscreen"></iframe>
                 <input style={{ display: "none" }} className="item-focusable"
-                    action="action" onclick="window.history.go(-1); return false;" type="button" value="Back" />
+                    action="action" onClick="window.history.go(-1); return false;" type="button" value="Back" />
             </div>
         )
     }

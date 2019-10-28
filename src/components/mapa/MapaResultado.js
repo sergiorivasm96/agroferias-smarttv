@@ -59,7 +59,10 @@ class MapaResultado extends React.Component {
         let productoBuscado = JSON.parse(localStorage.getItem('resultadoBusqueda'));
         return (
             <div>
-                <h1 style={{ paddingLeft: '90px' }}>En las siguientes tiendas puede encontrar el producto: {productoBuscado.nombre}</h1>
+                <h1 style={{ paddingLeft: '70px' }}>En las siguientes tiendas puede encontrar el producto: </h1>
+                <h1 style={{ paddingLeft: '70px' }}>
+                    {productoBuscado.nombre}
+                </h1>
                 <div
                     id="divGrande"
                     style={{
