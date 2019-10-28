@@ -107,7 +107,7 @@ class ElegirTv extends React.Component {
                                 key={'televisor-' + televisor.idTelevisor}
                             >
 
-                                <MapaLugar televisor={true}></MapaLugar>
+                                <MapaLugar name={'tv-' + televisor.idTelevisor} televisor={true}></MapaLugar>
                             </div>
                         </div>
 

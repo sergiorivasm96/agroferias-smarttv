@@ -61,7 +61,7 @@ class Configuracion extends React.Component {
             button = <Link to={{
                 pathname: `/configuracion/${this.state.idFeriaActual}`
             }} >
-                <button style={buttonStyle} className='item-focusable btn-elegir-tv'>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
+                <button name={'seleccTienda'} style={buttonStyle} className='item-focusable btn-elegir-tv'>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
             </Link>
             
             textoFeria = 'Feria seleccionada: ' + this.state.nombreFeriaActual

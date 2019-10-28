@@ -15,7 +15,7 @@ class ScrollableListItem extends React.Component {
           <Link to={{ pathname: `/playvideo/${videoList.urlPlaylist}` }}
             className='item-focusable feria item' key={'feria-' + videoList.idPlaylist} onClick={() => this.cambioVideoList(videoList)} tabIndex="0" style={styleVideoListCard}>
             <div >
-              <img src={videoList.urlImagen} style={{ width: '150px', height: '150px' }} alt=""></img>
+              <img name={"video-"+videoList.idPlaylist.toString()} src={videoList.urlImagen} style={{ width: '150px', height: '150px' }} alt=""></img>
             </div>
             <div className={"videolist-text"} style={{ fontWeight: 'bold' }}>{videoList.nombre}</div>
           </Link>

@@ -14,7 +14,7 @@ class MapaLugar extends React.Component{
             icono = <FontAwesomeIcon icon={faMapMarkerAlt} size='2x'/>
         }
         return(
-            <div id="place">
+            <div name={this.props.name} id="place">
                 {icono}
             </div>
         )
