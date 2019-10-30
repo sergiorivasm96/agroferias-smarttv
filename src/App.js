@@ -1,33 +1,39 @@
 import 'core-js/library';
-import "core-js/shim";
-import React from 'react'
-import { faCog, faMap, faUser, faVideo } from '@fortawesome/free-solid-svg-icons'
-import MenuItem from './components/home/MenuItem.js'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import Home from './components/home/Home.js'
-import Mapa from './components/mapa/Mapa.js'
-import Identificate from './components/identificate/Identificate.js'
-import Perfil from './components/identificate/Perfil.js'
-import Publicidad from './components/publicidad/Publicidad.js'
-import Configuracion from './components/configuracion/Configuracion.js'
-import MapaBuscador from './components/mapa/MapaBuscador.js'
-import Mapeo from './components/mapeo/Mapeo.js'
-import MapaResultado from './components/mapa/MapaResultado.js'
-import ElegirTV from './components/configuracion/ElegirTv.js'
-import PlayVideo from './components/publicidad/PlayVideo.js'
-
-
+import 'core-js/shim';
+import 'cross-fetch/polyfill';
+import React from 'react';
+import {
+  faCog,
+  faMap,
+  faUser,
+  faVideo
+} from '@fortawesome/free-solid-svg-icons';
+import MenuItem from './components/home/MenuItem.js';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './components/home/Home.js';
+import Mapa from './components/mapa/Mapa.js';
+import Identificate from './components/identificate/Identificate.js';
+import Perfil from './components/identificate/Perfil.js';
+import Publicidad from './components/publicidad/Publicidad.js';
+import Configuracion from './components/configuracion/Configuracion.js';
+import MapaBuscador from './components/mapa/MapaBuscador.js';
+import Mapeo from './components/mapeo/Mapeo.js';
+import MapaResultado from './components/mapa/MapaResultado.js';
+import ElegirTV from './components/configuracion/ElegirTv.js';
+import PlayVideo from './components/publicidad/PlayVideo.js';
 
 const menuStyle = {
   background: '#ed217c',
   paddingLeft: '12%',
   paddingTop: '15px',
   paddingBottom: '15px'
-}
+};
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+   
+    
     this.mapeo = new Mapeo();
   }
 
@@ -42,13 +48,29 @@ class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
-        <div className='main-menu' id='menuSuperior'>
-          <div className='App'>
-            <div display='block' style={menuStyle} className="keyboard-row menu-rosado">
-              <MenuItem name='Identifícate' icon={faUser} link="/identificate"></MenuItem>
-              <MenuItem name='Mapa' icon={faMap} link="/mapas" ></MenuItem>
-              <MenuItem name='Publicidad' icon={faVideo} link="/publicidad" ></MenuItem>
-              <MenuItem name='Configuración' icon={faCog} link="/configuracion" ></MenuItem>
+        <div className="main-menu" id="menuSuperior">
+          <div className="App">
+            <div
+              display="block"
+              style={menuStyle}
+              className="keyboard-row menu-rosado"
+            >
+              <MenuItem
+                name="Identifícate"
+                icon={faUser}
+                link="/identificate"
+              ></MenuItem>
+              <MenuItem name="Mapa" icon={faMap} link="/mapas"></MenuItem>
+              <MenuItem
+                name="Publicidad"
+                icon={faVideo}
+                link="/publicidad"
+              ></MenuItem>
+              <MenuItem
+                name="Configuración"
+                icon={faCog}
+                link="/configuracion"
+              ></MenuItem>
             </div>
           </div>
 
@@ -71,24 +93,34 @@ class App extends React.Component {
             <Route exact path="/mapas/buscador">
               <MapaBuscador />
             </Route>
-            <Route exact path="/mapas/buscador/:idTienda" render={({ match }) => <MapaResultado idTienda={match.params.idTienda} />} >
+            <Route
+              exact
+              path="/mapas/buscador/:idTienda"
+              render={({ match }) => (
+                <MapaResultado idTienda={match.params.idTienda} />
+              )}
+            ></Route>
+            <Route
+              exact
+              path="/configuracion/:idFeria"
+              render={({ match }) => (
+                <ElegirTV idFeria={match.params.idFeria} />
+              )}
+            ></Route>
 
-            </Route>
-            <Route exact path="/configuracion/:idFeria" render={({ match }) => <ElegirTV idFeria={match.params.idFeria} />} >
-            </Route>
-
-            <Route exact path="/playvideo/:codigo" render={({ match }) => <PlayVideo codigo={match.params.codigo} />} >
+            <Route
+              exact
+              path="/playvideo/:codigo"
+              render={({ match }) => <PlayVideo codigo={match.params.codigo} />}
+            >
               <PlayVideo />
             </Route>
 
             <Route exact path="/perfil">
               <Perfil />
             </Route>
-
           </Switch>
-
         </div>
-
       </BrowserRouter>
     );
   }
