@@ -15,6 +15,7 @@ import Mapeo from './components/mapeo/Mapeo.js'
 import MapaResultado from './components/mapa/MapaResultado.js'
 import ElegirTV from './components/configuracion/ElegirTv.js'
 import PlayVideo from './components/publicidad/PlayVideo.js'
+import Ruleta from './components/juegos/ruleta/Ruleta.js'
 
 
 
@@ -84,6 +85,19 @@ class App extends React.Component {
             <Route exact path="/perfil">
               <Perfil />
             </Route>
+
+            <Route exact path="/juegos/ruleta">
+              <Ruleta />
+            </Route>
+
+            <Route exact path="/recomendaciones">
+              <Perfil />
+            </Route>
+
+            <Route exact path="/promociones">
+              <Perfil />
+            </Route>
+
 
           </Switch>
 
