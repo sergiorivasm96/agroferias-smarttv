@@ -23,7 +23,7 @@ class Perfil extends React.Component{
   
     handlerClickJuegos(){
         console.log('juegos')
-        window.location.pathname = "/juegos/ruleta"
+        window.location.pathname = "/juegos"
     }
 
     handlerClickRecomendaciones(){

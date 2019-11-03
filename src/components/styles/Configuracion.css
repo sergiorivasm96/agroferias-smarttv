@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 
-.item-focusable img{
+.item-focusable.item img{
   filter: grayscale(100%);
   opacity: 0.6;
 }
