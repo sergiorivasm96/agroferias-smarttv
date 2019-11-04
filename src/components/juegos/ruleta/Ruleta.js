@@ -1,6 +1,7 @@
 import React from 'react';
 import SpinOn from './spin_on.png'
 import SpinOff from './spin_off.png'
+import '../../styles/Configuracion.css'
 import { throwStatement } from '@babel/types';
 /* Extraido de http://jsbin.com/qefada/11/edit?html,css,js,output */
 
@@ -35,10 +36,6 @@ const premios = [
 var isStopped = false;
 
 class Ruleta extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const canvas = this.refs.canvas
         const ctx = canvas.getContext("2d")
@@ -140,12 +137,14 @@ class Ruleta extends React.Component {
                 <div style={divStyle}>
                     <img style={{ filter: "graystyle(0%)", opacity: "1" }} src={"https://cdn4.vectorstock.com/i/thumb-large/55/28/african-woman-presenting-something-cartoon-vector-12365528.jpg"}></img>
                     <canvas ref="canvas" style={{ display: 'inline' }} width={300} height={300}></canvas>
-                    <img id={"spin"} src={SpinOn} className="item-focusable" onClick={detenerRuleta}></img>
+                    <img id={"spin"} src={SpinOn} className="item-focusable spinBtn" onClick={detenerRuleta}></img>
                 </div>
             </div>
         );
     }
 }
+
+export default Ruleta;
 
 var deg = rand(0, 360);
 var speed = 0;
@@ -179,4 +178,3 @@ const divStyle = {
     marginTop: '5%'
 }
 
-export default Ruleta;

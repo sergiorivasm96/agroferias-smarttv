@@ -15,7 +15,7 @@ class Memoria extends React.Component {
         this.start()
     }
     handleClick(name, index) {
-        if (this.state.openedFrameworks.length == 2) {
+        if (this.state.openedFrameworks.length === 2) {
             setTimeout(() => {
                 this.check()
             }, 750)
@@ -32,7 +32,7 @@ class Memoria extends React.Component {
                 openedFrameworks: frameworks,
                 finalizedFrameworks: finalizedFrameworks
             })
-            if (this.state.openedFrameworks.length == 2) {
+            if (this.state.openedFrameworks.length === 2) {
                 setTimeout(() => {
                     this.check()
                 }, 750)
@@ -41,7 +41,7 @@ class Memoria extends React.Component {
     }
     check() {
         let finalizedFrameworks = this.state.finalizedFrameworks
-        if ((this.state.openedFrameworks[0].name == this.state.openedFrameworks[1].name) && (this.state.openedFrameworks[0].index != this.state.openedFrameworks[1].index)) {
+        if ((this.state.openedFrameworks[0].name === this.state.openedFrameworks[1].name) && (this.state.openedFrameworks[0].index !== this.state.openedFrameworks[1].index)) {
             finalizedFrameworks[this.state.openedFrameworks[0].index].complete = true
             finalizedFrameworks[this.state.openedFrameworks[1].index].complete = true
         } else {

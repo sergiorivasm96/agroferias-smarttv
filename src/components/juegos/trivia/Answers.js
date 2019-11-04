@@ -38,7 +38,7 @@ class Answers extends React.Component {
 
     shouldComponentUpdate() {
         //console.log(this.props.cleanAnswers)
-        if(this.props.correct == -1) return false;
+        if(this.props.correct === -1) return false;
         if (this.props.isAnswered) {
             this.setState({
                 classNames: ['', '', '', '']

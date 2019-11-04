@@ -2,10 +2,7 @@ import React from 'react'
 import BotonOpcion from '../identificate/BotonOpcion.js'
 
 class Juegos extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
+    
     handlerClickRuleta() {
         console.log('ruleta')
         window.location.pathname = "/juegos/ruleta"

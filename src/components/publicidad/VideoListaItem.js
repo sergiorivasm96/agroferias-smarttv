@@ -11,7 +11,7 @@ class ScrollableListItem extends React.Component {
       <div style={styleVideoList}>
         {this.props.videoList.map((videoList) => (
           <Link to={{ pathname: `/playvideo/${videoList.urlPlaylist}` }}
-            className='item-focusable feria item' key={'feria-' + videoList.idPlaylist} onClick={() => this.cambioVideoList(videoList)} tabIndex="0" style={styleVideoListCard}>
+            className='item-focusable feria configuration item' key={'feria-' + videoList.idPlaylist} onClick={() => this.cambioVideoList(videoList)} tabIndex="0" style={styleVideoListCard}>
             <div >
               <img name={"video-"+videoList.idPlaylist.toString()} src={videoList.urlImagen} style={{ width: '150px', height: '150px' }} alt=""></img>
             </div>

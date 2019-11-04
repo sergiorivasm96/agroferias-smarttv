@@ -48,7 +48,7 @@ class Popup extends React.Component {
     }
 
     componentDidMount() {
-        if (this.state.time == 'start')
+        if (this.state.time === 'start')
             setTimeout(() => {
                 this.popupHandle();
             }, 3000);
@@ -56,7 +56,7 @@ class Popup extends React.Component {
 
     render() {
 
-        let { title, text, buttonText } = this.state;
+        let { title, text } = this.state;
 
         let { style } = this.props;
 
