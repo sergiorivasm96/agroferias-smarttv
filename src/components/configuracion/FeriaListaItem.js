@@ -10,7 +10,7 @@ class ScrollableListItem extends React.Component{
             <div  style={styleFeriaList}>
             {this.props.ferias.map((feria) => (
               <div
-                  className='item-focusable feria item'
+                  className='item-focusable feria configuration item'
                   key={'feria-' + feria.idFeria}
                   name={'feria-' + feria.idFeria}
                   onClick={()=>this.cambioFeria(feria)}

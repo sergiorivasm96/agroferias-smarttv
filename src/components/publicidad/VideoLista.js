@@ -32,7 +32,7 @@ class VideoLista extends React.Component {
     render() {
         return (
             <div>
-                <div className="menu-wrapper">
+                <div className="menu-wrapper" id="lista-videos" >
                     <div className="menu .keyboard-row" style={{ overflow: 'hidden', paddingLeft: '15%'}} >
                         <VideoListaItem videoList={this.state.videoList} cambioVideoList={this.props.cambioVideoList}></VideoListaItem>
                     </div>

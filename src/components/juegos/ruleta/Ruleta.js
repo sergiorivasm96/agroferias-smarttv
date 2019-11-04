@@ -1,4 +1,8 @@
 import React from 'react';
+import SpinOn from './spin_on.png'
+import SpinOff from './spin_off.png'
+import '../../styles/Configuracion.css'
+import { throwStatement } from '@babel/types';
 /* Extraido de http://jsbin.com/qefada/11/edit?html,css,js,output */
 
 const premios = [
@@ -32,29 +36,16 @@ const premios = [
 var isStopped = false;
 
 class Ruleta extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         const canvas = this.refs.canvas
         const ctx = canvas.getContext("2d")
 
-        function rand(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-
         var color = ['#FF5733', '#33FF36', '#3364FF', '#33FFE6', '#FC33FF', '#FF336E', "#FCFF33", "#FFC133"];
-        var label = ['1 kg de papa', '200', '50', '100', '5', '500', '0', "jPOT"];
         var slices = premios.length;
         var sliceDeg = 360 / slices;
-        var deg = rand(0, 360);
-        var speed = 0;
-        var slowDownRand = 0;
+
         var width = canvas.width; // size
         var center = width / 2;      // center
-
-        var lock = false;
 
         function deg2rad(deg) {
             return deg * Math.PI / 180;
@@ -105,7 +96,7 @@ class Ruleta extends React.Component {
             ctx.fill();
         }
 
-        (function anim() {
+        function anim() {
             deg += speed;
             deg %= 360;
 
@@ -123,32 +114,60 @@ class Ruleta extends React.Component {
             }
             // Stopped!
             if (lock && !speed) {
+                lock = false;
                 var ai = Math.floor(((360 - deg - 90) % 360) / sliceDeg); // deg 2 Array Index
                 ai = (slices + ai) % slices; // Fix negative index
-                return alert("Ganaste:\n" + premios[ai].descripcion); // Get Array Item from end Degree
+                alert("Ganaste:\n" + premios[ai].descripcion); // Get Array Item from end Degree
+                iniciarRuleta();
             }
 
             drawImg();
             window.requestAnimationFrame(anim);
-        }());
+        }
 
-        document.getElementById("spin").addEventListener("mousedown", function () {
-            isStopped = true;
-        }, false);
+        window.requestAnimationFrame(anim);
 
     }
+
 
     render() {
 
         return (
             <div>
                 <div style={divStyle}>
+                    <img style={{ filter: "graystyle(0%)", opacity: "1" }} src={"https://cdn4.vectorstock.com/i/thumb-large/55/28/african-woman-presenting-something-cartoon-vector-12365528.jpg"}></img>
                     <canvas ref="canvas" style={{ display: 'inline' }} width={300} height={300}></canvas>
-                    <button id="spin" className="item-focusable" onClick={() => { isStopped = true }} >Stop!</button>
+                    <img id={"spin"} src={SpinOn} className="item-focusable spinBtn" onClick={detenerRuleta}></img>
                 </div>
             </div>
         );
     }
+}
+
+export default Ruleta;
+
+var deg = rand(0, 360);
+var speed = 0;
+var slowDownRand = 0;
+var lock = false;
+
+function rand(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function iniciarRuleta() {
+    console.log("Inicio");
+    isStopped = false;
+    speed = 0;
+    slowDownRand = 0;
+    document.getElementById("spin").src = SpinOn;
+    document.getElementById("spin").onclick = detenerRuleta;
+}
+
+function detenerRuleta() {
+    isStopped = true;
+    document.getElementById("spin").src = SpinOff;
+    document.getElementById("spin").onclick = iniciarRuleta;
 }
 
 const divStyle = {
@@ -159,4 +178,3 @@ const divStyle = {
     marginTop: '5%'
 }
 
-export default Ruleta;

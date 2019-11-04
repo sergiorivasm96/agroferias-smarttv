@@ -11,14 +11,14 @@
   cursor: pointer;
 }
 
-img{
+.configuration.item img{
   filter: grayscale(100%);
   opacity: 0.6;
 }
 
 .focused-item img{
-  filter: none;
-  opacity: 1;
+  filter: none !important;
+  opacity: 1 !important;
 }
 
 .item .feria-text{
@@ -28,6 +28,25 @@ img{
 .focused-item .item .feria-text{
   opacity: 0.6;
 }
+
+.item .videolist-text{
+  opacity: 0.6;
+}
+
+.focused-item .item .videolist-text{
+  opacity: 0.6;
+}
+
+.spinBtn.item-focusable{
+  filter: grayscale(100%);
+  opacity: 0.6;
+}
+
+.spinBtn.focused-item{
+  filter: none !important;
+  opacity: 1 !important;
+}
+
 
 .btn-elegir-tv{
   background: rgb(151, 151, 151);
