@@ -16,7 +16,8 @@ class Trivia extends React.Component {
             showButton: false,
             questionAnswered: false,
             score: 0,
-            displayPopup: 'flex'
+            displayPopup: 'flex',
+            final: false
         }
         this.nextQuestion = this.nextQuestion.bind(this);
         this.handleShowButton = this.handleShowButton.bind(this);
@@ -27,7 +28,7 @@ class Trivia extends React.Component {
     pushData(nr) {
         this.setState({
             question: data[nr].question,
-            answers: [data[nr].answers[0], data[nr].answers[1], data[nr].answers[2], data[nr].answers[3] ],
+            answers: [data[nr].answers[0], data[nr].answers[1], data[nr].answers[2], data[nr].answers[3]],
             correct: data[nr].correct,
             nr: this.state.nr + 1
         });
@@ -41,10 +42,11 @@ class Trivia extends React.Component {
     nextQuestion() {
         let { nr, total, score } = this.state;
 
-        if(nr === total){
+        if (nr === total) {
             this.setState({
                 displayPopup: 'flex',
-                correct: -1
+                correct: -1,
+                final: true
             });
         } else {
             console.log("next")
@@ -53,7 +55,7 @@ class Trivia extends React.Component {
                 showButton: false,
                 questionAnswered: false
             });
-            
+
         }
 
     }
@@ -79,12 +81,12 @@ class Trivia extends React.Component {
     }
 
     render() {
-        let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score} = this.state;
-
+        let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score } = this.state;
+        console.log("render: " + this.state.final)
         return (
             <div className="container">
 
-                <Popup style={{display: displayPopup}} score={score} total={total} startQuiz={this.handleStartQuiz}/>
+                <Popup style={{ display: displayPopup }} score={score} total={total} startQuiz={this.handleStartQuiz} final={this.state.final} />
 
                 <div className="row">
                     <div className="col-lg-10 col-lg-offset-1">
@@ -92,9 +94,9 @@ class Trivia extends React.Component {
                             <h4>Pregunta {nr}/{total}</h4>
                             <p>{question}</p>
                         </div>
-                        <Answers answers={answers} correct={correct} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore}/>
+                        <Answers answers={answers} correct={correct} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore} />
                         <div id="submit">
-                            {showButton ? <button className="fancy-btn" onClick={this.nextQuestion} >{nr===total ? 'Terminar' : 'Siguiente pregunta'}</button> : null}
+                            {showButton ? <button className="item-focusable fancy-btn" onClick={this.nextQuestion} >{nr === total ? 'Terminar' : 'Siguiente pregunta'}</button> : null}
                         </div>
                     </div>
                 </div>
