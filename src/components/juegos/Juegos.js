@@ -18,6 +18,7 @@ class Juegos extends React.Component {
 
     handlerClickTrivia() {
         console.log('trivia')
+        window.location.pathname = "/juegos/trivia"
     }
 
     render() {
