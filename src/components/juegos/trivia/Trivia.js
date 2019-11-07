@@ -1,14 +1,11 @@
 import React from 'react';
-/* import dataTrivia from './data'; */
+import dataTrivia from './data';
 import Answers from './Answers';
 import Popup from './Popup';
 
 import './Trivia.css'
 
 /* Basado en: https://github.com/florinpop17/quiz-app/tree/master/app */
-
-var dataTrivia = [];
-var numPreguntas;
 
 class Trivia extends React.Component {
     constructor(props) {
@@ -29,41 +26,23 @@ class Trivia extends React.Component {
     }
 
     pushData(nr) {
-        console.log("Push")
         this.setState({
-            question: dataTrivia[nr].enunciado,
-            answers: [dataTrivia[nr].alternativas[0], dataTrivia[nr].alternativas[1], dataTrivia[nr].alternativas[2], dataTrivia[nr].alternativas[3]],
-            correct: dataTrivia[nr].correcto,
+            question: dataTrivia[nr].question,
+            answers: [dataTrivia[nr].answers[0], dataTrivia[nr].answers[1], dataTrivia[nr].answers[2], dataTrivia[nr].answers[3]],
+            correct: dataTrivia[nr].correct,
             nr: this.state.nr + 1
         });
     }
 
     componentWillMount() {
-        console.log("willMount")
         let { nr } = this.state;
-        if (nr === 0) {
-            fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/trivia/5`)
-                .then(res => res.json())
-                .then((data) => {
-                    console.log(data.preguntas);
-                    dataTrivia = data.preguntas;
-                    this.parsearDatos();
-                    numPreguntas = dataTrivia.length;
-                    let { nr } = this.state;
-                    this.pushData(nr);
-                    this.forceUpdate();
-                })
-                .catch(console.log)
-        } else {
-            console.log("else")
-            this.pushData(nr);
-        }
+        this.pushData(nr);
     }
 
     nextQuestion() {
         let { nr, total, score } = this.state;
 
-        if (nr === numPreguntas) {
+        if (nr === total) {
             this.setState({
                 displayPopup: 'flex',
                 correct: -1,
@@ -105,44 +84,42 @@ class Trivia extends React.Component {
         for (let i = 0; i < dataTrivia.length; i++) {
             for (let j = 0; j < dataTrivia[i].alternativas.length; j++) {
                 if (dataTrivia[i].alternativas[j].esCorrecto == 1) {
-                    dataTrivia[i].correcto = j + 1;
+                    dataTrivia[i].correcto = j+1;
                 }
             }
         }
     }
 
-    /* componentDidMount() {
+    componentDidMount() {
         fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/trivia/5`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data.preguntas);
                 dataTrivia = data.preguntas;
                 this.parsearDatos();
-                this.setState({total: dataTrivia.length})
-                let { nr } = this.state;
-                this.pushData(nr);
+
                 //this.forceUpdate();
             })
             .catch(console.log)
-    } */
+    }
 
     render() {
         let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score } = this.state;
-        console.log("render: " + answers)
+        console.log("render: " + this.state.final)
         return (
             <div className="container">
 
-                <Popup style={{ display: displayPopup }} score={score} total={numPreguntas} startQuiz={this.handleStartQuiz} final={this.state.final} />
+                <Popup style={{ display: displayPopup }} score={score} total={total} startQuiz={this.handleStartQuiz} final={this.state.final} />
 
                 <div className="row">
                     <div className="col-lg-10 col-lg-offset-1">
                         <div id="question">
-                            <h4>Pregunta {nr}/{numPreguntas}</h4>
+                            <h4>Pregunta {nr}/{total}</h4>
                             <p>{question}</p>
                         </div>
                         <Answers answers={answers} correct={correct} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore} />
                         <div id="submit">
-                            {showButton ? <button className="item-focusable fancy-btn" onClick={this.nextQuestion} >{nr === numPreguntas ? 'Terminar' : 'Siguiente pregunta'}</button> : null}
+                            {showButton ? <button className="item-focusable fancy-btn" onClick={this.nextQuestion} >{nr === total ? 'Terminar' : 'Siguiente pregunta'}</button> : null}
                         </div>
                     </div>
                 </div>
