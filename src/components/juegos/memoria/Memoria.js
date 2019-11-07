@@ -97,7 +97,7 @@ class Memoria extends React.Component {
             window.location.pathname = "/configuracion";
         }
         console.log("Mi tele es: " + localTelevisor.idTelevisor)
-        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/memoria/3`)
+        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/memoria/televisor/${localTelevisor.idTelevisor}`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data.items_memoria);

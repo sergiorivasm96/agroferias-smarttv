@@ -168,7 +168,7 @@ class Ruleta extends React.Component {
         }
         console.log("Mi tele es: " + localTelevisor.idTelevisor)
 
-        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/ruleta/6`)
+        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/ruleta/televisor/${localTelevisor.idTelevisor}`)
             .then(res => res.json())
             .then((data) => {
                 console.log(data)
