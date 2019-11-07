@@ -38,7 +38,7 @@ class Answers extends React.Component {
 
     shouldComponentUpdate() {
         //console.log(this.props.cleanAnswers)
-        if(this.props.correct === -1) return false;
+        if (this.props.correct === -1) return false;
         if (this.props.isAnswered) {
             this.setState({
                 classNames: ['', '', '', '']
@@ -50,6 +50,17 @@ class Answers extends React.Component {
     render() {
         let { answers } = this.props;
         let { classNames } = this.state;
+
+        console.log("Preguntas = " + answers)
+
+        if (answers == null) {
+            return (
+                <div id="answers">
+                    <ul>
+                    </ul>
+                </div>
+            )
+        }
 
         return (
             <div id="answers">
