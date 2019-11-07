@@ -1,5 +1,5 @@
 import React from 'react';
-import data from './data';
+import dataTrivia from './data';
 import Answers from './Answers';
 import Popup from './Popup';
 
@@ -12,7 +12,7 @@ class Trivia extends React.Component {
         super(props);
         this.state = {
             nr: 0,
-            total: data.length,
+            total: dataTrivia.length,
             showButton: false,
             questionAnswered: false,
             score: 0,
@@ -27,9 +27,9 @@ class Trivia extends React.Component {
 
     pushData(nr) {
         this.setState({
-            question: data[nr].question,
-            answers: [data[nr].answers[0], data[nr].answers[1], data[nr].answers[2], data[nr].answers[3]],
-            correct: data[nr].correct,
+            question: dataTrivia[nr].question,
+            answers: [dataTrivia[nr].answers[0], dataTrivia[nr].answers[1], dataTrivia[nr].answers[2], dataTrivia[nr].answers[3]],
+            correct: dataTrivia[nr].correct,
             nr: this.state.nr + 1
         });
     }
@@ -78,6 +78,29 @@ class Trivia extends React.Component {
         this.setState({
             score: this.state.score + 1
         });
+    }
+
+    parsearDatos() {
+        for (let i = 0; i < dataTrivia.length; i++) {
+            for (let j = 0; j < dataTrivia[i].alternativas.length; j++) {
+                if (dataTrivia[i].alternativas[j].esCorrecto == 1) {
+                    dataTrivia[i].correcto = j+1;
+                }
+            }
+        }
+    }
+
+    componentDidMount() {
+        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/trivia/5`)
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data.preguntas);
+                dataTrivia = data.preguntas;
+                this.parsearDatos();
+
+                //this.forceUpdate();
+            })
+            .catch(console.log)
     }
 
     render() {
