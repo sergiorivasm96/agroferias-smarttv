@@ -2,47 +2,84 @@ import React from 'react';
 import SpinOn from './spin_on.png'
 import SpinOff from './spin_off.png'
 import '../../styles/Configuracion.css'
+import Tick from './tick.mp3'
 import { throwStatement } from '@babel/types';
 /* Extraido de http://jsbin.com/qefada/11/edit?html,css,js,output */
 
-const premios = [
+const items_ruleta = [
     {
         id: 1,
-        etiqueta: "PAPA",
-        descripcion: "1kg de papa"
+        nombre: "PAPA",
+        num_repeticiones: 1
     },
     {
         id: 2,
-        etiqueta: "CAMOTE",
-        descripcion: "1kg de camote"
+        nombre: "CAMOTE",
+        num_repeticiones: 2
     },
     {
         id: 3,
-        etiqueta: "QUINUA",
-        descripcion: "1kg de quinua"
+        nombre: "QUINUA",
+        num_repeticiones: 3
     },
     {
         id: 4,
-        etiqueta: "50% DESC",
-        descripcion: "50% de descuento en tu próxima compra"
+        nombre: "50% DESC",
+        num_repeticiones: 4
     },
     {
         id: 5,
-        etiqueta: "AUTO 0KM",
-        descripcion: "Un auto 0 kilómetros"
+        nombre: "AUTO 0KM",
+        num_repeticiones: 5
     }
 ]
 
 var isStopped = false;
+var reproduciendoTick = false;
 
 class Ruleta extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            items_ruleta: [
+                {
+                    id: 1,
+                    nombre: "PAPA",
+                    num_repeticiones: 1
+                },
+                {
+                    id: 2,
+                    nombre: "CAMOTE",
+                    num_repeticiones: 2
+                },
+                {
+                    id: 3,
+                    nombre: "QUINUA",
+                    num_repeticiones: 3
+                },
+                {
+                    id: 4,
+                    nombre: "50% DESC",
+                    num_repeticiones: 4
+                },
+                {
+                    id: 5,
+                    nombre: "AUTO 0KM",
+                    num_repeticiones: 5
+                }
+            ]
+        }
+    }
+
     componentDidMount() {
         const canvas = this.refs.canvas
         const ctx = canvas.getContext("2d")
 
         var color = ['#FF5733', '#33FF36', '#3364FF', '#33FFE6', '#FC33FF', '#FF336E', "#FCFF33", "#FFC133"];
-        var slices = premios.length;
-        var sliceDeg = 360 / slices;
+        var totalRepeticiones = 0;
+        items_ruleta.map(item => { totalRepeticiones += item.num_repeticiones });
+        var slices = items_ruleta.length;
+        var sliceDeg;
 
         var width = canvas.width; // size
         var center = width / 2;      // center
@@ -60,25 +97,16 @@ class Ruleta extends React.Component {
             ctx.fill();
         }
 
-        function drawText(deg, text) {
+        function drawText(deg, text, size) {
             ctx.save();
             ctx.translate(center, center);
             ctx.rotate(deg2rad(deg));
             ctx.textAlign = "right";
             ctx.fillStyle = "#fff";
-            ctx.font = 'bold 20px sans-serif';
+            let stringFont = 'bold ' + (size / 1.2).toString() + 'px sans-serif';
+            ctx.font = stringFont;
             ctx.fillText(text, 130, 10);
             ctx.restore();
-        }
-
-        function drawImg() {
-            ctx.clearRect(0, 0, width, width);
-            for (var i = 0; i < slices; i++) {
-                drawSlice(deg, color[i]);
-                drawText(deg + sliceDeg / 2, premios[i].etiqueta);
-                deg += sliceDeg;
-            }
-            drawTriangle();
         }
 
         function drawTriangle() {
@@ -96,7 +124,23 @@ class Ruleta extends React.Component {
             ctx.fill();
         }
 
+        function drawImg() {
+            ctx.clearRect(0, 0, width, width);
+            for (var i = 0; i < slices; i++) {
+                items_ruleta[i].tamano = 360 * items_ruleta[i].num_repeticiones / totalRepeticiones;
+                sliceDeg = items_ruleta[i].tamano;
+                drawSlice(deg, color[i]);
+                drawText(deg + sliceDeg / 2, items_ruleta[i].id, sliceDeg);
+                deg += sliceDeg;
+            }
+            drawTriangle();
+        }
+
         function anim() {
+            /* if (!reproduciendoTick) {
+                reproducirTick(speed);
+            } */
+
             deg += speed;
             deg %= 360;
 
@@ -115,9 +159,11 @@ class Ruleta extends React.Component {
             // Stopped!
             if (lock && !speed) {
                 lock = false;
-                var ai = Math.floor(((360 - deg - 90) % 360) / sliceDeg); // deg 2 Array Index
-                ai = (slices + ai) % slices; // Fix negative index
-                alert("Ganaste:\n" + premios[ai].descripcion); // Get Array Item from end Degree
+                //var ai = Math.floor(((360 - deg - 90) % 360) / sliceDeg); // deg 2 Array Index
+                //ai = (slices + ai) % slices; // Fix negative index
+                var ai = Math.floor(obtenerIndex(((360 - deg - 90) % 360)));
+                console.log("Ganaste: " + ai);
+                alert("Ganaste:\n" + items_ruleta[ai].nombre); // Get Array Item from end Degree
                 iniciarRuleta();
             }
 
@@ -125,9 +171,41 @@ class Ruleta extends React.Component {
             window.requestAnimationFrame(anim);
         }
 
+        function obtenerIndex(grado) {
+            if (grado < 0) grado += 360;
+            let currDeg = 0;
+            for (let i = 0; i < items_ruleta.length; i++) {
+                currDeg += items_ruleta[i].tamano;
+                if (grado < currDeg) {
+                    console.log("Grado: " + grado);
+                    return items_ruleta[i].id;
+                }
+
+            }
+            return -1;
+        }
+
         window.requestAnimationFrame(anim);
 
+        let localTelevisor = JSON.parse(localStorage.getItem("localTelevisor"));
+        if (localTelevisor === null) {
+            alert("Por favor, seleccione primero un televisor.");
+            window.location.pathname = "/configuracion";
+        }
+        console.log("Mi tele es: " + localTelevisor.idTelevisor)
+
+        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/ruleta/televisor/${localTelevisor.idTelevisor}`)
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+                console.log("Ruleta es ")
+                console.log(data.items_ruleta);
+                //items_ruleta = data.items_ruleta;
+            })
+            .catch(console.log)
+
     }
+
 
 
     render() {
@@ -144,7 +222,20 @@ class Ruleta extends React.Component {
     }
 }
 
+var audio = new Audio(Tick);
 export default Ruleta;
+
+function reproducirTick(velocidad) {
+    if (velocidad <= 0.2 || (1000 / velocidad) > 1000) return;
+    reproduciendoTick = true;
+    console.log(1000 / velocidad)
+    setTimeout(() => {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.play();
+        reproduciendoTick = false;
+    }, 1000 / velocidad);
+}
 
 var deg = rand(0, 360);
 var speed = 0;
