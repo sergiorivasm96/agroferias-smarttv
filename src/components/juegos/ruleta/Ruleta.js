@@ -4,6 +4,7 @@ import SpinOff from './spin_off.png'
 import '../../styles/Configuracion.css'
 import Tick from './tick.mp3'
 import { throwStatement } from '@babel/types';
+
 /* Extraido de http://jsbin.com/qefada/11/edit?html,css,js,output */
 
 /* var items_ruleta = [
@@ -176,6 +177,7 @@ class Ruleta extends React.Component {
                 console.log(data.items_ruleta);
                 items_ruleta = data.items_ruleta;
                 this.crearRuleta();
+                this.forceUpdate();
             })
             .catch(console.log)
     }
@@ -185,12 +187,24 @@ class Ruleta extends React.Component {
     render() {
         console.log("Rendering...")
         return (
-            <div>
-                <div style={divStyle}>
+            <div id="ruleta" className="row">
+                <div className="column1" style={divStyle}>
                     <img style={{ filter: "graystyle(0%)", opacity: "1" }} src={"https://cdn4.vectorstock.com/i/thumb-large/55/28/african-woman-presenting-something-cartoon-vector-12365528.jpg"}></img>
                     <canvas ref="canvas" style={{ display: 'inline' }} width={300} height={300}></canvas>
                     <img id={"spin"} src={SpinOn} className="item-focusable spinBtn" onClick={detenerRuleta}></img>
                 </div>
+                <div className="column2" style={styleColumn}>
+                    <span style={spanStyle}>Premios:</span>
+                    <ul>
+                        {items_ruleta.map(item => {
+                            return <li>
+                                <span className={"badge badge-pill badge-primary"} style={numberStyle}>  {item.id} </span>
+                                <span style={spanStyle}>{"   " + item.nombre}</span>
+                            </li>
+                        })}
+                    </ul>
+                </div>
+
             </div>
         );
     }
@@ -240,6 +254,28 @@ const divStyle = {
     position: 'relative',
     overflow: 'hidden',
     textAlign: 'center',
-    marginTop: '5%'
+    marginTop: '5%',
+    float: 'left',
+    width: '63%'
 }
 
+const styleColumn = {
+    marginTop: '5%',
+    float: 'right',
+    width: '37%'
+}
+
+const spanStyle = {
+    fontFamily: "\"Josefin Sans\", sans-serif",
+    fontSize: "20px",
+    fontFamily: "\"Josefin Sans\", sans-serif",
+    textTransform: "uppercase",
+    fontWeight: "700",
+    wordWrap: 'break-word'
+}
+
+const numberStyle = {
+    backgroundColor: "#662974",
+    color: 'white',
+    fontSize: "20px",
+}
