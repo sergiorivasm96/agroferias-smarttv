@@ -1,5 +1,4 @@
 import React from 'react';
-import dataTrivia from './data';
 import Answers from './Answers';
 import Popup from './Popup';
 
@@ -27,16 +26,12 @@ class Trivia extends React.Component {
 
     pushData(nr) {
         this.setState({
-            question: dataTrivia[nr].question,
-            answers: [dataTrivia[nr].answers[0], dataTrivia[nr].answers[1], dataTrivia[nr].answers[2], dataTrivia[nr].answers[3]],
-            correct: dataTrivia[nr].correct,
+            question: dataTrivia[nr].enunciado,
+            answers: [dataTrivia[nr].alternativas[0].contenido, dataTrivia[nr].alternativas[1].contenido, dataTrivia[nr].alternativas[2].contenido, dataTrivia[nr].alternativas[3].contenido],
+            correct: dataTrivia[nr].correcto,
+            total: dataTrivia.length,
             nr: this.state.nr + 1
         });
-    }
-
-    componentWillMount() {
-        let { nr } = this.state;
-        this.pushData(nr);
     }
 
     nextQuestion() {
@@ -81,31 +76,42 @@ class Trivia extends React.Component {
     }
 
     parsearDatos() {
+        loopi:
         for (let i = 0; i < dataTrivia.length; i++) {
+            loopj:
             for (let j = 0; j < dataTrivia[i].alternativas.length; j++) {
                 if (dataTrivia[i].alternativas[j].esCorrecto == 1) {
-                    dataTrivia[i].correcto = j+1;
+                    dataTrivia[i].correcto = j + 1;
+                    continue loopi;
                 }
             }
+            dataTrivia[i].correcto = 0;
         }
     }
 
     componentDidMount() {
-        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/trivia/5`)
+        let localTelevisor = JSON.parse(localStorage.getItem("localTelevisor"));
+        if (localTelevisor === null) {
+            alert("Por favor, seleccione primero un televisor.");
+            window.location.pathname = "/configuracion";
+        }
+        //https://demo3419583.mockable.io/trivia
+        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/trivia/televisor/${localTelevisor.idTelevisor}`)
             .then(res => res.json())
             .then((data) => {
+                console.log("BACK:")
                 console.log(data.preguntas);
                 dataTrivia = data.preguntas;
                 this.parsearDatos();
-
-                //this.forceUpdate();
+                let { nr } = this.state;
+                this.pushData(nr);
             })
             .catch(console.log)
+
     }
 
     render() {
         let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score } = this.state;
-        console.log("render: " + this.state.final)
         return (
             <div className="container">
 
@@ -129,3 +135,5 @@ class Trivia extends React.Component {
 };
 
 export default Trivia;
+
+var dataTrivia = [];
