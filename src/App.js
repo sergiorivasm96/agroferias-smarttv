@@ -1,5 +1,6 @@
 import 'core-js/library';
 import "core-js/shim";
+import 'cross-fetch/polyfill';
 import React from 'react'
 import { faCog, faMap, faUser, faVideo } from '@fortawesome/free-solid-svg-icons'
 import MenuItem from './components/home/MenuItem.js'
