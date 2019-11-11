@@ -197,8 +197,8 @@ class Ruleta extends React.Component {
                     <span style={spanStyle}>Premios:</span>
                     <ul>
                         {items_ruleta.map(item => {
-                            return <li>
-                                <span className={"badge badge-pill badge-primary"} style={numberStyle}>  {item.id} </span>
+                            return <li style={{listStyleType:"none"}}>
+                                <div style={numberStyle}>{item.id}</div>
                                 <span style={spanStyle}>{"   " + item.nombre}</span>
                             </li>
                         })}
@@ -260,7 +260,7 @@ const divStyle = {
 }
 
 const styleColumn = {
-    marginTop: '5%',
+    marginTop: '3%',
     float: 'right',
     width: '37%'
 }
@@ -271,11 +271,20 @@ const spanStyle = {
     fontFamily: "\"Josefin Sans\", sans-serif",
     textTransform: "uppercase",
     fontWeight: "700",
-    wordWrap: 'break-word'
+    wordWrap: 'break-word',
+    lineHeight: '45px'
 }
 
 const numberStyle = {
+    display: 'inline',
     backgroundColor: "#662974",
+    borderRadius: '50%',
     color: 'white',
-    fontSize: "20px",
+    fontSize: "18px",
+    textAlign: 'center',
+    width: '20px',
+    height: '20px',
+    lineHeight: '20px',
+    padding: '8px',
+    border: '2px solid rgb(237, 33, 124)'
 }
