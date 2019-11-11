@@ -90,8 +90,13 @@ class Trivia extends React.Component {
     }
 
     componentDidMount() {
+        let localTelevisor = JSON.parse(localStorage.getItem("localTelevisor"));
+        if (localTelevisor === null) {
+            alert("Por favor, seleccione primero un televisor.");
+            window.location.pathname = "/configuracion";
+        }
         //https://demo3419583.mockable.io/trivia
-        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/trivia/televisor/1`)
+        fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/juegos/trivia/televisor/${localTelevisor.idTelevisor}`)
             .then(res => res.json())
             .then((data) => {
                 console.log("BACK:")
