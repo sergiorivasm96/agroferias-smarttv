@@ -15,7 +15,6 @@ class Popup extends React.Component {
     }
 
     popupHandle() {
-        console.log("click")
         let { time } = this.state;
 
         if (time === 'start') {
@@ -32,15 +31,17 @@ class Popup extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("recive: " + nextProps.final)
+        console.log("recibe: " + nextProps.final)
         if (nextProps.final) {
             setTimeout(() => {
                 window.location.reload();
             }, 6000);
+            let titulo = this.props.score < this.props.total / 2 ? 'Lo lamento ☹️' : 'Felicitaciones!';
+            this.setState({
+                title: titulo,
+                text: 'Has terminado la trivia. <br /> Obtuviste: <strong>' + this.props.score + '</strong> de <strong>' + this.props.total + '</strong> respuestas correctas.'
+            });
         }
-        this.setState({
-            text: 'Has terminado la trivia. <br /> Obtuviste: <strong>' + this.props.score + '</strong> de <strong>' + this.props.total + '</strong> respuestas correctas.'
-        });
     }
 
     createMarkup(text) {
@@ -48,6 +49,15 @@ class Popup extends React.Component {
     }
 
     componentDidMount() {
+        if (this.props.final) {
+            setTimeout(() => {
+                window.location.reload();
+            }, 6000);
+            this.setState({
+                text: 'Has terminado la trivia. <br /> Obtuviste: <strong>' + this.props.score + '</strong> de <strong>' + this.props.total + '</strong> respuestas correctas.'
+            });
+        }
+
         if (this.state.time === 'start')
             setTimeout(() => {
                 this.popupHandle();

@@ -51,7 +51,7 @@ class Answers extends React.Component {
         let { answers } = this.props;
         let { classNames } = this.state;
 
-        console.log("Preguntas = " + answers)
+        //console.log("Preguntas = " + answers)
 
         if (answers == null) {
             return (
