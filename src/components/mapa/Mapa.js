@@ -70,7 +70,7 @@ class Mapa extends React.Component {
     console.log("Feria = " + this.idTiendaSeleccionada);
     console.log(this.state.tiendas)
     return (
-      <div>
+      <div style={{marginTop: '10%'}}>
         <BotonBuscar></BotonBuscar>
         <div
           id="divGrande"

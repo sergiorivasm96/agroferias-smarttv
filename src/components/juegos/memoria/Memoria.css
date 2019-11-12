@@ -1,10 +1,9 @@
 body {
-    background: #fff;
     font-family: 'Delius', cursive;
 }
 #app {
     padding: 35px;
-    width: 40%;
+    width: 70%;
     margin: 20px auto;
     border-radius: 10px;
 }

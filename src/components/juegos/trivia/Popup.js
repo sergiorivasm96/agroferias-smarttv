@@ -8,7 +8,8 @@ class Popup extends React.Component {
             time: 'start',
             title: 'Bienvenido a la Trivia',
             text: 'Selecciona las opciones en las pantallas que aparecerán a continuación.',
-            buttonText: 'Iniciar'
+            buttonText: 'Iniciar',
+            styleButton: "none"
         };
 
         this.popupHandle = this.popupHandle.bind(this);
@@ -33,11 +34,12 @@ class Popup extends React.Component {
     componentWillReceiveProps(nextProps) {
         console.log("recibe: " + nextProps.final)
         if (nextProps.final) {
-            setTimeout(() => {
+            /* setTimeout(() => {
                 window.location.reload();
-            }, 6000);
+            }, 6000); */
             let titulo = this.props.score < this.props.total / 2 ? 'Lo lamento ☹️' : 'Felicitaciones!';
             this.setState({
+                styleButton: '',
                 title: titulo,
                 text: 'Has terminado la trivia. <br /> Obtuviste: <strong>' + this.props.score + '</strong> de <strong>' + this.props.total + '</strong> respuestas correctas.'
             });
@@ -50,9 +52,6 @@ class Popup extends React.Component {
 
     componentDidMount() {
         if (this.props.final) {
-            setTimeout(() => {
-                window.location.reload();
-            }, 6000);
             this.setState({
                 text: 'Has terminado la trivia. <br /> Obtuviste: <strong>' + this.props.score + '</strong> de <strong>' + this.props.total + '</strong> respuestas correctas.'
             });
@@ -66,7 +65,7 @@ class Popup extends React.Component {
 
     render() {
 
-        let { title, text } = this.state;
+        let { title, text, styleButton } = this.state;
 
         let { style } = this.props;
 
@@ -78,7 +77,7 @@ class Popup extends React.Component {
                             <h1>{title}</h1>
                             <p dangerouslySetInnerHTML={this.createMarkup(text)} />
                             <br></br><br></br>
-                            {/* <button className="fancy-btn item-focusable" onClick={this.popupHandle}>{buttonText}</button> */}
+                            <button style={{display: styleButton}} className="fancy-btn item-focusable" onClick={this.popupHandle}>Continuar</button>
                         </div>
                     </div>
                 </div>

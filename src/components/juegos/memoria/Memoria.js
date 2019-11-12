@@ -1,5 +1,10 @@
 import React from 'react'
 import './Memoria.css'
+import Correct from '../correct.wav'
+import Fail from '../fail.wav'
+
+var audioCorrect = new Audio(Correct);
+var audioFail = new Audio(Fail);
 
 class Memoria extends React.Component {
     constructor(props) {
@@ -46,9 +51,13 @@ class Memoria extends React.Component {
         if ((this.state.openedFrameworks[0].name === this.state.openedFrameworks[1].name) && (this.state.openedFrameworks[0].index !== this.state.openedFrameworks[1].index)) {
             finalizedFrameworks[this.state.openedFrameworks[0].index].complete = true
             finalizedFrameworks[this.state.openedFrameworks[1].index].complete = true
+            audioCorrect.currentTime = 0;
+            audioCorrect.play();
         } else {
             finalizedFrameworks[this.state.openedFrameworks[0].index].close = true
             finalizedFrameworks[this.state.openedFrameworks[1].index].close = true
+            audioFail.currentTime = 0;
+            audioFail.play();
         }
         this.setState({
             finalizedFrameworks,

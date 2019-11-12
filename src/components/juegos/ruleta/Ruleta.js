@@ -3,7 +3,7 @@ import SpinOn from './spin_on.png'
 import SpinOff from './spin_off.png'
 import '../../styles/Configuracion.css'
 import Tick from './tick.mp3'
-import { throwStatement } from '@babel/types';
+import AfroWoman from './african-woman.png'
 
 /* Extraido de http://jsbin.com/qefada/11/edit?html,css,js,output */
 
@@ -84,11 +84,11 @@ class Ruleta extends React.Component {
             ctx.restore();
         }
 
-        function drawTriangle() {
+        function drawTriangle(width) {
             ctx.beginPath();
-            ctx.moveTo(130, 0);
-            ctx.lineTo(170, 0);
-            ctx.lineTo(150, 20);
+            ctx.moveTo(width / 2 - 20, 0);
+            ctx.lineTo(width / 2 + 20, 0);
+            ctx.lineTo(width / 2, 20);
             ctx.closePath();
 
             ctx.lineWidth = 10;
@@ -105,16 +105,16 @@ class Ruleta extends React.Component {
                 items_ruleta[i].tamano = 360 * items_ruleta[i].num_repeticiones / totalRepeticiones;
                 sliceDeg = items_ruleta[i].tamano;
                 drawSlice(deg, color[i]);
-                drawText(deg + sliceDeg / 2, items_ruleta[i].id, sliceDeg);
+                drawText(deg + sliceDeg / 2, i + 1, sliceDeg);
                 deg += sliceDeg;
             }
-            drawTriangle();
+            drawTriangle(width);
         }
 
         function anim() {
-            /* if (!reproduciendoTick) {
+            if (!reproduciendoTick) {
                 reproducirTick(speed);
-            } */
+            }
 
             deg += speed;
             deg %= 360;
@@ -187,18 +187,18 @@ class Ruleta extends React.Component {
     render() {
         console.log("Rendering...")
         return (
-            <div id="ruleta" className="row">
+            <div id="ruleta" className="row" style={{ marginTop: '3%' }}>
                 <div className="column1" style={divStyle}>
-                    <img style={{ filter: "graystyle(0%)", opacity: "1" }} src={"https://cdn4.vectorstock.com/i/thumb-large/55/28/african-woman-presenting-something-cartoon-vector-12365528.jpg"}></img>
-                    <canvas ref="canvas" style={{ display: 'inline' }} width={300} height={300}></canvas>
+                    <img style={{ filter: "graystyle(0%)", opacity: "1" }} src={AfroWoman}></img>
+                    <canvas ref="canvas" style={{ display: 'inline' }} width={400} height={400}></canvas>
                     <img id={"spin"} src={SpinOn} className="item-focusable spinBtn" onClick={detenerRuleta}></img>
                 </div>
                 <div className="column2" style={styleColumn}>
                     <span style={spanStyle}>Premios:</span>
                     <ul>
-                        {items_ruleta.map(item => {
-                            return <li style={{listStyleType:"none"}}>
-                                <div style={numberStyle}>{item.id}</div>
+                        {items_ruleta.map((item, index) => {
+                            return <li style={{ listStyleType: "none" }}>
+                                <div style={numberStyle}>{index + 1}</div>
                                 <span style={spanStyle}>{"   " + item.nombre}</span>
                             </li>
                         })}
