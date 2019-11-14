@@ -90,8 +90,9 @@ class ElegirTv extends React.Component {
                                 borderRadius: '50%',
                                 width: '50px',
                                 height: '50px',
-                                border: '3px solid black',
-                                textAlign: 'center'
+                                border: '3px solid white',
+                                textAlign: 'center',
+                                color: 'solid white'
 
                             }}>
                                 {televisor.idTelevisor}

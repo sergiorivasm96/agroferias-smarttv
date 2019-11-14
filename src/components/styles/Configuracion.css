@@ -19,13 +19,10 @@
 .focused-item img{
   filter: none !important;
   opacity: 1 !important;
+  border: white;
 }
 
 .item .feria-text{
-  opacity: 0.6;
-}
-
-.focused-item .item .feria-text{
   opacity: 0.6;
 }
 
@@ -47,17 +44,25 @@
   opacity: 1 !important;
 }
 
-
 .btn-elegir-tv{
-  background: rgb(151, 151, 151);
-}
-
-.btn-elegir-tv.focused-item{
   background: rgb(237, 33, 124) !important;
   color: #fff !important;
 }
 
+.btn-elegir-tv.focused-item{
+  background: white !important;
+  color: #fff !important;
+}
+
+.btn-elegir-tv.focused-item > svg{
+  color: rgb(237, 33, 124) !important;
+}
+
 .focused-item.feria > .feria-text{
+  color: #ed217c !important;
+}
+
+.focused-item.feria > .videolist-text{
   color: #ed217c !important;
 }
 
