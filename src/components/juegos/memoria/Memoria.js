@@ -118,6 +118,12 @@ class Memoria extends React.Component {
 
     render() {
         console.log("Rendering...")
+        if (this.state.frameworks === null || this.state.frameworks.length === 0) {
+            return (
+                <div style={{ fontSize: '30px' }}>El juego no está implementado</div>
+            )
+        }
+
         return (
             <div id="app">
                 <div className="playground">

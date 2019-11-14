@@ -18,11 +18,11 @@ class VideoLista extends React.Component {
                 .then((data) => {
                     console.log(data)
                     this.setState({ videoList: data.filter((x) => x.habilitado === 1) })
-                        console.log('filtrado:')
-                        console.log(this.state.videoList)
+                    console.log('filtrado:')
+                    console.log(this.state.videoList)
                 })
                 .catch(console.log)
-        }else{
+        } else {
             alert("Por favor, seleccione una feria en configuración.");
             window.location.pathname = "/configuracion";
             return;
@@ -33,8 +33,13 @@ class VideoLista extends React.Component {
         return (
             <div>
                 <div className="menu-wrapper" id="lista-videos" >
-                    <div className="menu .keyboard-row" style={{ overflow: 'hidden', paddingLeft: '15%'}} >
-                        <VideoListaItem videoList={this.state.videoList} cambioVideoList={this.props.cambioVideoList}></VideoListaItem>
+                    <div className="menu .keyboard-row" style={{ overflow: 'hidden', paddingLeft: '15%' }} >
+                        {(this.state.videoList === null || this.state.videoList.length === 0) ?
+                            <div style={{ fontSize: '30px' }}>No existen videos</div>
+                            :
+                            <VideoListaItem videoList={this.state.videoList} cambioVideoList={this.props.cambioVideoList}></VideoListaItem>
+                        }
+
                     </div>
                 </div>
             </div>

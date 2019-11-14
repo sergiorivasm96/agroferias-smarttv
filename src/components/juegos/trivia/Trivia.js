@@ -111,6 +111,12 @@ class Trivia extends React.Component {
     }
 
     render() {
+        if (dataTrivia === null || dataTrivia.length === 0) {
+            return (
+                <div style={{ fontSize: '30px' }}>El juego no está implementado</div>
+            )
+        }
+
         let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score } = this.state;
         return (
             <div className="container">

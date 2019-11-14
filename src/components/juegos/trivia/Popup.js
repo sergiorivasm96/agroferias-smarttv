@@ -1,4 +1,9 @@
 import React from 'react';
+import Correct from '../correct.wav'
+import Fail from '../fail.wav'
+
+var audioCorrect = new Audio(Correct);
+var audioFail = new Audio(Fail);
 
 class Popup extends React.Component {
     constructor(props) {
@@ -9,7 +14,8 @@ class Popup extends React.Component {
             title: 'Bienvenido a la Trivia',
             text: 'Selecciona las opciones en las pantallas que aparecerán a continuación.',
             buttonText: 'Iniciar',
-            styleButton: "none"
+            styleButton: "none",
+            audio: null
         };
 
         this.popupHandle = this.popupHandle.bind(this);
@@ -37,7 +43,17 @@ class Popup extends React.Component {
             /* setTimeout(() => {
                 window.location.reload();
             }, 6000); */
-            let titulo = this.props.score < this.props.total / 2 ? 'Lo lamento ☹️' : 'Felicitaciones!';
+            let titulo;
+            let audioFin;
+            if (this.props.score === this.props.total) {
+                titulo = 'Felicitaciones!';
+                audioFin = audioCorrect;
+            } else {
+                titulo = 'Lo lamento ☹️';
+                audioFin = audioFail;
+            }
+            audioFin.currentTime = 0;
+            audioFin.play();
             this.setState({
                 styleButton: '',
                 title: titulo,
@@ -77,7 +93,7 @@ class Popup extends React.Component {
                             <h1>{title}</h1>
                             <p dangerouslySetInnerHTML={this.createMarkup(text)} />
                             <br></br><br></br>
-                            <button style={{display: styleButton}} className="fancy-btn item-focusable" onClick={this.popupHandle}>Continuar</button>
+                            <button style={{ display: styleButton }} className="fancy-btn item-focusable" onClick={this.popupHandle}>Continuar</button>
                         </div>
                     </div>
                 </div>

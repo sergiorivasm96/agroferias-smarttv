@@ -74,10 +74,10 @@ class Answers extends React.Component {
         return (
             <div id="answers">
                 <ul>
-                    <li onClick={this.checkAnswer} className={classNames[0]} data-id="1"><span>A</span> <p className="item-focusable">{answers[0]}</p></li>
-                    <li onClick={this.checkAnswer} className={classNames[1]} data-id="2"><span>B</span> <p className="item-focusable">{answers[1]}</p></li>
-                    <li onClick={this.checkAnswer} className={classNames[2]} data-id="3"><span>C</span> <p className="item-focusable">{answers[2]}</p></li>
-                    <li onClick={this.checkAnswer} className={classNames[3]} data-id="4"><span>D</span> <p className="item-focusable">{answers[3]}</p></li>
+                    <li onClick={this.checkAnswer} className={classNames[0] + " item-focusable"} data-id="1"><span>A</span> <p>{answers[0]}</p></li>
+                    <li onClick={this.checkAnswer} className={classNames[1] + " item-focusable"} data-id="2"><span>B</span> <p>{answers[1]}</p></li>
+                    <li onClick={this.checkAnswer} className={classNames[2] + " item-focusable"} data-id="3"><span>C</span> <p>{answers[2]}</p></li>
+                    <li onClick={this.checkAnswer} className={classNames[3] + " item-focusable"} data-id="4"><span>D</span> <p>{answers[3]}</p></li>
                 </ul>
             </div>
         );

@@ -4,6 +4,7 @@ import SpinOff from './spin_off.png'
 import '../../styles/Configuracion.css'
 import Tick from './tick.mp3'
 import AfroWoman from './african-woman.png'
+import BotonOpcion from '../../identificate/BotonOpcion.js'
 
 /* Extraido de http://jsbin.com/qefada/11/edit?html,css,js,output */
 
@@ -36,6 +37,7 @@ import AfroWoman from './african-woman.png'
 ] */
 
 var items_ruleta = []
+var ruletaInicial = true;
 
 var isStopped = false;
 var reproduciendoTick = false;
@@ -176,22 +178,33 @@ class Ruleta extends React.Component {
                 console.log("Ruleta es ")
                 console.log(data.items_ruleta);
                 items_ruleta = data.items_ruleta;
+                ruletaInicial = false;
                 this.crearRuleta();
                 this.forceUpdate();
             })
-            .catch(console.log)
+            .catch((err) => {
+                console.log(err);
+                ruletaInicial = false;
+            })
     }
 
 
 
     render() {
         console.log("Rendering...")
+        if (items_ruleta === null || items_ruleta.length === 0 && ruletaInicial === false) {
+            return (
+                <div style={{ fontSize: '30px' }}>El juego no está implementado</div>
+            )
+        }
+
         return (
             <div id="ruleta" className="row" style={{ marginTop: '3%' }}>
                 <div className="column1" style={divStyle}>
                     <img style={{ filter: "graystyle(0%)", opacity: "1" }} src={AfroWoman}></img>
                     <canvas ref="canvas" style={{ display: 'inline' }} width={400} height={400}></canvas>
-                    <img id={"spin"} src={SpinOn} className="item-focusable spinBtn" onClick={detenerRuleta}></img>
+                    <BotonOpcion id="spin" texto='STOP' funClick={detenerRuleta} ></BotonOpcion>
+                    {/*  <img id={"spin"} src={SpinOn} className="item-focusable spinBtn" onClick={detenerRuleta}></img> */}
                 </div>
                 <div className="column2" style={styleColumn}>
                     <span style={spanStyle}>Premios:</span>
@@ -239,14 +252,16 @@ function iniciarRuleta() {
     isStopped = false;
     speed = 0;
     slowDownRand = 0;
-    document.getElementById("spin").src = SpinOn;
     document.getElementById("spin").onclick = detenerRuleta;
+    document.getElementById("spin").disabled = false;
+    document.getElementById("spin").style.opacity = 1;
 }
 
 function detenerRuleta() {
     isStopped = true;
-    document.getElementById("spin").src = SpinOff;
     document.getElementById("spin").onclick = iniciarRuleta;
+    document.getElementById("spin").disabled = true;
+    document.getElementById("spin").style.opacity = 0.5;
 }
 
 const divStyle = {
