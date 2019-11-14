@@ -103,6 +103,21 @@
     color: #dc0a0a;
 }
 
+#answers li.focused-item span {
+    background-color: white;
+    color: #ed217c
+}
+
+#answers li.focused-item p {
+    background-color: #ed217c;
+    color: white;
+}
+
+#answers li.focused-item {
+    background-color: #ed217c;
+    color: white;
+}
+
 #submit {
     text-align: center;
     margin: 20px 0;
@@ -159,6 +174,7 @@
     font-size: 18px;
     letter-spacing: 1px;
     margin: 20px 10% 0;
+    color: black;
 }
 
 .popup .fancy-btn{

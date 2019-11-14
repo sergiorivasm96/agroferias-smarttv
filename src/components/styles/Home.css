@@ -36,3 +36,8 @@ video{
 #divGrande > div > .focused-item{
     color: red !important ;
 }
+
+button.focused-item{
+    color: #ed217c !important ;
+    background-color: white !important;
+}

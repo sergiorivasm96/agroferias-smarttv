@@ -1,10 +1,9 @@
 body {
-    background: #fff;
     font-family: 'Delius', cursive;
 }
 #app {
     padding: 35px;
-    width: 40%;
+    width: 70%;
     margin: 20px auto;
     border-radius: 10px;
 }
@@ -67,6 +66,17 @@ body {
     animation-fill-mode: both;
     opacity: 0.2;
 }
+
+#app .playground .card .item-focusable.front {
+    color: #ed217c !important ;
+    background-color: white !important;
+}
+
+#app .playground .card .item-focusable.front.focused-item  {
+    color: white !important;
+    background-color: #ed217c !important;
+}
+
 @keyframes selected {
     0% {
         opacity: 0.2;

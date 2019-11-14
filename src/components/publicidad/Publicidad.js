@@ -14,7 +14,7 @@ class Publicidad extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{marginTop: '8%'}}>
                 <VideoLista cambioVideoList={this.cambioVideoList}></VideoLista>
             </div>
         )

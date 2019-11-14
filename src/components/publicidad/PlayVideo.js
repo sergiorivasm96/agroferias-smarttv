@@ -4,28 +4,44 @@ import React from 'react';
 
 class PlayVideo extends React.Component {
 
-    componentDidMount() {
-        document.getElementsByClassName("item-focusable")[0].focus();
+    handlerClickBack() {
+        console.log('back')
+        window.location.pathname = "/publicidad";
     }
 
-    handlerClickBack(){
-        console.log('back')
+    salir() {
         window.location.pathname = "/publicidad";
     }
 
     render() {
         let idPlaylist = true ? localStorage.getItem("codigoVideo") : "PLC0w3lEHx2SF3NsbnqnLbWBWyF_3g0cjZ";
+        console.log(idPlaylist[0] + idPlaylist[1])
+        if(idPlaylist[0] !== 'P' && idPlaylist[1] !== 'L'){
+            return(
+                <div>
+                    Video Invalido
+                </div>
+            )
+        }
         let srcUrl = "https://www.youtube.com/embed/videoseries?list=" + idPlaylist + "&modestbranding=1&autoplay=1&controls=0&fs=0&loop=1&rel=0&showinfo=0&disablekb=1"
         return (
             <div style={videoContainerStyle}>
                 <iframe style={iframeStyle} src={srcUrl} frameBorder="0" title='iframeTitle'
                     allow="autoplay; encrypted-media" allowFullScreen="allowfullscreen"></iframe>
-                <input style={{ display: "none" }} className="item-focusable"
-                    action="action" onClick="window.history.go(-1); return false;" type="button" value="Back" />
+                <input style={{ display: "none" }} id={"botonAtras"} className="item-focusable focused-item" onClick={this.salir} type="button" />
             </div>
         )
     }
 }
+
+window.addEventListener("keypress", escucharEnter, false);
+function escucharEnter(e) {
+    var keyCode = e.keyCode;
+    console.log("Escuche " + keyCode)
+    if (keyCode == 13) {
+        window.location.pathname = "/publicidad";
+    }
+};
 
 const videoContainerStyle = {
     "position": "absolute",
