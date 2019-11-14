@@ -16,8 +16,8 @@ class PlayVideo extends React.Component {
     render() {
         let idPlaylist = true ? localStorage.getItem("codigoVideo") : "PLC0w3lEHx2SF3NsbnqnLbWBWyF_3g0cjZ";
         console.log(idPlaylist[0] + idPlaylist[1])
-        if(idPlaylist[0] !== 'P' && idPlaylist[1] !== 'L'){
-            return(
+        if (idPlaylist[0] !== 'P' && idPlaylist[1] !== 'L') {
+            return (
                 <div>
                     Video Invalido
                 </div>
@@ -39,7 +39,14 @@ function escucharEnter(e) {
     var keyCode = e.keyCode;
     console.log("Escuche " + keyCode)
     if (keyCode == 13) {
-        window.location.pathname = "/publicidad";
+        window.removeEventListener("keypress", escucharEnter, false);
+        var first = window.location.pathname
+        first.indexOf(1);
+        first.toLowerCase();
+        first = first.split("/")[1];
+        if (first == "playvideo") {
+            window.location.pathname = "/publicidad";
+        }
     }
 };
 
