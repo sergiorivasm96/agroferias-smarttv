@@ -23,6 +23,16 @@ class Configuracion extends React.Component {
 
     componentDidMount() {
         this._isMounted = true;
+        let localTelevisor = localStorage.getItem("localTelevisor");
+        let localTienda = localStorage.getItem("idFeria");
+
+        if (localTelevisor === null) {
+            alert("Por favor, seleccione una feria en configuración.");
+        } else {
+            if (localTelevisor === null) {
+                alert("Por favor, seleccione primero un televisor.");
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -63,7 +73,7 @@ class Configuracion extends React.Component {
             }} >
                 <button name={'seleccTienda'} style={buttonStyle} className='item-focusable btn-elegir-tv'>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
             </Link>
-            
+
             textoFeria = 'Feria seleccionada: ' + this.state.nombreFeriaActual
         } else {
             button = <button style={buttonStyle} className='item-focusable' onClick={this.seleccionarTelevisorSinFeria}>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>

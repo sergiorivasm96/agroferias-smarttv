@@ -1,6 +1,8 @@
 import React from 'react'
 import MapaLugar from '../mapa/MapaLugar.js';
 
+import '../mapa/Mapa.css'
+
 class ElegirTv extends React.Component {
     constructor(props) {
         super(props);
@@ -32,7 +34,7 @@ class ElegirTv extends React.Component {
                 let habilitados = data.filter((x) => x.habilitado === 1);
                 console.log(habilitados)
                 this.setState({ televisores: habilitados })
-                if(habilitados === null || habilitados.length === 0) alert("No existen televisores en la agreferia.");
+                if (habilitados === null || habilitados.length === 0) alert("No existen televisores en la agreferia.");
                 console.log(this.state.televisores);
                 fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
                     .then(res => res.json())
@@ -92,22 +94,26 @@ class ElegirTv extends React.Component {
                                 height: '50px',
                                 border: '3px solid white',
                                 textAlign: 'center',
-                                color: 'solid white'
-
+                                color: 'black',
+                                backgroundColor: '#ed217c'
                             }}>
                                 {televisor.idTelevisor}
                             </div>
                             <div
-                                className="item-focusable"
+                                className="item-focusable seleccionarTV"
                                 style={{
                                     left: (televisor.posicion_X - this.factor.x) * this.anchoImagen,
                                     position: 'absolute',
-                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen
+                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen,
+                                    border: 'solid black 3px',
+                                    backgroundColor: '#ed217c',
+                                    borderRadius: '50%',
+                                    width: '40px',
+                                    height: '40px'
                                 }}
                                 onClick={() => this.handlerClick(televisor)}
                                 key={'televisor-' + televisor.idTelevisor}
                             >
-
                                 <MapaLugar name={'tv-' + televisor.idTelevisor} televisor={true}></MapaLugar>
                             </div>
                         </div>

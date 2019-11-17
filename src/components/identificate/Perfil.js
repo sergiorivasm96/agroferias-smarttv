@@ -1,5 +1,6 @@
 import React from 'react'
 import BotonOpcion from './BotonOpcion'
+import BotonLogout from './BotonLogout'
 
 class Perfil extends React.Component{
     constructor(props) {
@@ -33,6 +34,7 @@ class Perfil extends React.Component{
     render (){
         return(
             <div>
+                <BotonLogout></BotonLogout>
                 <div style={{ paddingTop:'3%', paddingLeft:'25%' }}>
                     <img src={this.state.usuario.url_photo} style={{float: "left", width:'150px', height: '150px'}} alt=''></img>
                     <h1 style={{fontSize:'42px', paddingTop: '2%'}}>Bienvenido {this.state.usuario.nombre} {this.state.usuario.apellidos} </h1>

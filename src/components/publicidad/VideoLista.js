@@ -23,7 +23,7 @@ class VideoLista extends React.Component {
                 })
                 .catch(console.log)
         } else {
-            alert("Por favor, seleccione una feria en configuración.");
+            //alert("Por favor, seleccione una feria en configuración.");
             window.location.pathname = "/configuracion";
             return;
         }

@@ -92,7 +92,7 @@ class Trivia extends React.Component {
     componentDidMount() {
         let localTelevisor = JSON.parse(localStorage.getItem("localTelevisor"));
         if (localTelevisor === null) {
-            alert("Por favor, seleccione primero un televisor.");
+            //alert("Por favor, seleccione primero un televisor.");
             window.location.pathname = "/configuracion";
         }
         //https://demo3419583.mockable.io/trivia

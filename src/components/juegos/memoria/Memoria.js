@@ -102,7 +102,7 @@ class Memoria extends React.Component {
 
         let localTelevisor = JSON.parse(localStorage.getItem("localTelevisor"));
         if (localTelevisor === null) {
-            alert("Por favor, seleccione primero un televisor.");
+            //alert("Por favor, seleccione primero un televisor.");
             window.location.pathname = "/configuracion";
         }
         console.log("Mi tele es: " + localTelevisor.idTelevisor)
