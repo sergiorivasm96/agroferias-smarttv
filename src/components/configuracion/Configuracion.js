@@ -95,7 +95,6 @@ class Configuracion extends React.Component {
                         backgroundColor: "#e6428b",
                         padding: "20px",
                         fontSize: "18px",
-
                         borderRadius: "20px",
                         boxShadow: "0px 0px 6px #ccc",
                         color: "#fff"
