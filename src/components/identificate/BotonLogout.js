@@ -1,15 +1,12 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom'
 
-class BotonBuscar extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+class BotonLogout extends React.Component {
     render() {
         return (
-            <Link to="/mapas/buscador" className='link-mapa-buscador'>
+            <Link to="#" className='link-logout'>
                 <button className='item-focusable btn-buscar' style={{
                     borderRadius: '100%',
                     width: '50px',
@@ -18,14 +15,14 @@ class BotonBuscar extends React.Component {
                     color: 'white',
                     float: 'right',
                     marginRight: '30px',
-                    marginTop: '-100px',
+                    marginTop: '5px',
                     border: 'solid black 3px'
                 }} >
-                    <FontAwesomeIcon className='img-lupa' icon={faSearch} size='2x' />
+                    <FontAwesomeIcon className='img-lupa' icon={faSignOutAlt} size='2x' />
                 </button>
 
             </Link>
         )
     }
 }
-export default BotonBuscar;
+export default BotonLogout;

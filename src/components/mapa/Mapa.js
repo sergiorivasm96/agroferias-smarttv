@@ -26,7 +26,7 @@ class Mapa extends React.Component {
       fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/${localStorage.getItem("idFeria")}`)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ tiendas: data.filter((x) => x.tipoTienda ===0) })
+          this.setState({ tiendas: data.filter((x) => x.tipoTienda === 0) })
           // this.setState({ tiendas: data });
           fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
             .then(res => res.json())
@@ -39,9 +39,9 @@ class Mapa extends React.Component {
         })
         .catch(console.log)
     }
-    else{
-        //alert("Por favor, seleccione una feria y un televisor en la pestaña de configuración");
-        window.location.pathname = "/configuracion";
+    else {
+      //alert("Por favor, seleccione una feria y un televisor en la pestaña de configuración");
+      window.location.pathname = "/configuracion";
     }
   }
 
@@ -87,11 +87,16 @@ class Mapa extends React.Component {
           {this.state.tiendas.map((tienda, i) => {
             // if ( tienda.posicion_x == null || tienda.posicion_y == null) return null;
             return <div
-              className="item-focusable"
+              className="item-focusable mapaLugar"
               style={{
                 left: (tienda.posicion_x - this.factor.x) * this.anchoImagen,
                 position: 'absolute',
-                top: (tienda.posicion_y - this.factor.y) * this.altoImagen
+                top: (tienda.posicion_y - this.factor.y) * this.altoImagen,
+                border: 'solid black 3px',
+                backgroundColor: '#ed217c',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px'
               }}
               onClick={() => this.handlerClick(tienda)}
               key={'tienda-' + tienda.idTienda}>
