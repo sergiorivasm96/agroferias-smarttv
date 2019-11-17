@@ -1,6 +1,8 @@
 import React from 'react'
 import MapaLugar from '../mapa/MapaLugar.js';
 
+import '../mapa/Mapa.css'
+
 class ElegirTv extends React.Component {
     constructor(props) {
         super(props);
@@ -92,13 +94,13 @@ class ElegirTv extends React.Component {
                                 height: '50px',
                                 border: '3px solid white',
                                 textAlign: 'center',
-                                color: 'solid white'
-
+                                color: 'black',
+                                backgroundColor: '#ed217c'
                             }}>
                                 {televisor.idTelevisor}
                             </div>
                             <div
-                                className="item-focusable"
+                                className="item-focusable seleccionarTV"
                                 style={{
                                     left: (televisor.posicion_X - this.factor.x) * this.anchoImagen,
                                     position: 'absolute',
@@ -107,7 +109,6 @@ class ElegirTv extends React.Component {
                                 onClick={() => this.handlerClick(televisor)}
                                 key={'televisor-' + televisor.idTelevisor}
                             >
-
                                 <MapaLugar name={'tv-' + televisor.idTelevisor} televisor={true}></MapaLugar>
                             </div>
                         </div>

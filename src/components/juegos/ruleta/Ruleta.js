@@ -8,34 +8,6 @@ import BotonOpcion from '../../identificate/BotonOpcion.js'
 
 /* Extraido de http://jsbin.com/qefada/11/edit?html,css,js,output */
 
-/* var items_ruleta = [
-    {
-        id: 1,
-        nombre: "PAPA",
-        num_repeticiones: 1
-    },
-    {
-        id: 2,
-        nombre: "CAMOTE",
-        num_repeticiones: 2
-    },
-    {
-        id: 3,
-        nombre: "QUINUA",
-        num_repeticiones: 3
-    },
-    {
-        id: 4,
-        nombre: "50% DESC",
-        num_repeticiones: 4
-    },
-    {
-        id: 5,
-        nombre: "AUTO 0KM",
-        num_repeticiones: 5
-    }
-] */
-
 var items_ruleta = []
 var ruletaInicial = true;
 
@@ -140,7 +112,7 @@ class Ruleta extends React.Component {
                 //ai = (slices + ai) % slices; // Fix negative index
                 var ai = Math.floor(obtenerIndex(((360 - deg - 90) % 360)));
                 console.log("Ganaste: " + items_ruleta[ai].id);
-                alert("Ganaste:\n" + items_ruleta[ai].nombre); // Get Array Item from end Degree
+                mostrarMensaje("Ganaste:\n" + items_ruleta[ai].nombre, items_ruleta[ai].urlImage); // Get Array Item from end Degree
                 iniciarRuleta();
             }
 
@@ -166,7 +138,7 @@ class Ruleta extends React.Component {
     componentDidMount() {
         let localTelevisor = JSON.parse(localStorage.getItem("localTelevisor"));
         if (localTelevisor === null) {
-            alert("Por favor, seleccione primero un televisor.");
+            //alert("Por favor, seleccione primero un televisor.");
             window.location.pathname = "/configuracion";
         }
         console.log("Mi tele es: " + localTelevisor.idTelevisor)
@@ -236,6 +208,12 @@ function reproducirTick(velocidad) {
         audio.play();
         reproduciendoTick = false;
     }, 1000 / velocidad);
+}
+
+function mostrarMensaje(texto, imagen){
+    localStorage.setItem('mensajePremio', texto);
+    localStorage.setItem('imagenPremio', imagen);
+    window.location.pathname = '/premio';
 }
 
 var deg = rand(0, 360);

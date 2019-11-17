@@ -20,7 +20,7 @@ import Ruleta from './components/juegos/ruleta/Ruleta.js'
 import Memoria from './components/juegos/memoria/Memoria.js'
 import Trivia from './components/juegos/trivia/Trivia.js'
 import Juegos from './components/juegos/Juegos.js'
-
+import Premios from './components/juegos/Premios'
 
 
 const menuStyle = {
@@ -114,6 +114,9 @@ class App extends React.Component {
               <Perfil />
             </Route>
 
+            <Route exact path="/premio">
+              <Premios />
+            </Route>
 
           </Switch>
 

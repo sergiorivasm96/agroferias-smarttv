@@ -11,7 +11,7 @@ class BotonBuscar extends React.Component{
     render (){
         return(
             <Link to="/mapas/buscador" className='link-mapa-buscador'>
-                <button className='item-focusable btn-buscar' style={{borderRadius: '100%', width:'50px', height:'50px', backgroundColor:'#ed217c', float:'right', marginRight:'30px', marginTop:'30px'}} >
+                <button className='item-focusable btn-buscar' style={{borderRadius: '100%', width:'50px', height:'50px', backgroundColor:'#ed217c', float:'right', marginRight:'30px', marginTop:'-100px'}} >
                     <FontAwesomeIcon className='img-lupa' icon={faSearch} size='2x' />
                 </button>
           

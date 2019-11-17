@@ -1,19 +1,21 @@
 import React from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faMapMarkerAlt, faTv} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMapMarkerAlt, faTv } from '@fortawesome/free-solid-svg-icons'
 
-class MapaLugar extends React.Component{
+import './Mapa.css'
+
+class MapaLugar extends React.Component {
     // constructor(props) {
     //     super(props);
     // }
-    render (){
+    render() {
         let icono
-        if(this.props.televisor){
-            icono = <FontAwesomeIcon icon={faTv} size='2x'/>
-        } else{
-            icono = <FontAwesomeIcon icon={faMapMarkerAlt} size='2x'/>
+        if (this.props.televisor) {
+            icono = <FontAwesomeIcon icon={faTv} size='2x' />
+        } else {
+            icono = <FontAwesomeIcon icon={faMapMarkerAlt} size='2x' />
         }
-        return(
+        return (
             <div name={this.props.name} id="place">
                 {icono}
             </div>

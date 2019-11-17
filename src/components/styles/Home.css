@@ -18,7 +18,7 @@ video{
 
 
 .focused-item{
-    color: red !important ;
+    color: #ed217c !important ;
 }
 
 .item-focusable:focus{
@@ -30,7 +30,7 @@ video{
 }
 
 #divGrande > div > .focused-item{
-    color: red !important ;
+    color: #ed217c !important ;
 }
 
 button.focused-item{
