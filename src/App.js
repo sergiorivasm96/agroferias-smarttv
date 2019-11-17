@@ -21,6 +21,8 @@ import Memoria from './components/juegos/memoria/Memoria.js'
 import Trivia from './components/juegos/trivia/Trivia.js'
 import Juegos from './components/juegos/Juegos.js'
 import Premios from './components/juegos/Premios'
+import Promociones from './components/identificate/Promociones.js'
+import Recomendaciones from './components/identificate/Recomendaciones'
 
 
 const menuStyle = {
@@ -107,11 +109,11 @@ class App extends React.Component {
             </Route>
 
             <Route exact path="/recomendaciones">
-              <Perfil />
+              <Recomendaciones />
             </Route>
 
             <Route exact path="/promociones">
-              <Perfil />
+              <Promociones />
             </Route>
 
             <Route exact path="/premio">

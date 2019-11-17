@@ -15,11 +15,12 @@ class Perfil extends React.Component{
     }
 
     componentDidMount(){
-
+        localStorage.setItem("idUsuario", "3")
     }
 
     handlerClickPromociones(){
         console.log('promociones')
+        window.location.pathname = "/promociones"
     }
   
     handlerClickJuegos(){
@@ -29,6 +30,7 @@ class Perfil extends React.Component{
 
     handlerClickRecomendaciones(){
         console.log('recomendaciones')
+        window.location.pathname = "/recomendaciones"
     }
 
     render (){

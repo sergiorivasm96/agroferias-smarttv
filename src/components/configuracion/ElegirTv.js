@@ -57,7 +57,7 @@ class ElegirTv extends React.Component {
     }
 
     render() {
-        console.log("redner")
+        console.log("render")
         let textoEncabezado
         let televisorGuardado = JSON.parse(localStorage.getItem('localTelevisor'));
 
