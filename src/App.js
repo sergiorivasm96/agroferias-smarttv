@@ -13,7 +13,6 @@ import MapaResultado from './components/mapa/MapaResultado.js'
 import ElegirTV from './components/configuracion/ElegirTv.js'
 
 
-
 const menuStyle = {
     background: '#ed217c',
     paddingLeft: '12%',
