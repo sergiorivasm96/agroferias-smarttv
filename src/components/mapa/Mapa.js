@@ -163,11 +163,9 @@ class Mapa extends React.Component {
           }}
           data-attribute={!this.state.popUpTVVisible ? 'hidden' : ''}
           hidden={!this.state.popUpTVVisible ? 'hidden' : ''}
-        >
+          >
           <p style={{ fontWeight: "bold", fontSize: '50px', marginTop: 'auto' }}>{this.state.texto}</p>
         </div>
-
-
       </div>
 
     );
