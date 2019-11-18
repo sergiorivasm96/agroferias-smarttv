@@ -57,7 +57,6 @@ class ElegirTv extends React.Component {
     }
 
     render() {
-        console.log("render")
         let textoEncabezado
         let televisorGuardado = JSON.parse(localStorage.getItem('localTelevisor'));
 
@@ -129,20 +128,25 @@ class ElegirTv extends React.Component {
                         top: 0,
                         bottom: 0,
                         margin: 'auto',
-                        width: "35%",
-                        height: "30%",
+                        width: "20%",
+                        height: "20%",
                         zIndex: 10,
                         backgroundColor: "#e6428b",
-                        padding: "20px",
                         fontSize: "40px",
                         borderRadius: "20px",
                         boxShadow: "0px 0px 6px #ccc",
-                        color: "#fff"
+                        color: "#fff",
+                        verticalAlign: 'middle',
+                        textAlign: 'center'
                     }}
                     data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
                     hidden={!this.state.popUpVisible ? 'hidden' : ''}
                 >
-                    <p> Usted eligió el televisor {this.state.televisorModal.idTelevisor}</p>
+                    <p style={{
+                        marginTop: '11px'
+                    }}>
+                        Usted eligió el televisor {this.state.televisorModal.idTelevisor}
+                    </p>
                 </div>
             </div>
         )

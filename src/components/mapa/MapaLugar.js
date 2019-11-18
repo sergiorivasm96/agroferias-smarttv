@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapMarkerAlt, faTv } from '@fortawesome/free-solid-svg-icons'
+import { faStore, faTv } from '@fortawesome/free-solid-svg-icons'
 
 import './Mapa.css'
 
@@ -29,19 +29,15 @@ class MapaLugar extends React.Component {
                 </div>
             )
         } else {
-            icono = <FontAwesomeIcon icon={faMapMarkerAlt} size='2x' />
             return (
-                <div style={{
-
-                    /* marginLeft: '-10px' */
-                }}
-                    name={this.props.name} id="place">
+                <div name={this.props.name} id="place">
                     <span style={{
-                        marginLeft: '7px',
-                        marginTop: '3px',
+                        marginLeft: '2px',
+                        marginTop: '4px',
+                        fontSize: '14px',
                         display: 'inline-block'
                     }}>
-                        <FontAwesomeIcon icon={faMapMarkerAlt} size='2x' />
+                        <FontAwesomeIcon icon={faStore} size='2x' />
                     </span>
 
                 </div>

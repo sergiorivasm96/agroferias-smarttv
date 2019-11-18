@@ -23,7 +23,7 @@ class Ruleta extends React.Component {
         const canvas = this.refs.canvas
         const ctx = canvas.getContext("2d")
 
-        var color = ['#FF5733', '#33FF36', '#3364FF', '#33FFE6', '#FC33FF', '#FF336E', "#FCFF33", "#FFC133"];
+        var color = ['#E83E31', '#EEDB03', '#01A275', '#03A4FF', '#1C55DA', '#24057C', "#A36B50", "#302F34"];
         var totalRepeticiones = 0;
         items_ruleta.map(item => { totalRepeticiones += item.num_repeticiones });
         var slices = items_ruleta.length;
@@ -40,10 +40,14 @@ class Ruleta extends React.Component {
         function drawSlice(deg, color) {
             ctx.beginPath();
             ctx.fillStyle = color;
+            ctx.strokeStyle = 'black';
+            ctx.lineWidth = 5;
+
             ctx.moveTo(center, center);
             ctx.arc(center, center, width / 2, deg2rad(deg), deg2rad(deg + sliceDeg));
             ctx.lineTo(center, center);
             ctx.fill();
+            ctx.stroke();
         }
 
         function drawText(deg, text, size) {
@@ -73,21 +77,38 @@ class Ruleta extends React.Component {
             ctx.fill();
         }
 
+        function drawBorder(radius) {
+            ctx.beginPath();
+            ctx.lineWidth = 10;
+            ctx.strokeStyle = 'yellow';
+            ctx.arc(center, center, radius, 0, 2 * Math.PI, false);
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = 'black';
+            ctx.arc(center, center, radius - 5, 0, 2 * Math.PI, false);
+            ctx.stroke();
+        }
+
         function drawImg() {
             ctx.clearRect(0, 0, width, width);
             for (var i = 0; i < slices; i++) {
                 items_ruleta[i].tamano = 360 * items_ruleta[i].num_repeticiones / totalRepeticiones;
                 sliceDeg = items_ruleta[i].tamano;
-                drawSlice(deg, color[i]);
+                drawSlice(deg, color[i] === null ? 'blue' : color[i]);
                 drawText(deg + sliceDeg / 2, i + 1, sliceDeg);
                 deg += sliceDeg;
             }
+            drawBorder(width / 2 - 5);
             drawTriangle(width);
         }
 
         function anim() {
+            if (items_ruleta === null || items_ruleta.length === 0)
+                return;
             if (!reproduciendoTick) {
-                reproducirTick(speed);
+                //reproducirTick(speed);
             }
 
             deg += speed;
@@ -210,7 +231,7 @@ function reproducirTick(velocidad) {
     }, 1000 / velocidad);
 }
 
-function mostrarMensaje(texto, imagen){
+function mostrarMensaje(texto, imagen) {
     localStorage.setItem('mensajePremio', texto);
     localStorage.setItem('imagenPremio', imagen);
     window.location.pathname = '/premio';
