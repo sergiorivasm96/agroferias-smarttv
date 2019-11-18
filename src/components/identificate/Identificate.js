@@ -7,7 +7,7 @@ class Identificate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            codigoQR: 'abcdefghij'
+            televisor: JSON.parse(localStorage.getItem("localTelevisor")),
         };
 
         this.firebaseConnection = new FirebaseConection();
@@ -15,27 +15,22 @@ class Identificate extends React.Component {
     }
 
     componentDidMount() {
-
-        let tvid = "tv-1";
+        let id = this.state.televisor.idTelevisor
+        let tvid = `tv-${id}`;
+        console.log('tvid')
         const sessionRef = this.firebaseConnection.database.ref(`sessiones/${tvid}`);
         sessionRef.on("value", (snapshot)=> {
           console.log(" el valor es ", snapshot.val());
+          localStorage.setItem('idUsuario', snapshot.val())
+          window.location.pathname = "/Perfil";
         });
-
-        setTimeout(() => {
-            window.location.pathname = "/Perfil";
-        }, 5000);
     }
 
     render() {
-
-
         return (
             <div style={divGrandeStyle}>
                 <div style={divCentradoStyle}>
-                    <h1>Por favor, escanea el código QR desde nuestra app:</h1>
-                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${this.state.codigoQR}`} style={QRStyle} alt=''></img>
-
+                  <div>Esperando autenticación</div>
                 </div>
             </div>
         )
