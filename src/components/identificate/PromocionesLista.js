@@ -26,7 +26,11 @@ class PromocionesLista extends React.Component{
             <div>
                 <div className="menu-wrapper">
                     <div className="menu .keyboard-row" style={{overflow: 'hidden'}} >
-                        <ItemLista promociones={this.state.promociones} cambioProducto={this.props.cambioProducto}></ItemLista>
+                        {(this.state.promociones === null || this.state.promociones.length === 0) ?
+                            <div style={{ fontSize: '30px' }}>No existen promociones disponibles</div>
+                            :
+                            <ItemLista promociones={this.state.promociones} cambioProducto={this.props.cambioProducto}></ItemLista>
+                        }    
                     </div>
                 </div>
             </div>

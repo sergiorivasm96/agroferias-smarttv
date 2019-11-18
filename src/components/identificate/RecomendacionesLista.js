@@ -26,7 +26,12 @@ class RecomendacionesLista extends React.Component{
             <div>
                 <div className="menu-wrapper">
                     <div className="menu .keyboard-row" style={{overflow: 'hidden'}} >
-                        <ItemLista recomendaciones={this.state.recomendaciones} cambioProducto={this.props.cambioProducto}></ItemLista>
+                        {(this.state.recomendaciones === null || this.state.recomendaciones.length === 0) ?
+                            <div style={{ fontSize: '30px' }}>No existen recomendaciones disponibles</div>
+                            :
+                            <ItemLista recomendaciones={this.state.recomendaciones} cambioProducto={this.props.cambioProducto}></ItemLista>                        
+                        }   
+                     
                     </div>
                 </div>
             </div>
