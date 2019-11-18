@@ -84,11 +84,7 @@ class Identificate extends React.Component {
                     >
                     <p style={{ fontWeight: "bold", fontSize: '50px', marginTop: 'auto' }}>Aún no se ha reconocido a un cliente</p>
                 </div>
-
             </div>
-            
-
-           
         )
     }
 }
