@@ -108,7 +108,7 @@ class Ruleta extends React.Component {
             if (items_ruleta === null || items_ruleta.length === 0)
                 return;
             if (!reproduciendoTick) {
-                //reproducirTick(speed);
+                reproducirTick(speed);
             }
 
             deg += speed;
