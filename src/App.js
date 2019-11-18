@@ -24,7 +24,6 @@ import Premios from './components/juegos/Premios'
 import Promociones from './components/identificate/Promociones.js'
 import Recomendaciones from './components/identificate/Recomendaciones'
 
-
 const menuStyle = {
   background: '#ed217c',
   paddingLeft: '12%',
