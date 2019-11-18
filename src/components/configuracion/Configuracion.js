@@ -26,13 +26,23 @@ class Configuracion extends React.Component {
         let localTelevisor = localStorage.getItem("localTelevisor");
         let localTienda = localStorage.getItem("idFeria");
 
-        if (localTelevisor === null) {
-            alert("Por favor, seleccione una feria en configuración.");
+        if (localTienda === null) {
+            this.mostrarAlerta("Por favor, seleccione una feria en configuración.");
         } else {
             if (localTelevisor === null) {
-                alert("Por favor, seleccione primero un televisor.");
+                this.mostrarAlerta("Por favor, seleccione primero un televisor.");
             }
         }
+    }
+
+    mostrarAlerta(mensaje) {
+        this.setState({ texto: mensaje, popUpVisible: true }, () => {
+            setTimeout(() => {
+                this.setState({
+                    popUpVisible: false
+                });
+            }, 3000);
+        });
     }
 
     componentWillUnmount() {
@@ -54,14 +64,7 @@ class Configuracion extends React.Component {
     }
 
     seleccionarTelevisorSinFeria() {
-        const texto2 = 'Debe seleccionar una feria primero'
-        this.setState({ texto: texto2, popUpVisible: true }, () => {
-            setTimeout(() => {
-                this.setState({
-                    popUpVisible: false
-                });
-            }, 3000);
-        });
+        this.mostrarAlerta('Debe seleccionar una feria primero');
     }
 
     render() {
@@ -114,6 +117,7 @@ class Configuracion extends React.Component {
                 >
                     <p style={{ fontWeight: "bold", fontSize: '50px', marginTop: '20px' }}>{this.state.texto}</p>
                 </div>
+
             </div>
         )
     }
