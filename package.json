@@ -7,27 +7,39 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
     "@fortawesome/free-solid-svg-icons": "^5.11.2",
-    "@fortawesome/react-fontawesome": "^0.1.5",
     "firebase": "^7.4.0",
+    "@fortawesome/react-fontawesome": "^0.1.6",
+    "bootstrap": "^4.3.1",
+    "compression": "^1.7.3",
+    "core-js": "^2.5.4",
+    "cross-fetch": "^3.0.4",
+    "express": "^4.16.3",
+    "gsap": "^2.1.3",
     "jquery": "^3.4.1",
-    "react": "^16.10.1",
-    "react-dom": "^16.10.1",
+    "react": "^16.10.2",
+    "react-bootstrap": "^1.0.0-beta.14",
+    "react-dom": "^16.10.2",
+    "react-gsap": "^1.2.0",
     "react-horizontal-scrolling-menu": "^0.7.3",
     "react-navigation": "^4.0.10",
+    "react-roulette": "0.0.1",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.2",
     "react-scrollable-list": "^1.2.0",
-    "react-simple-keyboard": "^2.0.4",
+    "react-simple-keyboard": "^2.0.5",
     "reactjs-popup": "^1.5.0",
     "redux": "^4.0.4",
-    "video-react": "^0.14.1"
+    "video-react": "^0.14.1",
+    "wheel-react": "^1.0.3",
+    "winwheel": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && npm run toes5",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "toes5": "babel build -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -43,5 +55,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3"
   }
 }

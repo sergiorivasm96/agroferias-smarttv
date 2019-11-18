@@ -1,6 +1,8 @@
 import React from 'react'
 import MapaLugar from '../mapa/MapaLugar.js';
 
+import '../mapa/Mapa.css'
+
 class ElegirTv extends React.Component {
     constructor(props) {
         super(props);
@@ -24,12 +26,15 @@ class ElegirTv extends React.Component {
     }
 
     componentDidMount() {
-        let idFeria = localStorage.getItem('idFeria')
+        let idFeria = localStorage.getItem('idFeria');
+        console.log("did")
         fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${idFeria}/televisor`)
             .then(res => res.json())
             .then((data) => {
-                console.log(data.filter((x) => x.habilitado ===1))
-                this.setState({ televisores: data.filter((x) => x.habilitado ===1) })
+                let habilitados = data.filter((x) => x.habilitado === 1);
+                console.log(habilitados)
+                this.setState({ televisores: habilitados })
+                if (habilitados === null || habilitados.length === 0) alert("No existen televisores en la agreferia.");
                 console.log(this.state.televisores);
                 fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
                     .then(res => res.json())
@@ -52,6 +57,7 @@ class ElegirTv extends React.Component {
     }
 
     render() {
+        console.log("redner")
         let textoEncabezado
         let televisorGuardado = JSON.parse(localStorage.getItem('localTelevisor'));
 
@@ -86,24 +92,29 @@ class ElegirTv extends React.Component {
                                 borderRadius: '50%',
                                 width: '50px',
                                 height: '50px',
-                                border: '3px solid black',
-                                textAlign: 'center'
-
+                                border: '3px solid white',
+                                textAlign: 'center',
+                                color: 'black',
+                                backgroundColor: '#ed217c'
                             }}>
                                 {televisor.idTelevisor}
                             </div>
                             <div
-                                className="item-focusable"
+                                className="item-focusable seleccionarTV"
                                 style={{
                                     left: (televisor.posicion_X - this.factor.x) * this.anchoImagen,
                                     position: 'absolute',
-                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen
+                                    top: (televisor.posicion_Y - this.factor.y) * this.altoImagen,
+                                    border: 'solid black 3px',
+                                    backgroundColor: '#ed217c',
+                                    borderRadius: '50%',
+                                    width: '40px',
+                                    height: '40px'
                                 }}
                                 onClick={() => this.handlerClick(televisor)}
                                 key={'televisor-' + televisor.idTelevisor}
                             >
-
-                                <MapaLugar televisor={true}></MapaLugar>
+                                <MapaLugar name={'tv-' + televisor.idTelevisor} televisor={true}></MapaLugar>
                             </div>
                         </div>
 

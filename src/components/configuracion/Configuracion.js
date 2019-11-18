@@ -23,6 +23,16 @@ class Configuracion extends React.Component {
 
     componentDidMount() {
         this._isMounted = true;
+        let localTelevisor = localStorage.getItem("localTelevisor");
+        let localTienda = localStorage.getItem("idFeria");
+
+        if (localTelevisor === null) {
+            alert("Por favor, seleccione una feria en configuración.");
+        } else {
+            if (localTelevisor === null) {
+                alert("Por favor, seleccione primero un televisor.");
+            }
+        }
     }
 
     componentWillUnmount() {
@@ -61,9 +71,9 @@ class Configuracion extends React.Component {
             button = <Link to={{
                 pathname: `/configuracion/${this.state.idFeriaActual}`
             }} >
-                <button style={buttonStyle} className='item-focusable btn-elegir-tv'>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
+                <button name={'seleccTienda'} style={buttonStyle} className='item-focusable btn-elegir-tv'>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
             </Link>
-            
+
             textoFeria = 'Feria seleccionada: ' + this.state.nombreFeriaActual
         } else {
             button = <button style={buttonStyle} className='item-focusable' onClick={this.seleccionarTelevisorSinFeria}>  <FontAwesomeIcon icon={faTv} size='6x' />  </button>
@@ -95,7 +105,6 @@ class Configuracion extends React.Component {
                         backgroundColor: "#e6428b",
                         padding: "20px",
                         fontSize: "18px",
-
                         borderRadius: "20px",
                         boxShadow: "0px 0px 6px #ccc",
                         color: "#fff"

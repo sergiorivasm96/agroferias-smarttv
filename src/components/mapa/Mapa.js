@@ -2,7 +2,7 @@ import React from 'react'
 import MapaLugar from './MapaLugar.js'
 import BotonBuscar from './BotonBuscar'
 import UbicacionActual from './UbicacionActual.js'
-import Modal from '../utilitarios/Modal'
+// import Modal from '../utilitarios/Modal'
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -11,34 +11,23 @@ class Mapa extends React.Component {
       popUpVisible: false,
       popUpTVVisible: false,
       tiendaModal: {},
-      imagen: null
+      imagen: null,
+      televisor: JSON.parse(localStorage.getItem("localTelevisor")),
+      idFeriaSeleccionada: localStorage.getItem("idFeria")
     };
-    this.anchoImagen = 1000;
-    this.altoImagen = 350;
+    this.anchoImagen = 1114;
+    this.altoImagen = 390;
     this.factor = { x: 15 / 1200, y: 30 / 382 };
-    this.televisor = null;
-    this.idTiendaSeleccionada = null;
-  }
 
-  componentWillMount() {
-    let idFeria = localStorage.getItem("idFeria");
-    let televisorLocal = localStorage.getItem("localTelevisor");
-    if (idFeria == null) {
-      alert("Por favor, seleccione una feria en configuración.");
-      window.location.pathname = "/configuracion";
-    } else if (televisorLocal == null) {
-      alert("Por favor, seleccione un televisor en configuración.");
-      window.location.pathname = "/configuracion";
-    }
   }
 
   componentDidMount() {
-    this.idTiendaSeleccionada = localStorage.getItem("idFeria");
-    if (localStorage.getItem("idFeria")) {
+    if (this.state.idFeriaSeleccionada && this.state.televisor) {
       fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/tiendas/feria/${localStorage.getItem("idFeria")}`)
         .then(res => res.json())
         .then((data) => {
-          this.setState({ tiendas: data });
+          this.setState({ tiendas: data.filter((x) => x.tipoTienda === 0) })
+          // this.setState({ tiendas: data });
           fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
             .then(res => res.json())
             .then((data) => {
@@ -49,6 +38,10 @@ class Mapa extends React.Component {
             .catch(console.log)
         })
         .catch(console.log)
+    }
+    else {
+      //alert("Por favor, seleccione una feria y un televisor en la pestaña de configuración");
+      window.location.pathname = "/configuracion";
     }
   }
 
@@ -77,29 +70,33 @@ class Mapa extends React.Component {
     console.log("Feria = " + this.idTiendaSeleccionada);
     console.log(this.state.tiendas)
     return (
-      <div>
+      <div >
         <BotonBuscar></BotonBuscar>
         <div
           id="divGrande"
           style={{
             backgroundImage: 'url(' + this.state.imagen + ')',
-            width: '1000px',
-            height: '350px',
+            width: '1114px',
+            height: '390px',
             backgroundSize: '100% 100%',
             position: 'relative',
-            marginLeft: '4%',
-            marginTop: '5%'
+            marginLeft: '6%',
+            marginTop: '10%'
           }}>
 
           {this.state.tiendas.map((tienda, i) => {
-            if (tienda.tipoTienda === 0 || tienda.posicion_x > 1 || tienda.posicion_y > 1
-              || tienda.posicion_x == null || tienda.posicion_y == null) return null;
+            // if ( tienda.posicion_x == null || tienda.posicion_y == null) return null;
             return <div
-              className="item-focusable"
+              className="item-focusable mapaLugar"
               style={{
                 left: (tienda.posicion_x - this.factor.x) * this.anchoImagen,
                 position: 'absolute',
-                top: (tienda.posicion_y - this.factor.y) * this.altoImagen
+                top: (tienda.posicion_y - this.factor.y) * this.altoImagen,
+                border: 'solid black 3px',
+                backgroundColor: '#ed217c',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px'
               }}
               onClick={() => this.handlerClick(tienda)}
               key={'tienda-' + tienda.idTienda}>
@@ -132,7 +129,8 @@ class Mapa extends React.Component {
             lineHeight: "25px",
             borderRadius: "20px",
             boxShadow: "0px 0px 6px #ccc",
-            color: "#fff"
+            color: "#fff",
+            fontSize: '20pt'
           }}
           data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
           hidden={!this.state.popUpVisible ? 'hidden' : ''}
@@ -152,15 +150,16 @@ class Mapa extends React.Component {
             bottom: 0,
             margin: 'auto',
             width: "35%",
-            height: "20%",
+            height: "15%",
             zIndex: 10,
             backgroundColor: "#e6428b",
             padding: "20px",
             fontSize: "18px",
-
             borderRadius: "20px",
             boxShadow: "0px 0px 6px #ccc",
-            color: "#fff"
+            color: "#fff",
+            verticalAlign: 'middle',
+            paddingTop: '5px'
           }}
           data-attribute={!this.state.popUpTVVisible ? 'hidden' : ''}
           hidden={!this.state.popUpTVVisible ? 'hidden' : ''}

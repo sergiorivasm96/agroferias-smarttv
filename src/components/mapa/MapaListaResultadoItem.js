@@ -52,5 +52,5 @@ const styleFeriaCard = {
     verticalAllign: 'middle',
     paddingTop: '3%',
     // lineHeight: '40px',
-    fontSize: '40px'
+    fontSize: '30px'
 }
