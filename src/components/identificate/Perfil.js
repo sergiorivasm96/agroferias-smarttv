@@ -15,7 +15,6 @@ class Perfil extends React.Component {
     }
 
     componentDidMount() {
-        localStorage.setItem("idUsuario", "1");
         fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/usuario/cliente/${localStorage.getItem("idUsuario")}`)
             .then(res => res.json())
             .then((data) => {
@@ -46,11 +45,17 @@ class Perfil extends React.Component {
         window.location.pathname = "/recomendaciones"
     }
 
+    handerClickLogout(){
+        console.log('logout')
+        localStorage.removeItem('idUsuario')
+        window.location.pathname = "/identificate"
+    }
+
     render() {
-        let photo = this.state.usuario.url_photo === null ? 'https://cdn.pixabay.com/photo/2017/02/23/13/05/profile-2092113_960_720.png' : this.state.usuario.url_photo;
+        let photo = this.state.usuario.url_photo === null || this.state.usuario.url_photo === ""? 'https://cdn.pixabay.com/photo/2017/02/23/13/05/profile-2092113_960_720.png' : this.state.usuario.url_photo;
         return (
             <div>
-                <BotonLogout></BotonLogout>
+                <BotonLogout funClick={this.handerClickLogout}></BotonLogout>
                 <div style={{ paddingTop: '3%', paddingLeft: '25%' }}>
                     <img src={photo} style={{ float: "left", width: '150px', height: '150px' }} alt=''></img>
                     <h1 style={{ fontSize: '42px', paddingTop: '2%' }}>Bienvenido {this.state.usuario.nombre} {this.state.usuario.apellidos} </h1>

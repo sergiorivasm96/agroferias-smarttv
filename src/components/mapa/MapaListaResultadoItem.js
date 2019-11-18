@@ -18,10 +18,8 @@ class MapaResultado extends React.Component{
                     {data.map((resultado) => (
                         <Link to={{
                             pathname: `/mapas/buscador/${resultado.idTienda}`
-                            }}  style={{ textDecoration: 'none', color:'inherit' }} key={'key-' + resultado.idProducto} onClick={localStorage.setItem('resultadoBusqueda', JSON.stringify(resultado))}>
-                               
+                            }}  style={{ textDecoration: 'none', color:'inherit' }} key={'key-' + resultado.idProducto} onClick={localStorage.setItem('resultadoBusqueda', JSON.stringify(resultado))}>          
                             <div className='item-focusable resultado item' key={'resultado-' + resultado.idProducto} tabIndex="0"  style={styleFeriaCard}>
-                                
                                 <div className={"resultado-body" + resultado.idProducto}>
                                 </div>
                                 <div>{resultado.nombre}</div>

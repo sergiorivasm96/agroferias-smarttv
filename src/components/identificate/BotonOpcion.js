@@ -6,8 +6,8 @@ class BotonOpcion extends React.Component{
     // }
     render (){
         return( 
-            <div>
-                <button id={this.props.id} className='item-focusable' style={{width:'200px', height:'50px', backgroundColor:'#ed217c', marginLeft: '45%', marginTop: '2%', color:'white', fontWeight: 'bold' }} onClick={this.props.funClick} >
+            <div style={{textAlign:'center'}}>
+                <button id={this.props.id} className='item-focusable' style={{width:'200px', height:'50px', backgroundColor:'#ed217c', marginTop: '2%', color:'white', fontWeight: 'bold'}} onClick={this.props.funClick} >
                     {this.props.texto}
                 </button>         
             </div>

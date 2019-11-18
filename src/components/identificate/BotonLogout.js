@@ -1,12 +1,10 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-import { Link } from 'react-router-dom'
 
 class BotonLogout extends React.Component {
     render() {
         return (
-            <Link to="#" className='link-logout'>
                 <button className='item-focusable btn-buscar' style={{
                     borderRadius: '100%',
                     width: '50px',
@@ -17,11 +15,9 @@ class BotonLogout extends React.Component {
                     marginRight: '30px',
                     marginTop: '5px',
                     border: 'solid black 3px'
-                }} >
+                }} onClick={this.props.funClick}>
                     <FontAwesomeIcon className='img-lupa' icon={faSignOutAlt} size='2x' />
                 </button>
-
-            </Link>
         )
     }
 }

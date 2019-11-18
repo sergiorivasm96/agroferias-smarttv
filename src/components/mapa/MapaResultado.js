@@ -75,10 +75,15 @@ class MapaResultado extends React.Component {
                         marginTop: '5%'
                     }}>
                     <div
-                        className="item-focusable"
+                        className="item-focusable mapaLugar"
                         style={{
                             left: (this.state.tienda.posicion_x - this.factor.x) * this.anchoImagen,
                             position: 'absolute',
+                            border: 'solid black 3px',
+                            backgroundColor: '#ed217c',
+                            borderRadius: '50%',
+                            width: '40px',
+                            height: '40px',
                             top: (this.state.tienda.posicion_y - this.factor.y) * this.altoImagen
                         }}
                         onClick={() => this.handlerClick(this.state.tienda)}>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faStreetView} from '@fortawesome/free-solid-svg-icons'
+import {faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons'
 
 class UbicacionActual extends React.Component{
     // constructor(props) {
@@ -20,7 +20,7 @@ class UbicacionActual extends React.Component{
                 }}
                 onClick={this.props.customClickEvent}
                 >
-                <FontAwesomeIcon icon={faStreetView} size='2x'/>
+                <FontAwesomeIcon icon={faMapMarkerAlt} size='2x'/>
              </div>
         )
     }
