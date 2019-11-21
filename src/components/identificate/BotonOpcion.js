@@ -1,15 +1,42 @@
 import React from 'react'
 
-class BotonOpcion extends React.Component{
+class BotonOpcion extends React.Component {
     // constructor(props) {
     //     super(props);
     // }
-    render (){
-        return( 
-            <div style={{textAlign:'center'}}>
-                <button id={this.props.id} className='item-focusable' style={{width:'200px', height:'50px', backgroundColor:'#ed217c', marginTop: '2%', color:'white', fontWeight: 'bold'}} onClick={this.props.funClick} >
+    render() {
+        let { mostrar } = this.props;
+        console.log("Mostrar = " + mostrar)
+        let estiloDisplay;
+        if (mostrar) {
+            estiloDisplay = {
+                width: '200px',
+                height: '50px',
+                backgroundColor: '#ed217c',
+                marginTop: '2%',
+                color: 'white',
+                fontWeight: 'bold',
+                textAlign: 'center !important',
+                display: mostrar
+            }
+        } else {
+            estiloDisplay = {
+                width: '200px',
+                height: '50px',
+                backgroundColor: '#ed217c',
+                marginTop: '2%',
+                color: 'white',
+                fontWeight: 'bold',
+                textAlign: 'center !important'
+            }
+        }
+
+        return (
+            <div style={{ textAlign: 'center' }}>
+                <button id={this.props.id} className='item-focusable' style={estiloDisplay}
+                    onClick={this.props.funClick} >
                     {this.props.texto}
-                </button>         
+                </button>
             </div>
 
         )

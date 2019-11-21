@@ -70,12 +70,12 @@ body {
     opacity: 0.2;
 }
 
-#app .playground .card .item-focusable.front {
+#app .playground .card.item-focusable .front {
     color: #ed217c !important ;
     background-color: white !important;
 }
 
-#app .playground .card .item-focusable.front.focused-item  {
+#app .playground .card.item-focusable.focused-item .front  {
     color: white !important;
     background-color: #ed217c !important;
 }

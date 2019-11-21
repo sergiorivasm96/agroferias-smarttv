@@ -1,6 +1,7 @@
 import React from 'react';
 import Answers from './Answers';
 import Popup from './Popup';
+import BotonOpcion from '../../identificate/BotonOpcion.js'
 
 import './Trivia.css'
 
@@ -43,6 +44,7 @@ class Trivia extends React.Component {
                 correct: -1,
                 final: true
             });
+            this.finalizarTrivia();
         } else {
             console.log("next")
             this.pushData(nr);
@@ -53,6 +55,15 @@ class Trivia extends React.Component {
 
         }
 
+    }
+
+    finalizarTrivia() {
+        var elems = document.querySelectorAll(".item-focusable");
+        [].forEach.call(elems, function (el) {
+            el.classList.remove("item-focusable");
+        });
+        document.getElementById("btn-continuar-trivia").className = "item-focusable focused-item";
+        document.getElementById("btn-continuar-trivia").focus();
     }
 
     handleShowButton() {
@@ -131,7 +142,9 @@ class Trivia extends React.Component {
                         </div>
                         <Answers answers={answers} correct={correct} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore} />
                         <div id="submit">
-                            {showButton ? <button className="item-focusable fancy-btn" onClick={this.nextQuestion} >{nr === total ? 'Terminar' : 'Siguiente pregunta'}</button> : null}
+                            {/* {showButton ? <button className="item-focusable fancy-btn" onClick={this.nextQuestion} >{nr === total ? 'Terminar' : 'Siguiente pregunta'}</button> : null} */}
+                            {showButton ? <BotonOpcion texto={nr === total ? 'Terminar' : 'Siguiente pregunta'} funClick={this.nextQuestion}></BotonOpcion> : null}
+
                         </div>
                     </div>
                 </div>

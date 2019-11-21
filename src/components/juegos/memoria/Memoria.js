@@ -173,7 +173,7 @@ class Memoria extends React.Component {
         [].forEach.call(elems, function (el) {
             el.classList.remove("item-focusable");
         });
-        document.getElementById("boton-reintentar").className = "fancy-btn item-focusable";
+        document.getElementById("boton-reintentar").className = "item-focusable";
 
         clearInterval(this.myInterval);
     }
@@ -205,7 +205,7 @@ class Memoria extends React.Component {
                 </div>
 
                 <div
-                    className="modal-mapa"
+                    className="modal modal-mapa"
                     style={{
                         position: 'absolute',
                         left: 0,
@@ -214,20 +214,21 @@ class Memoria extends React.Component {
                         bottom: 0,
                         margin: 'auto',
                         width: "45%",
-                        height: "45%",
+                        height: "42%",
                         zIndex: 10,
-                        backgroundColor: "#e6428b",
+                        backgroundColor: "black",
                         borderRadius: "20px",
                         boxShadow: "0px 0px 6px #ccc",
                         color: "#fff",
                         textAlign: 'center',
-                        border: 'solid #0b0e21 7px'
+                        border: 'solid #ed217c 7px'
                     }}
                     data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
                     hidden={!this.state.popUpVisible ? 'hidden' : ''}
                 >
-                    <p style={{ fontWeight: "bold", fontSize: '150px', lineHeight: '0px', marginTop: '90px', marginBottom: '0px' }}>{this.state.texto}</p>
-                    <button id="boton-reintentar"
+                    <p style={{ fontWeight: "bold", fontSize: '130px', lineHeight: '0px', marginTop: '90px', marginBottom: '60px' }}>{this.state.texto}</p>
+                    <BotonOpcion id="boton-reintentar" texto='REINTENTAR' funClick={() => { window.location.reload(); }}></BotonOpcion>
+                    {/* <button id="boton-reintentar"
                         style={{
                             marginTop: '120px',
                             display: 'inline-block'
@@ -235,7 +236,7 @@ class Memoria extends React.Component {
                         className="fancy-btn item-focusable"
                         onClick={() => { window.location.reload(); }}>
                         REINTENTAR
-                        </button>
+                    </button> */}
 
                 </div>
 
@@ -256,11 +257,11 @@ class Card extends React.Component {
     }
     render() {
         return (
-            <div className={" card" + (!this.props.close ? ' opened' : '') + (this.props.complete ? ' matched' : '')} onClick={() => this.clicked(this.props.framework)}>
-                <div className="item-focusable front">
+            <div className={"item-focusable card" + (!this.props.close ? ' opened' : '') + (this.props.complete ? ' matched' : '')} onClick={() => this.clicked(this.props.framework)}>
+                <div className="front">
                     ?
                 </div>
-                <div className="item-focusable back">
+                <div className="back">
                     <img src={this.props.framework} width={70} height={70} />
                 </div>
             </div>

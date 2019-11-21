@@ -107,9 +107,9 @@ class Ruleta extends React.Component {
         function anim() {
             if (items_ruleta === null || items_ruleta.length === 0)
                 return;
-            if (!reproduciendoTick) {
+            /* if (!reproduciendoTick) {
                 reproducirTick(speed);
-            }
+            } */
 
             deg += speed;
             deg %= 360;

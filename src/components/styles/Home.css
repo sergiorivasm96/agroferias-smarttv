@@ -37,3 +37,21 @@ button.focused-item{
     color: #ed217c !important ;
     background-color: white !important;
 }
+
+.modal {
+    background-color: white;
+    position: 'absolute';
+    left: 0;
+    right: 0;
+    top: 0;               
+    bottom: 0;
+    margin: 'auto';
+    width: "45%";
+    height: "45%";
+    z-index: 10;
+    border-radius: "20px";
+    box-shadow: "0px 0px 6px #ccc";
+    color: "black";
+    text-align: 'center';
+    border: 'solid #0b0e21 7px';
+}

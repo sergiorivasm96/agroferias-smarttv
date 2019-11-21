@@ -1,6 +1,7 @@
 import React from 'react';
 import Correct from '../correct.wav'
 import Fail from '../fail.wav'
+import BotonOpcion from '../../identificate/BotonOpcion.js'
 
 var audioCorrect = new Audio(Correct);
 var audioFail = new Audio(Fail);
@@ -93,7 +94,9 @@ class Popup extends React.Component {
                             <h1>{title}</h1>
                             <p dangerouslySetInnerHTML={this.createMarkup(text)} />
                             <br></br><br></br>
-                            <button style={{ display: styleButton }} className="fancy-btn item-focusable" onClick={this.popupHandle}>Continuar</button>
+                            <BotonOpcion id="btn-continuar-trivia" texto='Continuar' mostrar={styleButton} funClick={this.popupHandle}></BotonOpcion>
+                            <br></br>
+                            {/* <button style={{ display: styleButton }} className="fancy-btn item-focusable" onClick={this.popupHandle}>Continuar</button> */}
                         </div>
                     </div>
                 </div>
