@@ -33,6 +33,12 @@ class Mapeo {
       // right
       return { status: 'none' };
     },
+    107: function _(selectedItem, newSelected) {
+      window.history.back();
+    },
+    461: function _(selectedItem, newSelected) {
+      window.history.back();
+    },
     8: function _(selectedItem, newSelected) {
       window.history.back();
     }

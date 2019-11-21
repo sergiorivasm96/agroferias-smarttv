@@ -4,8 +4,8 @@ import Correct from '../correct.wav'
 import Fail from '../fail.wav'
 import BotonOpcion from '../../identificate/BotonOpcion.js'
 
-var audioCorrect = new Audio(Correct);
-var audioFail = new Audio(Fail);
+// var audioCorrect = new Audio(Correct);
+// var audioFail = new Audio(Fail);
 var numCartas = 0;
 
 class Memoria extends React.Component {
@@ -56,14 +56,14 @@ class Memoria extends React.Component {
         if ((this.state.openedFrameworks[0].name === this.state.openedFrameworks[1].name) && (this.state.openedFrameworks[0].index !== this.state.openedFrameworks[1].index)) {
             finalizedFrameworks[this.state.openedFrameworks[0].index].complete = true
             finalizedFrameworks[this.state.openedFrameworks[1].index].complete = true
-            audioCorrect.currentTime = 0;
-            audioCorrect.play();
+            // audioCorrect.currentTime = 0;
+            // audioCorrect.play();
             numCartas--;
         } else {
             finalizedFrameworks[this.state.openedFrameworks[0].index].close = true
             finalizedFrameworks[this.state.openedFrameworks[1].index].close = true
-            audioFail.currentTime = 0;
-            audioFail.play();
+            // audioFail.currentTime = 0;
+            // audioFail.play();
         }
         if (numCartas === 0) {
             this.mostrarAlerta("Ganaste!");
