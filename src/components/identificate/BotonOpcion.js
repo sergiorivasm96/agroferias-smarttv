@@ -6,7 +6,6 @@ class BotonOpcion extends React.Component {
     // }
     render() {
         let { mostrar } = this.props;
-        console.log("Mostrar = " + mostrar)
         let estiloDisplay;
         if (mostrar) {
             estiloDisplay = {

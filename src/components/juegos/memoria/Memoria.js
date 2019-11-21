@@ -29,9 +29,7 @@ class Memoria extends React.Component {
 
     handleClick(name, index) {
         if (this.state.openedFrameworks.length === 2) {
-            setTimeout(() => {
-                this.check()
-            }, 750)
+            return;
         } else {
             let framework = {
                 name,
@@ -172,9 +170,10 @@ class Memoria extends React.Component {
         var elems = document.querySelectorAll(".item-focusable");
         [].forEach.call(elems, function (el) {
             el.classList.remove("item-focusable");
+            el.classList.remove("focused-item");
         });
-        document.getElementById("boton-reintentar").className = "item-focusable";
-
+        document.getElementById("boton-reintentar").className = "item-focusable focused-item";
+        document.getElementById("boton-reintentar").focus();
         clearInterval(this.myInterval);
     }
 
@@ -228,16 +227,6 @@ class Memoria extends React.Component {
                 >
                     <p style={{ fontWeight: "bold", fontSize: '130px', lineHeight: '0px', marginTop: '90px', marginBottom: '60px' }}>{this.state.texto}</p>
                     <BotonOpcion id="boton-reintentar" texto='REINTENTAR' funClick={() => { window.location.reload(); }}></BotonOpcion>
-                    {/* <button id="boton-reintentar"
-                        style={{
-                            marginTop: '120px',
-                            display: 'inline-block'
-                        }}
-                        className="fancy-btn item-focusable"
-                        onClick={() => { window.location.reload(); }}>
-                        REINTENTAR
-                    </button> */}
-
                 </div>
 
             </div>

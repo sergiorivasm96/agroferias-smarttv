@@ -109,7 +109,8 @@ class MapaResultado extends React.Component {
                         width: "35%",
                         height: "30%",
                         zIndex: 10,
-                        backgroundColor: "#e6428b",
+                        backgroundColor: "black",
+                        border: 'solid #ed217c 7px',
                         padding: "20px",
                         fontSize: "18px",
                         lineHeight: "25px",
@@ -136,10 +137,10 @@ class MapaResultado extends React.Component {
                         width: "35%",
                         height: "20%",
                         zIndex: 10,
-                        backgroundColor: "#e6428b",
+                        backgroundColor: "black",
+                        border: 'solid #ed217c 7px',
                         padding: "20px",
                         fontSize: "18px",
-
                         borderRadius: "20px",
                         boxShadow: "0px 0px 6px #ccc",
                         color: "#fff"

@@ -61,6 +61,7 @@ class Trivia extends React.Component {
         var elems = document.querySelectorAll(".item-focusable");
         [].forEach.call(elems, function (el) {
             el.classList.remove("item-focusable");
+            el.classList.remove("focused-item");
         });
         document.getElementById("btn-continuar-trivia").className = "item-focusable focused-item";
         document.getElementById("btn-continuar-trivia").focus();
@@ -70,7 +71,7 @@ class Trivia extends React.Component {
         this.setState({
             showButton: true,
             questionAnswered: true
-        })
+        });
     }
 
     handleStartQuiz() {

@@ -3,14 +3,18 @@ import MapaLugar from '../mapa/MapaLugar.js';
 
 import '../mapa/Mapa.css'
 
+var ImagenError = 'https://www.elegantthemes.com/blog/wp-content/uploads/2016/03/500-internal-server-error-featured-image-1.png';
+
 class ElegirTv extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             televisores: [],
-            popUpVisible: false,
+            popUpTVVisible: false,
             televisorModal: {},
-            imagen: ''
+            imagen: '',
+            texto: '',
+            popUpVisible: false
         };
         this.anchoImagen = 1000;
         this.altoImagen = 350;
@@ -34,14 +38,15 @@ class ElegirTv extends React.Component {
                 let habilitados = data.filter((x) => x.habilitado === 1);
                 console.log(habilitados)
                 this.setState({ televisores: habilitados })
-                if (habilitados === null || habilitados.length === 0) alert("No existen televisores en la agreferia.");
+                if (habilitados === null || habilitados.length === 0) this.mostrarAlerta("No existen televisores en la agroferia.");
                 console.log(this.state.televisores);
                 fetch(`https://fmh7fxbfoh.execute-api.us-east-2.amazonaws.com/Despliegue/api/mapa/${localStorage.getItem("idFeria")}/imagen`)
                     .then(res => res.json())
                     .then((data) => {
                         console.log("Imagen es ")
                         console.log(data.urlImagen);
-                        this.setState({ imagen: data.urlImagen })
+                        if (data === null || data.urlImagen === null) this.setState({ imagen: ImagenError })
+                        else this.setState({ imagen: data.urlImagen })
                     })
                     .catch(console.log)
             })
@@ -49,15 +54,23 @@ class ElegirTv extends React.Component {
     }
 
     handlerClick(televisor) {
-        this.setState({ televisorModal: televisor, popUpVisible: true });
+        this.setState({ televisorModal: televisor, popUpTVVisible: true });
         localStorage.setItem("localTelevisor", JSON.stringify(televisor));
         setTimeout(() => {
-            this.setState({ popUpVisible: false });
+            this.setState({ popUpTVVisible: false });
         }, 3000);
     }
 
+    mostrarAlerta(mensaje) {
+        this.setState({ texto: mensaje, popUpVisible: true });
+    }
+
     render() {
-        let textoEncabezado
+        if (this.state.televisores === null || this.state.televisores.length === 0) {
+            this.state.televisores = [] 
+        }
+
+        let textoEncabezado;
         let televisorGuardado = JSON.parse(localStorage.getItem('localTelevisor'));
 
         if (televisorGuardado) {
@@ -119,6 +132,8 @@ class ElegirTv extends React.Component {
 
                     ))}
                 </div>
+
+                {/* Modal para televisores */}
                 <div
                     className="modal-mapa"
                     style={{
@@ -131,16 +146,17 @@ class ElegirTv extends React.Component {
                         width: "20%",
                         height: "20%",
                         zIndex: 10,
-                        backgroundColor: "#e6428b",
+                        backgroundColor: "black",
                         fontSize: "40px",
                         borderRadius: "20px",
                         boxShadow: "0px 0px 6px #ccc",
                         color: "#fff",
                         verticalAlign: 'middle',
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        border: 'solid #ed217c 7px'
                     }}
-                    data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
-                    hidden={!this.state.popUpVisible ? 'hidden' : ''}
+                    data-attribute={!this.state.popUpTVVisible ? 'hidden' : ''}
+                    hidden={!this.state.popUpTVVisible ? 'hidden' : ''}
                 >
                     <p style={{
                         marginTop: '11px'
@@ -148,6 +164,33 @@ class ElegirTv extends React.Component {
                         Usted eligió el televisor {this.state.televisorModal.idTelevisor}
                     </p>
                 </div>
+
+                {/* Modal para alertas */}
+                <div
+                    className="modal modal-mapa"
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        margin: 'auto',
+                        width: "45%",
+                        height: "42%",
+                        zIndex: 10,
+                        backgroundColor: "black",
+                        borderRadius: "20px",
+                        boxShadow: "0px 0px 6px #ccc",
+                        color: "#fff",
+                        textAlign: 'center',
+                        border: 'solid #ed217c 7px'
+                    }}
+                    data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
+                    hidden={!this.state.popUpVisible ? 'hidden' : ''}
+                >
+                    <p style={{ fontWeight: "bold", fontSize: '70px', wordBreak: 'break-word', marginTop: '5%' }}>{this.state.texto}</p>
+                </div>
+
             </div>
         )
     }
