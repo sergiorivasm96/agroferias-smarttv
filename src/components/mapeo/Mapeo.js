@@ -32,6 +32,9 @@ class Mapeo {
     39: function _(selectedItem, newSelected) {
       // right
       return { status: 'none' };
+    },
+    8: function _(selectedItem, newSelected) {
+      window.history.back();
     }
   };
 

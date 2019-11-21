@@ -2,8 +2,8 @@ import React from 'react';
 import Correct from '../correct.wav'
 import Fail from '../fail.wav'
 
-var audioCorrect = new Audio(Correct);
-var audioFail = new Audio(Fail);
+// var audioCorrect = new Audio(Correct);
+// var audioFail = new Audio(Fail);
 
 class Answers extends React.Component {
     constructor(props) {
@@ -27,14 +27,14 @@ class Answers extends React.Component {
 
             if (answer === correct) {
                 updatedClassNames[answer - 1] = 'right';
-                audioCorrect.currentTime = 0;
-                audioCorrect.play();
+                // audioCorrect.currentTime = 0;
+                // audioCorrect.play();
                 increaseScore();
             }
             else {
                 updatedClassNames[answer - 1] = 'wrong';
-                audioFail.currentTime = 0;
-                audioFail.play();
+                // audioFail.currentTime = 0;
+                // audioFail.play();
             }
 
             this.setState({
