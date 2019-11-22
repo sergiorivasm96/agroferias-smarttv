@@ -9,6 +9,7 @@ import BotonOpcion from '../../identificate/BotonOpcion.js'
 /* Extraido de http://jsbin.com/qefada/11/edit?html,css,js,output */
 
 var items_ruleta = []
+var ruleta_unica = []
 var ruletaInicial = true;
 
 var isStopped = false;
@@ -24,14 +25,34 @@ class Ruleta extends React.Component {
         const ctx = canvas.getContext("2d")
 
         var color = ['#E83E31', '#EEDB03', '#01A275', '#03A4FF', '#1C55DA', '#24057C', "#A36B50", "#302F34"];
+
         var totalRepeticiones = 0;
-        items_ruleta.map(item => { totalRepeticiones += item.num_repeticiones });
+        var nuevaRuleta = [];
+
+        items_ruleta.map((item, index) => {
+            item.orden = index + 1;
+            totalRepeticiones += item.num_repeticiones;
+            for (let j = 0; j < item.num_repeticiones; j++)
+                nuevaRuleta.push(item);
+        });
+        items_ruleta = shuffle(nuevaRuleta);
+
+        let idsUnicos = [];
+        items_ruleta.map((item => {
+            if (!idsUnicos.includes(item.orden)) {
+                idsUnicos.push(item.orden);
+                ruleta_unica.push(item);
+            }
+        }));
+        ruleta_unica = ruleta_unica.sort((a, b) => a.orden - b.orden);
+
         var slices = items_ruleta.length;
-        console.log("Silices: " + slices)
+        console.log("Slices: " + slices)
         var sliceDeg;
 
         var width = canvas.width; // size
         var center = width / 2;      // center
+        var distanciaText = width / 2 * -1;
 
         function deg2rad(deg) {
             return deg * Math.PI / 180;
@@ -51,14 +72,22 @@ class Ruleta extends React.Component {
         }
 
         function drawText(deg, text, size) {
+            let numRads = size / 360 * 2 * Math.PI;
+            console.log("numRads = " + size)
+
             ctx.save();
-            ctx.translate(center, center);
-            ctx.rotate(deg2rad(deg));
+            if (deg < 0) deg += 360;
+            let x = 150 * Math.cos(deg2rad(deg + size / 12));
+            let y = 150 * Math.sin(deg2rad(deg + size / 12));
+            ctx.translate(center + x, center + y);
+            //ctx.translate(300, 200);
+            ctx.rotate(deg2rad(deg + 90));
             ctx.textAlign = "right";
             ctx.fillStyle = "#fff";
-            let stringFont = 'bold ' + ((size > 100) ? 100 : (size / 1.2)).toString() + 'px sans-serif';
+            let stringFont = 'bold ' + ((size > 100) ? 100 : (size)).toString() + 'px sans-serif';
             ctx.font = stringFont;
-            ctx.fillText(text, 130, 10);
+            //ctx.fillText(text, 0, distanciaText + 60);
+            ctx.fillText(text, 0, 0);
             ctx.restore();
         }
 
@@ -93,11 +122,11 @@ class Ruleta extends React.Component {
 
         function drawImg() {
             ctx.clearRect(0, 0, width, width);
+            sliceDeg = 360 / slices;
             for (var i = 0; i < slices; i++) {
-                items_ruleta[i].tamano = 360 * items_ruleta[i].num_repeticiones / totalRepeticiones;
-                sliceDeg = items_ruleta[i].tamano;
-                drawSlice(deg, color[i] === null ? 'blue' : color[i]);
-                drawText(deg + sliceDeg / 2, i + 1, sliceDeg);
+                let indexColor = i % color.length;
+                drawSlice(deg, color[indexColor]);
+                drawText(deg + sliceDeg / 2, items_ruleta[i].orden, sliceDeg);
                 deg += sliceDeg;
             }
             drawBorder(width / 2 - 5);
@@ -132,8 +161,7 @@ class Ruleta extends React.Component {
                 //var ai = Math.floor(((360 - deg - 90) % 360) / sliceDeg); // deg 2 Array Index
                 //ai = (slices + ai) % slices; // Fix negative index
                 var ai = Math.floor(obtenerIndex(((360 - deg - 90) % 360)));
-                console.log("Ganaste: " + items_ruleta[ai].id);
-                mostrarMensaje("Ganaste:\n" + items_ruleta[ai].nombre, items_ruleta[ai].urlImage); // Get Array Item from end Degree
+                recibirPremio(items_ruleta[ai].nombre, parseFloat(items_ruleta[ai].nombre) == 0.0 ? 0 : 1); //1 ganar 0 perder
                 iniciarRuleta();
             }
 
@@ -145,7 +173,7 @@ class Ruleta extends React.Component {
             if (grado < 0) grado += 360;
             let currDeg = 0;
             for (let i = 0; i < items_ruleta.length; i++) {
-                currDeg += items_ruleta[i].tamano;
+                currDeg += 360 / items_ruleta.length;
                 if (grado < currDeg) {
                     console.log("Grado: " + grado);
                     return i;
@@ -184,7 +212,6 @@ class Ruleta extends React.Component {
 
 
     render() {
-        console.log("Rendering...")
         if (items_ruleta === null || items_ruleta.length === 0 && ruletaInicial === false) {
             return (
                 <div style={{ fontSize: '30px' }}>El juego no está implementado</div>
@@ -196,16 +223,16 @@ class Ruleta extends React.Component {
                 <div className="column1" style={divStyle}>
                     <img style={{ filter: "graystyle(0%)", opacity: "1" }} src={AfroWoman}></img>
                     <canvas ref="canvas" style={{ display: 'inline' }} width={400} height={400}></canvas>
-                    <BotonOpcion id="spin" texto='STOP' funClick={detenerRuleta} ></BotonOpcion>
+                    <div style={styleBoton}><BotonOpcion id="spin" texto='STOP' funClick={detenerRuleta} ></BotonOpcion></div>
                     {/*  <img id={"spin"} src={SpinOn} className="item-focusable spinBtn" onClick={detenerRuleta}></img> */}
                 </div>
                 <div className="column2" style={styleColumn}>
-                    <span style={spanStyle}>Premios:</span>
+                    <span style={titleStyle}>Premios:</span>
                     <ul>
-                        {items_ruleta.map((item, index) => {
+                        {ruleta_unica.map((item, index) => {
                             return <li style={{ listStyleType: "none" }}>
-                                <div style={numberStyle}>{index + 1}</div>
-                                <span style={spanStyle}>{"   " + item.nombre}</span>
+                                <div style={numberStyle}>{item.orden ? item.orden : ''}</div>
+                                <span style={spanStyle}>&nbsp;&nbsp;{parseFloat(item.nombre) == 0.0 ? 'NADA' : "S/. " + item.nombre}</span>
                             </li>
                         })}
                     </ul>
@@ -231,9 +258,9 @@ function reproducirTick(velocidad) {
     }, 1000 / velocidad);
 }
 
-function mostrarMensaje(texto, imagen) {
+function recibirPremio(texto, resultado) {
+    localStorage.setItem('resultadoPremio', resultado);
     localStorage.setItem('mensajePremio', texto);
-    localStorage.setItem('imagenPremio', imagen);
     window.location.pathname = '/premio';
 }
 
@@ -279,6 +306,17 @@ const styleColumn = {
     width: '37%'
 }
 
+const titleStyle = {
+    fontFamily: "\"Josefin Sans\", sans-serif",
+    fontSize: "20px",
+    fontFamily: "\"Josefin Sans\", sans-serif",
+    textTransform: "uppercase",
+    fontWeight: "700",
+    wordWrap: 'break-word',
+    lineHeight: '45px',
+    color: 'rgb(237, 33, 124)'
+}
+
 const spanStyle = {
     fontFamily: "\"Josefin Sans\", sans-serif",
     fontSize: "20px",
@@ -301,4 +339,29 @@ const numberStyle = {
     lineHeight: '20px',
     padding: '8px',
     border: '2px solid rgb(237, 33, 124)'
+}
+
+const styleBoton = {
+    marginLeft: '50%'
+}
+
+/* Algoritmo de Fisher-Yates (aka Knuth) */
+
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
 }
