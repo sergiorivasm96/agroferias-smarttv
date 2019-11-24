@@ -17,7 +17,8 @@ class Trivia extends React.Component {
             questionAnswered: false,
             score: 0,
             displayPopup: 'flex',
-            final: false
+            final: false,
+            premio: 0
         }
         this.nextQuestion = this.nextQuestion.bind(this);
         this.handleShowButton = this.handleShowButton.bind(this);
@@ -114,6 +115,7 @@ class Trivia extends React.Component {
                 console.log("BACK:")
                 console.log(data.preguntas);
                 dataTrivia = data.preguntas;
+                this.setState({ premio: data.monto })
                 this.parsearDatos();
                 let { nr } = this.state;
                 this.pushData(nr);
@@ -129,11 +131,11 @@ class Trivia extends React.Component {
             )
         }
 
-        let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score } = this.state;
+        let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score, premio } = this.state;
         return (
             <div className="container">
 
-                <Popup style={{ display: displayPopup }} score={score} total={total} startQuiz={this.handleStartQuiz} final={this.state.final} />
+                <Popup style={{ display: displayPopup }} score={score} premio={premio} total={total} startQuiz={this.handleStartQuiz} final={this.state.final} />
 
                 <div className="row">
                     <div className="col-lg-10 col-lg-offset-1">

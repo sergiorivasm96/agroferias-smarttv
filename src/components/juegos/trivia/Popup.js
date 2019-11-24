@@ -34,7 +34,7 @@ class Popup extends React.Component {
 
             this.props.startQuiz();
         } else {
-            window.location.reload();// restart the application
+            window.location.pathname = '/premio';
         }
     }
 
@@ -49,9 +49,15 @@ class Popup extends React.Component {
             if (this.props.score === this.props.total) {
                 titulo = 'Felicitaciones!';
                 audioFin = audioCorrect;
+                setTimeout(() => {
+                    this.recibirPremio(this.props.premio, 1);
+                }, 5000)
             } else {
                 titulo = 'Lo lamento ☹️';
                 audioFin = audioFail;
+                setTimeout(() => {
+                    this.recibirPremio('', 0);
+                }, 5000)
             }
             audioFin.currentTime = 0;
             audioFin.play();
@@ -61,6 +67,12 @@ class Popup extends React.Component {
                 text: 'Has terminado la trivia. <br /> Obtuviste: <strong>' + this.props.score + '</strong> de <strong>' + this.props.total + '</strong> respuestas correctas.'
             });
         }
+    }
+
+    recibirPremio(texto, resultado) {
+        localStorage.setItem('resultadoPremio', resultado);
+        localStorage.setItem('mensajePremio', texto);
+        window.location.pathname = '/premio';
     }
 
     createMarkup(text) {
