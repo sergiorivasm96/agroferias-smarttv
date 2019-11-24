@@ -1,6 +1,6 @@
 .seleccionarTV {
     color: white;
-    background-color: #ed217c;
+    background-color: black;
 }
 
 .seleccionarTV.focused-item {
@@ -10,7 +10,7 @@
 
 .mapaLugar {
     color: white;
-    background-color: #ed217c;
+    background-color: black;
 }
 
 .mapaLugar.focused-item {

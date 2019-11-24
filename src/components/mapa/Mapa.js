@@ -46,7 +46,7 @@ class Mapa extends React.Component {
   }
 
   handlerClick(tienda) {
-    this.setState({ tiendaModal: tienda, popUpVisible: true });
+    this.setState({ tiendaModal: tienda, popUpVisible: true, popUpTVVisible: false });
     setTimeout(() => {
       this.setState({ popUpVisible: false });
     }, 3000);
@@ -54,7 +54,7 @@ class Mapa extends React.Component {
 
   handlerClickTV() {
     const texto2 = 'Usted se encuentra aquí';
-    this.setState({ texto: texto2, popUpTVVisible: true }, () => {
+    this.setState({ texto: texto2, popUpTVVisible: true, popUpVisible: false }, () => {
       setTimeout(() => {
         this.setState({
           popUpTVVisible: false
@@ -84,7 +84,9 @@ class Mapa extends React.Component {
             marginTop: '10%'
           }}>
 
-          {this.state.tiendas.map((tienda, i) => {
+          {this.state.tiendas.filter((tienda) => {
+            if (tienda.posicion_x !== null && tienda.posicion_y !== null) return tienda;
+          }).map((tienda, i) => {
             // if ( tienda.posicion_x == null || tienda.posicion_y == null) return null;
             return <div
               className="item-focusable mapaLugar"
@@ -93,10 +95,12 @@ class Mapa extends React.Component {
                 position: 'absolute',
                 top: (tienda.posicion_y - this.factor.y) * this.altoImagen,
                 border: 'solid black 3px',
-                backgroundColor: '#ed217c',
+                backgroundColor: 'black',
+                color: 'white',
                 borderRadius: '50%',
                 width: '40px',
-                height: '40px'
+                height: '40px',
+                border: '3px solid #ed217c'
               }}
               onClick={() => this.handlerClick(tienda)}
               key={'tienda-' + tienda.idTienda}>
@@ -165,7 +169,7 @@ class Mapa extends React.Component {
           }}
           data-attribute={!this.state.popUpTVVisible ? 'hidden' : ''}
           hidden={!this.state.popUpTVVisible ? 'hidden' : ''}
-          >
+        >
           <p style={{ fontWeight: "bold", fontSize: '50px', marginTop: 'auto' }}>{this.state.texto}</p>
         </div>
       </div>

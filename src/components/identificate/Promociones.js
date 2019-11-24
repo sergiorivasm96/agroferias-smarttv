@@ -8,7 +8,9 @@ class Promociones extends React.Component {
         this.state = {
             popUpVisible: false,
             tiendaSeleccionada: '',
-            texto: ""
+            texto: "",
+            empresa: '',
+            link: null
         }
         this.cambioProducto = this.cambioProducto.bind(this);
     }
@@ -20,24 +22,32 @@ class Promociones extends React.Component {
             .then(res => res.json())
             .then((data) => {
                 this.setState({ tiendaSeleccionada: data })
-                console.log(this.state.tiendaSeleccionada)
+                this.setState({
+                    link: this.state.tiendaSeleccionada.empresa.direccionWeb,
+                    empresa: this.state.tiendaSeleccionada.empresa.nombreComercial
+                })
+                /* console.log(this.state.tiendaSeleccionada)
                 const texto = `Visite la tienda ${this.state.tiendaSeleccionada.empresa.nombreComercial} en http://agroferias-cliente.s3-website.us-east-2.amazonaws.com/, pedidos al por mayor al número ${this.state.tiendaSeleccionada.empresa.celular} y al correo ${this.state.tiendaSeleccionada.empresa.email}`
                 this.setState({ popUpVisible: true, texto: texto })
                 setTimeout(() => {
                     this.setState({ popUpVisible: false });
-                }, 3000);
+                }, 3000); */
 
             })
             .catch(console.log)
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             <div>
+                <div style={{
+                    fontSize: '30px',
+                    marginTop: '2%',
+                    marginLeft: '2%',
+                    color: '#ed217c'
+                }}>
+                    PROMOCIONES
+                </div>
                 <ListaPromociones cambioProducto={this.cambioProducto}></ListaPromociones>
                 <div
                     className="modal-mapa"
@@ -65,6 +75,31 @@ class Promociones extends React.Component {
                     <p style={{ fontWeight: "bold", fontSize: '20px', marginTop: '20px' }}>{this.state.texto} </p>
 
                 </div>
+
+                <div style={{
+                    fontSize: '30px',
+                    marginTop: '2%',
+                    marginLeft: '2%',
+                    color: '#ed217c'
+                }}>
+                    {this.state.link ?
+                        <div><span>Somos</span> <span style={{ fontWeight: 'bold' }}>{this.state.empresa}</span><span>, encuentrenos usando el siguiente código:</span></div>
+                        :
+                        'Seleccione una para más información'}
+                </div>
+                {this.state.link ?
+                    <img style={{
+                        margin: 'auto',
+                        display: 'block',
+                        marginTop: '2%'
+                    }}
+                        src={'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=' + this.state.link}>
+
+                    </img>
+                    :
+                    ''
+                }
+
             </div>
         )
     }

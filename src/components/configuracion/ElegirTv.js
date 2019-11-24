@@ -67,7 +67,7 @@ class ElegirTv extends React.Component {
 
     render() {
         if (this.state.televisores === null || this.state.televisores.length === 0) {
-            this.state.televisores = [] 
+            this.state.televisores = []
         }
 
         let textoEncabezado;
@@ -111,8 +111,7 @@ class ElegirTv extends React.Component {
                             }}>
                                 {televisor.idTelevisor}
                             </div>
-                            <div
-                                className="item-focusable seleccionarTV"
+                            <div className="item-focusable seleccionarTV"
                                 style={{
                                     left: (televisor.posicion_X - this.factor.x) * this.anchoImagen,
                                     position: 'absolute',

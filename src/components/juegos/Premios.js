@@ -3,6 +3,8 @@ import BotonOpcion from '../identificate/BotonOpcion.js'
 
 import './Juegos.css'
 
+var imgDinero = 'https://static3.depositphotos.com/1007373/239/i/450/depositphotos_2392001-stock-photo-give-me-money.jpg';
+
 class Premios extends React.Component {
     constructor(props) {
         super(props);
@@ -10,21 +12,24 @@ class Premios extends React.Component {
 
 
     render() {
+        let resultado = parseInt(localStorage.getItem("resultadoPremio"));
         let mensaje = localStorage.getItem('mensajePremio');
-        let imagen = localStorage.getItem('imagenPremio');
+        console.log(mensaje)
+
+        let titulo = resultado === 1 ? "Felicitaciones!" : "Perdiste ☹";
 
         return (
             <div>
                 <div style={{ textAlign: 'center' }}>
                     <h1 className='titulosPremios'>
-                        Felicitaciones!</h1>
+                        {titulo}</h1>
 
-                    <h2>{mensaje}</h2>
+                    <h2>{resultado === 1 ? "Ganaste: \n" + "S/. " +  mensaje : ''}</h2>
 
                     <img style={{
                         width: '400px'
                     }}
-                        src={imagen}></img>
+                        src={imgDinero}></img>
                 </div>
                 <BotonOpcion texto='Regresar' funClick={regresar} ></BotonOpcion>
             </div>

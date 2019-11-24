@@ -12,11 +12,7 @@ class MapaLugar extends React.Component {
         let icono
         if (this.props.televisor) {
             return (
-                <div style={{
-
-                    /* marginLeft: '-10px' */
-                }}
-                    name={this.props.name} id="place">
+                <div name={this.props.name} id="place">
                     <span style={{
                         marginLeft: '4px',
                         marginTop: '6px',
