@@ -38,7 +38,7 @@ class MapaResultado extends React.Component {
     }
 
     handlerClick(tienda) {
-        this.setState({ tiendaModal: tienda, popUpVisible: true });
+        this.setState({ tiendaModal: tienda, popUpVisible: true, popUpTVVisible: false });
         setTimeout(() => {
             this.setState({ popUpVisible: false });
         }, 3000);
@@ -46,7 +46,7 @@ class MapaResultado extends React.Component {
 
     handlerClickTV() {
         const texto2 = 'Usted se encuentra aquí';
-        this.setState({ texto: texto2, popUpTVVisible: true }, () => {
+        this.setState({ texto: texto2, popUpTVVisible: true, popUpVisible: false }, () => {
             setTimeout(() => {
                 this.setState({
                     popUpTVVisible: false
