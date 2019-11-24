@@ -124,7 +124,7 @@ class Ruleta extends React.Component {
             ctx.clearRect(0, 0, width, width);
             sliceDeg = 360 / slices;
             for (var i = 0; i < slices; i++) {
-                let indexColor = i % color.length;
+                let indexColor = (items_ruleta[i].orden - 1) % color.length;
                 drawSlice(deg, color[indexColor]);
                 drawText(deg + sliceDeg / 2, items_ruleta[i].orden, sliceDeg);
                 deg += sliceDeg;
@@ -162,7 +162,7 @@ class Ruleta extends React.Component {
                 //ai = (slices + ai) % slices; // Fix negative index
                 var ai = Math.floor(obtenerIndex(((360 - deg - 90) % 360)));
                 recibirPremio(items_ruleta[ai].nombre, parseFloat(items_ruleta[ai].nombre) == 0.0 ? 0 : 1); //1 ganar 0 perder
-                iniciarRuleta();
+                //iniciarRuleta();
             }
 
             drawImg();
