@@ -10,9 +10,9 @@ class Answers extends React.Component {
         super(props);
         this.state = {
             isAnswered: false,
-            classNames: ['', '', '', '']
+            classNames: ['', '', '', ''],
+            seconds: 5
         }
-
         this.checkAnswer = this.checkAnswer.bind(this);
     }
 
@@ -26,12 +26,14 @@ class Answers extends React.Component {
             let updatedClassNames = this.state.classNames;
 
             if (answer === correct) {
+                updatedClassNames = ['', '', '', ''];
                 updatedClassNames[answer - 1] = 'right';
                 // audioCorrect.currentTime = 0;
                 // audioCorrect.play();
                 increaseScore();
             }
             else {
+                updatedClassNames = ['', '', '', ''];
                 updatedClassNames[answer - 1] = 'wrong';
                 // audioFail.currentTime = 0;
                 // audioFail.play();
@@ -45,22 +47,27 @@ class Answers extends React.Component {
         }
     }
 
-    shouldComponentUpdate() {
-        //console.log(this.props.cleanAnswers)
-        if (this.props.correct === -1) return false;
-        if (this.props.isAnswered) {
-            this.setState({
-                classNames: ['', '', '', '']
-            });
-        }
-        return true;
+    componentDidMount() {
+        this.myInterval = setInterval(() => {
+            const { seconds } = this.state
+            if (seconds > 0) {
+                this.setState(({ seconds }) => ({
+                    seconds: seconds - 1
+                }))
+            }
+            if (seconds === 0) {
+                clearInterval(this.myInterval);
+            }
+        }, 1000)
     }
 
     render() {
         let { answers } = this.props;
         let { classNames } = this.state;
 
-        //console.log("Preguntas = " + answers)
+
+        if (!this.props.isAnswered)
+            classNames = ['', '', '', ''];
 
         if (answers == null) {
             return (
@@ -79,6 +86,7 @@ class Answers extends React.Component {
                     <li onClick={this.checkAnswer} className={classNames[2] + " item-focusable"} data-id="3"><span>C</span> <p>{answers[2]}</p></li>
                     <li onClick={this.checkAnswer} className={classNames[3] + " item-focusable"} data-id="4"><span>D</span> <p>{answers[3]}</p></li>
                 </ul>
+                
             </div>
         );
     }

@@ -40,25 +40,27 @@ class Premios extends React.Component {
         console.log(mensaje)
 
         let titulo = resultado === 1 ? "Felicitaciones!" : "Perdiste ☹";
+        let marginTitulo = resultado === 1 ? "" : "15%";
 
         return (
             <div>
-                <div style={{ textAlign: 'center' }}>
+
+                <div style={{ textAlign: 'center', marginTop: marginTitulo }}>
                     <h1 className='titulosPremios'>{titulo}</h1>
 
                     {resultado === 1 ?
-                        <div style={{marginTop: '-2%'}}>
+                        <div style={{ marginTop: '-2%' }}>
                             <h2>Ganaste: S/. {mensaje} y se han <br></br> recargado a tu cuenta </h2>
                             <img style={{ width: '400px' }} src={imgDinero}></img>
                         </div>
                         :
                         ''}
-
-                    {/* <h2>y se ha recargado al saldo de tu cuenta   </h2> */}
-
-
                 </div>
-                <BotonOpcion texto='Regresar' funClick={regresar} ></BotonOpcion>
+
+                <div style={{ marginTop: '5%' }}>
+                    <BotonOpcion texto='Regresar' funClick={regresar} ></BotonOpcion>
+                </div>
+
             </div>
         );
     }
@@ -67,7 +69,8 @@ class Premios extends React.Component {
 function regresar() {
     localStorage.removeItem('mensajePremio');
     localStorage.removeItem('imagenPremio');
-    window.history.back();
+    //window.history.back();
+    window.location.pathname = "/perfil";
 }
 
 export default Premios;

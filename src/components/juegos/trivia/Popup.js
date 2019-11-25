@@ -39,11 +39,7 @@ class Popup extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("recibe: " + nextProps.final)
         if (nextProps.final) {
-            /* setTimeout(() => {
-                window.location.reload();
-            }, 6000); */
             let titulo;
             let audioFin;
             if (this.props.score === this.props.total) {
@@ -108,7 +104,6 @@ class Popup extends React.Component {
                             <br></br><br></br>
                             <BotonOpcion id="btn-continuar-trivia" texto='Continuar' mostrar={styleButton} funClick={this.popupHandle}></BotonOpcion>
                             <br></br>
-                            {/* <button style={{ display: styleButton }} className="fancy-btn item-focusable" onClick={this.popupHandle}>Continuar</button> */}
                         </div>
                     </div>
                 </div>
