@@ -73,7 +73,6 @@ class Ruleta extends React.Component {
 
         function drawText(deg, text, size) {
             let numRads = size / 360 * 2 * Math.PI;
-            console.log("numRads = " + size)
 
             ctx.save();
             if (deg < 0) deg += 360;
@@ -230,7 +229,7 @@ class Ruleta extends React.Component {
                     <span style={titleStyle}>Premios:</span>
                     <ul>
                         {ruleta_unica.map((item, index) => {
-                            return <li style={{ listStyleType: "none" }}>
+                            return <li key={index} style={{ listStyleType: "none" }}>
                                 <div style={numberStyle}>{item.orden ? item.orden : ''}</div>
                                 <span style={spanStyle}>&nbsp;&nbsp;{parseFloat(item.nombre) == 0.0 ? 'NADA' : "S/. " + item.nombre}</span>
                             </li>
