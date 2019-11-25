@@ -171,6 +171,7 @@ class Ruleta extends React.Component {
         }
 
         function obtenerIndex(grado) {
+            console.log("obtenerIndex");
             if (grado < 0) grado += 360;
             let currDeg = 0;
             for (let i = 0; i < items_ruleta.length; i++) {
