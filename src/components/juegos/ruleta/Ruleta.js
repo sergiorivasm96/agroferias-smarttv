@@ -141,7 +141,8 @@ class Ruleta extends React.Component {
             } */
 
             deg += speed;
-            deg %= 360;
+            deg %= 360
+            console.log(speed);
 
             // Increment speed
             if (!isStopped && speed < 3) {
