@@ -34,7 +34,11 @@ class Popup extends React.Component {
 
             this.props.startQuiz();
         } else {
-            window.location.pathname = '/premio';
+            if (this.props.score === this.props.total) {
+                this.recibirPremio(this.props.premio, 1);
+            } else {
+                this.recibirPremio('', 0);
+            }
         }
     }
 
@@ -42,15 +46,19 @@ class Popup extends React.Component {
         if (nextProps.final) {
             let titulo;
             let audioFin;
+            console.log("Score = " + this.props.score)
+            console.log("TOtal = " + this.props.total)
             if (this.props.score === this.props.total) {
                 titulo = 'Felicitaciones!';
                 audioFin = audioCorrect;
+                console.log("Premio = " + this.props.premio)
                 setTimeout(() => {
                     this.recibirPremio(this.props.premio, 1);
                 }, 5000)
             } else {
                 titulo = 'Lo lamento ☹️';
                 audioFin = audioFail;
+                console.log("Premio = " + this.props.premio)
                 setTimeout(() => {
                     this.recibirPremio('', 0);
                 }, 5000)
