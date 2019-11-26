@@ -73,7 +73,6 @@ class Ruleta extends React.Component {
 
         function drawText(deg, text, size) {
             let numRads = size / 360 * 2 * Math.PI;
-            console.log("numRads = " + size)
 
             ctx.save();
             if (deg < 0) deg += 360;
@@ -159,10 +158,9 @@ class Ruleta extends React.Component {
             // Stopped!
             if (lock && !speed) {
                 lock = false;
-                //var ai = Math.floor(((360 - deg - 90) % 360) / sliceDeg); // deg 2 Array Index
-                //ai = (slices + ai) % slices; // Fix negative index
-                var ai = Math.floor(obtenerIndex(((360 - deg - 90) % 360)));
-                recibirPremio(items_ruleta[ai].nombre, parseFloat(items_ruleta[ai].nombre) == 0.0 ? 0 : 1); //1 ganar 0 perder
+
+                var ai = obtenerIndex(deg)
+                return recibirPremio(items_ruleta[ai].nombre, parseFloat(items_ruleta[ai].nombre) == 0.0 ? 0 : 1); //1 ganar 0 perder
                 //iniciarRuleta();
             }
 
@@ -171,17 +169,9 @@ class Ruleta extends React.Component {
         }
 
         function obtenerIndex(grado) {
-            console.log("obtenerIndex");
-            if (grado < 0) grado += 360;
-            let currDeg = 0;
-            for (let i = 0; i < items_ruleta.length; i++) {
-                currDeg += 360 / items_ruleta.length;
-                if (grado < currDeg) {
-                    console.log("Grado: " + grado);
-                    return i;
-                }
-            }
-            return -1;
+            let ai = Math.floor(((360 - grado - 90) % 360) / sliceDeg); // deg 2 Array Index
+            ai = (slices + ai) % slices; // Fix negative index
+            return ai;
         }
         window.requestAnimationFrame(anim);
     }
@@ -232,7 +222,7 @@ class Ruleta extends React.Component {
                     <span style={titleStyle}>Premios:</span>
                     <ul>
                         {ruleta_unica.map((item, index) => {
-                            return <li style={{ listStyleType: "none" }}>
+                            return <li key={index} style={{ listStyleType: "none" }}>
                                 <div style={numberStyle}>{item.orden ? item.orden : ''}</div>
                                 <span style={spanStyle}>&nbsp;&nbsp;{parseFloat(item.nombre) == 0.0 ? 'NADA' : "S/. " + item.nombre}</span>
                             </li>

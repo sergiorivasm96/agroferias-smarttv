@@ -34,24 +34,34 @@ class Popup extends React.Component {
 
             this.props.startQuiz();
         } else {
-            window.location.reload();// restart the application
+            if (this.props.score === this.props.total) {
+                this.recibirPremio(this.props.premio, 1);
+            } else {
+                this.recibirPremio('', 0);
+            }
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("recibe: " + nextProps.final)
         if (nextProps.final) {
-            /* setTimeout(() => {
-                window.location.reload();
-            }, 6000); */
             let titulo;
             let audioFin;
+            console.log("Score = " + this.props.score)
+            console.log("TOtal = " + this.props.total)
             if (this.props.score === this.props.total) {
                 titulo = 'Felicitaciones!';
                 audioFin = audioCorrect;
+                console.log("Premio = " + this.props.premio)
+                setTimeout(() => {
+                    this.recibirPremio(this.props.premio, 1);
+                }, 5000)
             } else {
                 titulo = 'Lo lamento ☹️';
                 audioFin = audioFail;
+                console.log("Premio = " + this.props.premio)
+                setTimeout(() => {
+                    this.recibirPremio('', 0);
+                }, 5000)
             }
             audioFin.currentTime = 0;
             audioFin.play();
@@ -61,6 +71,12 @@ class Popup extends React.Component {
                 text: 'Has terminado la trivia. <br /> Obtuviste: <strong>' + this.props.score + '</strong> de <strong>' + this.props.total + '</strong> respuestas correctas.'
             });
         }
+    }
+
+    recibirPremio(texto, resultado) {
+        localStorage.setItem('resultadoPremio', resultado);
+        localStorage.setItem('mensajePremio', texto);
+        window.location.pathname = '/premio';
     }
 
     createMarkup(text) {
@@ -96,7 +112,6 @@ class Popup extends React.Component {
                             <br></br><br></br>
                             <BotonOpcion id="btn-continuar-trivia" texto='Continuar' mostrar={styleButton} funClick={this.popupHandle}></BotonOpcion>
                             <br></br>
-                            {/* <button style={{ display: styleButton }} className="fancy-btn item-focusable" onClick={this.popupHandle}>Continuar</button> */}
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,8 @@ class Memoria extends React.Component {
             minutes: 3,
             seconds: 0,
             texto: '',
-            popUpVisible: false
+            popUpVisible: false,
+            premio: 0
         }
         //this.start()
     }
@@ -66,7 +67,7 @@ class Memoria extends React.Component {
             // audioFail.play();
         }
         if (numCartas === 0) {
-            this.mostrarAlerta("Ganaste!");
+            this.mostrarAlerta(1);
             this.finalizarMemoria();
         }
         this.setState({
@@ -108,8 +109,17 @@ class Memoria extends React.Component {
         return array
     }
 
-    mostrarAlerta(mensaje) {
-        this.setState({ texto: mensaje, popUpVisible: true });
+    mostrarAlerta(resultado) {
+        //this.setState({ texto: mensaje, popUpVisible: true });
+        setTimeout(() => {
+            this.recibirPremio(this.state.premio, resultado);
+        }, 2000)
+    }
+
+    recibirPremio(texto, resultado) {
+        localStorage.setItem('resultadoPremio', resultado);
+        localStorage.setItem('mensajePremio', texto);
+        window.location.pathname = '/premio';
     }
 
     componentDidMount() {
@@ -134,7 +144,7 @@ class Memoria extends React.Component {
                 let segundos = data.duracion;
                 let minutos = Math.floor(segundos / 60);
                 segundos = segundos - minutos * 60;
-                this.setState({ minutes: minutos, seconds: segundos, inicio: false })
+                this.setState({ minutes: minutos, seconds: segundos, inicio: false, premio: data.monto })
                 this.iniciarCronometro();
 
                 this.forceUpdate();
@@ -154,7 +164,7 @@ class Memoria extends React.Component {
             }
             if (seconds === 0) {
                 if (minutes === 0) {
-                    this.mostrarAlerta("Perdiste!");
+                    this.recibirPremio('', 0);
                     this.finalizarMemoria();
                 } else {
                     this.setState(({ minutes }) => ({

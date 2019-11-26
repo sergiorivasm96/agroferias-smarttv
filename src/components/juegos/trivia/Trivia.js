@@ -17,7 +17,9 @@ class Trivia extends React.Component {
             questionAnswered: false,
             score: 0,
             displayPopup: 'flex',
-            final: false
+            final: false,
+            premio: 0,
+            seconds: 6
         }
         this.nextQuestion = this.nextQuestion.bind(this);
         this.handleShowButton = this.handleShowButton.bind(this);
@@ -42,7 +44,8 @@ class Trivia extends React.Component {
             this.setState({
                 displayPopup: 'flex',
                 correct: -1,
-                final: true
+                final: true,
+                seconds: 6
             });
             this.finalizarTrivia();
         } else {
@@ -50,7 +53,8 @@ class Trivia extends React.Component {
             this.pushData(nr);
             this.setState({
                 showButton: false,
-                questionAnswered: false
+                questionAnswered: false,
+                seconds: 6
             });
 
         }
@@ -69,9 +73,12 @@ class Trivia extends React.Component {
 
     handleShowButton() {
         this.setState({
-            showButton: true,
-            questionAnswered: true
+            questionAnswered: true,
+            seconds: 5
         });
+        setTimeout(() => {
+            this.nextQuestion();
+        }, 5000);
     }
 
     handleStartQuiz() {
@@ -114,12 +121,25 @@ class Trivia extends React.Component {
                 console.log("BACK:")
                 console.log(data.preguntas);
                 dataTrivia = data.preguntas;
+                this.setState({ premio: data.monto })
                 this.parsearDatos();
                 let { nr } = this.state;
                 this.pushData(nr);
             })
             .catch(console.log)
 
+        this.myInterval = setInterval(() => {
+            const { seconds } = this.state
+            if (seconds > 0) {
+                if (this.state.seconds === 6) return;
+                this.setState(({ seconds }) => ({
+                    seconds: seconds - 1
+                }))
+            }
+            if (seconds === 0) {
+                this.setState({ seconds: 5 })
+            }
+        }, 1000)
     }
 
     render() {
@@ -129,11 +149,11 @@ class Trivia extends React.Component {
             )
         }
 
-        let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score } = this.state;
+        let { nr, total, question, answers, correct, showButton, questionAnswered, displayPopup, score, premio, seconds } = this.state;
         return (
             <div className="container">
 
-                <Popup style={{ display: displayPopup }} score={score} total={total} startQuiz={this.handleStartQuiz} final={this.state.final} />
+                <Popup style={{ display: displayPopup }} score={score} premio={premio} total={total} startQuiz={this.handleStartQuiz} final={this.state.final} />
 
                 <div className="row">
                     <div className="col-lg-10 col-lg-offset-1">
@@ -142,17 +162,51 @@ class Trivia extends React.Component {
                             <p>{question}</p>
                         </div>
                         <Answers answers={answers} correct={correct} showButton={this.handleShowButton} isAnswered={questionAnswered} increaseScore={this.handleIncreaseScore} />
-                        <div id="submit">
-                            {/* {showButton ? <button className="item-focusable fancy-btn" onClick={this.nextQuestion} >{nr === total ? 'Terminar' : 'Siguiente pregunta'}</button> : null} */}
-                            {showButton ? <BotonOpcion texto={nr === total ? 'Terminar' : 'Siguiente pregunta'} funClick={this.nextQuestion}></BotonOpcion> : null}
 
-                        </div>
+
+                        {seconds === 6 ?
+                            ''
+                            :
+                            <div style={{
+                                display: 'block',
+                                borderRadius: '50%',
+                                backgroundColor: '#0094da',
+                                border: '2px solid white',
+                                width: '36px',
+                                height: '36px',
+                                padding: '8px',
+                                textAlign: 'center',
+                                font: '32px Arial',
+                                margin: 'auto',
+                                color: 'black',
+                                backgroundImage: valorGradient(seconds)
+                            }}>
+                                {seconds}
+                            </div>
+                        }
+
                     </div>
                 </div>
             </div>
         );
     }
 };
+
+function valorGradient(sec) {
+    const total = 5;
+    switch (sec) {
+        case 5:
+            return 'none';
+        case 4:
+            return 'linear-gradient(180deg, transparent 50%, #0094da 50%),linear-gradient(90deg, white 50%, transparent 50%)';
+        case 3:
+            return 'linear-gradient(90deg, white 50%, transparent 50%)';
+        case 2:
+            return 'linear-gradient(180deg, transparent 50%, white 50%), linear-gradient(90deg, white 50%, transparent 50%)';
+        case 1:
+            return 'linear-gradient(126deg, transparent 50%, white 50%), linear-gradient(90deg, white 50%, transparent 50%)';
+    }
+}
 
 export default Trivia;
 
