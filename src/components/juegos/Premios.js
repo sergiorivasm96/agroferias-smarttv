@@ -39,13 +39,12 @@ class Premios extends React.Component {
         let mensaje = localStorage.getItem('mensajePremio');
         console.log(mensaje)
 
-        let titulo = resultado === 1 ? "Felicitaciones!" : "Perdiste ☹";
-        let marginTitulo = resultado === 1 ? "" : "15%";
+        let titulo = resultado === 1 ? "Felicitaciones!" : "Perdiste";
 
         return (
             <div>
 
-                <div style={{ textAlign: 'center', marginTop: marginTitulo }}>
+                <div style={{ textAlign: 'center', marginTop: resultado === 1 ? '' : '15%' }}>
                     <h1 className='titulosPremios'>{titulo}</h1>
 
                     {resultado === 1 ?
@@ -57,7 +56,7 @@ class Premios extends React.Component {
                         ''}
                 </div>
 
-                <div style={{ marginTop: '5%' }}>
+                <div style={{ marginTop: resultado === 1 ? '1%' : '5%' }}>
                     <BotonOpcion texto='Regresar' funClick={regresar} ></BotonOpcion>
                 </div>
 
