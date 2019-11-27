@@ -83,7 +83,7 @@ class Ruleta extends React.Component {
             ctx.rotate(deg2rad(deg + 90));
             ctx.textAlign = "right";
             ctx.fillStyle = "#fff";
-            let stringFont = 'bold ' + ((size > 100) ? 100 : (size)).toString() + 'px sans-serif';
+            let stringFont = 'bold ' + ((size > 40) ? 40 : (size)).toString() + 'px sans-serif';
             ctx.font = stringFont;
             //ctx.fillText(text, 0, distanciaText + 60);
             ctx.fillText(text, 0, 0);

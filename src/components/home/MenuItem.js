@@ -36,7 +36,8 @@ const divStyle = {
   display: 'inline-block',
   textAlign: 'center',
   textDecorationLine : 'none',
-  color: '#7D1242'
+  color: '#7D1242',
+  textDecoration : 'none',
 }
   
 export default MenuItem;

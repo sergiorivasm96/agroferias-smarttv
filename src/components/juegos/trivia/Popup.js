@@ -56,7 +56,7 @@ class Popup extends React.Component {
                     this.recibirPremio(this.props.premio, 1);
                 }, 5000)
             } else {
-                titulo = 'Lo lamento ☹️';
+                titulo = 'Lo lamento';
                 audioFin = audioFail;
                 console.log("Premio = " + this.props.premio)
                 setTimeout(() => {
