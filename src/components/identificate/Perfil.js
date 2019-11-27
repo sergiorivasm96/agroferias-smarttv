@@ -9,7 +9,8 @@ class Perfil extends React.Component {
             usuario: {
                 nombre: '',
                 apellidos: '',
-                url_photo: null
+                url_photo: null,
+                popUpVisible: false
             }
         }
     }
@@ -20,6 +21,20 @@ class Perfil extends React.Component {
             .then((data) => {
                 console.log("Usuario es ")
                 console.log(data);
+                console.log(data.nombres)
+                if(data.nombres === undefined) {
+                    let usuarioPerfil = {
+                        nombre: '',
+                        apellidos: '',
+                        url_photo: ''
+                    }
+                    this.setState({ usuario: usuarioPerfil, popUpVisible: true })
+                setTimeout(() => {
+                    this.setState({ popUpVisible: false });
+                    window.location.pathname = "/identificate"
+                }, 3000);
+                return;
+                }
                 let usuarioPerfil = {
                     nombre: data.nombres,
                     apellidos: data.apellidoPaterno + " " + data.apellidoMaterno,
@@ -27,7 +42,13 @@ class Perfil extends React.Component {
                 }
                 this.setState({ usuario: usuarioPerfil })
             })
-            .catch(console.log)
+            .catch(()=>{
+                this.setState({ popUpVisible: true });
+                setTimeout(() => {
+                    this.setState({ popUpVisible: false });
+                    window.location.pathname = "/identificate"
+                }, 3000);
+            })
     }
 
     handlerClickPromociones() {
@@ -66,6 +87,34 @@ class Perfil extends React.Component {
                 <BotonOpcion texto='RECOMENDACIONES' funClick={this.handlerClickRecomendaciones}></BotonOpcion>
                 <BotonOpcion texto='PROMOCIONES' funClick={this.handlerClickPromociones}></BotonOpcion>
                 <BotonOpcion texto='JUEGOS' funClick={this.handlerClickJuegos}></BotonOpcion>
+
+                <div
+                    className="modal-tv"
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        margin: 'auto',
+                        width: "35%",
+                        height: "25%",
+                        zIndex: 10,
+                        backgroundColor: "black",
+                        border: 'solid #ed217c 7px',
+                        padding: "20px",
+                        fontSize: "18px",
+                        borderRadius: "20px",
+                        boxShadow: "0px 0px 6px #ccc",
+                        color: "#fff",
+                        verticalAlign: 'middle',
+                        paddingTop: '5px'
+                    }}
+                    data-attribute={!this.state.popUpVisible ? 'hidden' : ''}
+                    hidden={!this.state.popUpVisible ? 'hidden' : ''}
+                >
+                    <p style={{ fontWeight: "bold", fontSize: '50px', marginTop: 'auto' }}>Aún no se ha reconocido a un cliente</p>
+                </div>
 
             </div>
         )
