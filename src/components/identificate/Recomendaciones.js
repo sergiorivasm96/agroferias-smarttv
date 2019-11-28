@@ -86,7 +86,7 @@ class Recomendaciones extends React.Component {
                     color: '#ed217c'
                 }}>
                     {this.state.link ?
-                        <div><span>Somos</span> <span style={{ fontWeight: 'bold' }}>{this.state.empresa}</span><span>, encuentrenos usando el siguiente código:</span></div>
+                        <div><span>Somos</span> <span style={{ fontWeight: 'bold' }}>{this.state.empresa}</span><span>, encuéntrenos usando el siguiente código:</span></div>
                         :
                         'Seleccione una para más información'}
                 </div>

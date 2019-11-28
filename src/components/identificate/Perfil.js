@@ -22,18 +22,18 @@ class Perfil extends React.Component {
                 console.log("Usuario es ")
                 console.log(data);
                 console.log(data.nombres)
-                if(data.nombres === undefined) {
+                if (data.nombres === undefined) {
                     let usuarioPerfil = {
                         nombre: '',
                         apellidos: '',
                         url_photo: ''
                     }
                     this.setState({ usuario: usuarioPerfil, popUpVisible: true })
-                setTimeout(() => {
-                    this.setState({ popUpVisible: false });
-                    window.location.pathname = "/identificate"
-                }, 3000);
-                return;
+                    setTimeout(() => {
+                        this.setState({ popUpVisible: false });
+                        window.location.pathname = "/identificate"
+                    }, 3000);
+                    return;
                 }
                 let usuarioPerfil = {
                     nombre: data.nombres,
@@ -42,7 +42,7 @@ class Perfil extends React.Component {
                 }
                 this.setState({ usuario: usuarioPerfil })
             })
-            .catch(()=>{
+            .catch(() => {
                 this.setState({ popUpVisible: true });
                 setTimeout(() => {
                     this.setState({ popUpVisible: false });
@@ -66,14 +66,14 @@ class Perfil extends React.Component {
         window.location.pathname = "/recomendaciones"
     }
 
-    handerClickLogout(){
+    handerClickLogout() {
         console.log('logout')
         localStorage.removeItem('idUsuario')
         window.location.pathname = "/identificate"
     }
 
     render() {
-        let photo = this.state.usuario.url_photo === null || this.state.usuario.url_photo === ""? 'https://cdn.pixabay.com/photo/2017/02/23/13/05/profile-2092113_960_720.png' : this.state.usuario.url_photo;
+        let photo = this.state.usuario.url_photo === null || this.state.usuario.url_photo === "" ? 'https://cdn.pixabay.com/photo/2017/02/23/13/05/profile-2092113_960_720.png' : this.state.usuario.url_photo;
         return (
             <div>
                 <BotonLogout funClick={this.handerClickLogout}></BotonLogout>
